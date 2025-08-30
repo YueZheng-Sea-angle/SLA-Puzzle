@@ -3,23 +3,34 @@ import { PuzzleConfig } from './types';
 import { MainMenu } from './pages/MainMenu';
 import { PuzzleGame } from './components/game/PuzzleGame';
 import { PuzzleEditor } from './components/editor/PuzzleEditor';
+import { IrregularPuzzleGame } from './pages/IrregularPuzzleGame';
 import { Button } from './components/common/Button';
 import './App.css';
 
-type AppView = 'menu' | 'game' | 'editor';
+type AppView = 'menu' | 'game' | 'editor' | 'irregular-game';
 
 function App() {
   const [currentView, setCurrentView] = useState<AppView>('menu');
   const [currentPuzzle, setCurrentPuzzle] = useState<PuzzleConfig | null>(null);
+  const [irregularGameParams, setIrregularGameParams] = useState<{
+    imageData?: string;
+    gridSize?: '3x3' | '4x4' | '5x5' | '6x6';
+  }>({});
 
   const handleStartGame = (puzzleConfig: PuzzleConfig) => {
     setCurrentPuzzle(puzzleConfig);
     setCurrentView('game');
   };
 
+  const handleStartIrregularGame = (imageData?: string, gridSize: '3x3' | '4x4' | '5x5' | '6x6' = '3x3') => {
+    setIrregularGameParams({ imageData, gridSize });
+    setCurrentView('irregular-game');
+  };
+
   const handleBackToMenu = () => {
     setCurrentView('menu');
     setCurrentPuzzle(null);
+    setIrregularGameParams({});
   };
 
   const handleOpenEditor = () => {
@@ -37,6 +48,7 @@ function App() {
         return (
           <MainMenu
             onStartGame={handleStartGame}
+            onStartIrregularGame={handleStartIrregularGame}
             onOpenEditor={handleOpenEditor}
           />
         );
@@ -59,6 +71,15 @@ function App() {
       case 'editor':
         return (
           <PuzzleEditor onBackToMenu={handleBackToMenu} />
+        );
+      
+      case 'irregular-game':
+        return (
+          <IrregularPuzzleGame
+            onBackToMenu={handleBackToMenu}
+            imageData={irregularGameParams.imageData}
+            gridSize={irregularGameParams.gridSize}
+          />
         );
       
       default:

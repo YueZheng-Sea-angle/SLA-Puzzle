@@ -12,9 +12,13 @@
   "app": {
     "windows": [
       {
-        "title": "tauri-yz",
-        "width": 800,
-        "height": 600
+        "title": "拼图大师",
+        "width": 1330,
+        "height": 875,
+        "resizable": false,
+        "maximizable": false,
+        "minimizable": true,
+        "center": true
       }
     ],
     "security": {

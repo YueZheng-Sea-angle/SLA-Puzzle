@@ -196,7 +196,7 @@ export const AssetLibrary: React.FC<AssetLibraryProps> = ({
   return (
     <div className="asset-library">
       <div className="library-header">
-        <h3>素材库</h3>
+        <h3 className="m-0 text-gray-800 text-xl font-bold">素材库</h3>
         
         {showUpload && onAssetUpload && (
           <div className="upload-section">

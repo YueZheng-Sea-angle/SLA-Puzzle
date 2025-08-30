@@ -23,6 +23,19 @@ pub async fn create_puzzle(
     params: CreatePuzzleParams,
     state: State<'_, Mutex<AppState>>,
 ) -> Result<ApiResponse<PuzzleConfig>, String> {
+    // 参数验证
+    if params.name.trim().is_empty() {
+        return Ok(ApiResponse::error("拼图名称不能为空"));
+    }
+    
+    if params.image_path.trim().is_empty() {
+        return Ok(ApiResponse::error("图片路径不能为空"));
+    }
+    
+    if params.grid_size.rows == 0 || params.grid_size.cols == 0 {
+        return Ok(ApiResponse::error("网格大小必须大于0"));
+    }
+
     // 在实际应用中，这里会处理图片并生成拼图块
     // 现在返回一个示例配置
     let puzzle_config = PuzzleConfig {
@@ -90,21 +103,25 @@ pub async fn load_game(
     
     // 查找对应的拼图配置
     let puzzle_config = app_state.puzzles.iter()
-        .find(|p| p.id == params.game_id)
-        .ok_or("未找到拼图配置".to_string())?;
+        .find(|p| p.id == params.game_id);
 
-    // 创建一个新的游戏状态
-    let game_state = GameState {
-        config: puzzle_config.clone(),
-        start_time: chrono::Utc::now().to_rfc3339(),
-        end_time: None,
-        moves: 0,
-        is_completed: false,
-        elapsed_time: 0,
-        history: Vec::new(),
-    };
+    match puzzle_config {
+        Some(config) => {
+            // 创建一个新的游戏状态
+            let game_state = GameState {
+                config: config.clone(),
+                start_time: chrono::Utc::now().to_rfc3339(),
+                end_time: None,
+                moves: 0,
+                is_completed: false,
+                elapsed_time: 0,
+                history: Vec::new(),
+            };
 
-    Ok(ApiResponse::success(game_state))
+            Ok(ApiResponse::success(game_state))
+        }
+        None => Ok(ApiResponse::error("未找到拼图配置"))
+    }
 }
 
 // 获取排行榜

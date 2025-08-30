@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { Asset, PuzzleConfig, DifficultyLevel, PieceShape } from '../types';
 import { AssetLibrary } from '../components/game/AssetLibrary';
-import { Button } from '../components/common/Button';
-import { GameHelpButton } from '../components/common/GameHelp';
 import { PuzzleGenerator } from '../utils/puzzleGenerator';
-import './MainMenu.css';
+import { GameConfigPanel } from '../components/MainMenu';
+
 
 interface MainMenuProps {
   onStartGame: (puzzleConfig: PuzzleConfig) => void;
+  onStartIrregularGame: (imageData?: string, gridSize?: '3x3' | '4x4' | '5x5' | '6x6') => void;
   onOpenEditor: () => void;
 }
 
 export const MainMenu: React.FC<MainMenuProps> = ({
   onStartGame,
+  onStartIrregularGame,
   onOpenEditor,
 }) => {
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
@@ -32,6 +33,16 @@ export const MainMenu: React.FC<MainMenuProps> = ({
       // 使用真实的图片数据
       const imageData = selectedAsset.filePath;
       
+      // 如果选择的是异形拼图，使用新的异形拼图系统
+      if (pieceShape === 'irregular') {
+        const difficultyConfig = PuzzleGenerator.getDifficultyConfig(difficulty);
+        // 将 GridSize 转换为字符串格式
+        const gridSizeStr = `${difficultyConfig.gridSize.rows}x${difficultyConfig.gridSize.cols}` as '3x3' | '4x4' | '5x5' | '6x6';
+        onStartIrregularGame(imageData, gridSizeStr);
+        return;
+      }
+      
+      // 传统方形拼图
       const difficultyConfig = PuzzleGenerator.getDifficultyConfig(difficulty);
       
       const puzzleConfig = await PuzzleGenerator.generatePuzzle({
@@ -66,23 +77,14 @@ export const MainMenu: React.FC<MainMenuProps> = ({
     }
   };
 
-  const canStartGame = selectedAsset !== null && !isGenerating;
+
 
   return (
-    <div className="main-menu">
-      <div className="menu-header">
-        <div className="header-content">
-          <h1>🧩 拼图大师</h1>
-          <p>选择素材，开始你的拼图之旅</p>
-        </div>
-        <div className="header-actions">
-          <GameHelpButton />
-        </div>
-      </div>
-
-      <div className="menu-content">
+    <div className="min-h-screen bg-gray-100 text-gray-800 flex justify-center items-start pt-[25px] px-5 pb-5">
+      {/* 主要内容区域 - 作为一个整体 */}
+      <div className="flex flex-col lg:flex-row gap-5 w-full max-w-7xl">
         {/* 素材选择区域 */}
-        <div className="asset-section">
+        <div className="flex-1 bg-white rounded-lg overflow-hidden shadow-lg flex flex-col h-[800px]">
           <AssetLibrary
             onAssetSelect={handleAssetSelect}
             showUpload={true}
@@ -90,121 +92,18 @@ export const MainMenu: React.FC<MainMenuProps> = ({
         </div>
 
         {/* 游戏配置区域 */}
-        <div className="config-section">
-          <div className="config-panel">
-            <h3>游戏设置</h3>
-            
-            {/* 选中素材预览 */}
-            {selectedAsset && (
-              <div className="selected-asset">
-                <h4>已选择素材</h4>
-                <div className="asset-preview">
-                  <div className="preview-image">
-                    <img 
-                      src={selectedAsset.thumbnail} 
-                      alt={selectedAsset.name}
-                      className="selected-asset-image"
-                      onError={(e) => {
-                        // 如果图片加载失败，显示占位符
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const placeholder = target.nextElementSibling as HTMLElement;
-                        if (placeholder) placeholder.style.display = 'flex';
-                      }}
-                    />
-                    <div className="placeholder-preview" style={{ display: 'none' }}>
-                      <span>{selectedAsset.name}</span>
-                    </div>
-                  </div>
-                  <div className="asset-details">
-                    <p><strong>名称:</strong> {selectedAsset.name}</p>
-                    <p><strong>分类:</strong> {selectedAsset.category}</p>
-                    <p><strong>尺寸:</strong> {selectedAsset.width} × {selectedAsset.height}</p>
-                    <p><strong>标签:</strong> {selectedAsset.tags.join(', ')}</p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* 难度选择 */}
-            <div className="difficulty-selector">
-              <h4>难度等级</h4>
-              <div className="difficulty-options">
-                {[
-                  { value: 'easy', label: '简单 (3×3)', color: '#10B981' },
-                  { value: 'medium', label: '中等 (4×4)', color: '#3B82F6' },
-                  { value: 'hard', label: '困难 (5×5)', color: '#F59E0B' },
-                  { value: 'expert', label: '专家 (6×6)', color: '#EF4444' },
-                ].map(option => (
-                  <button
-                    key={option.value}
-                    className={`difficulty-btn ${difficulty === option.value ? 'active' : ''}`}
-                    onClick={() => setDifficulty(option.value as DifficultyLevel)}
-                    style={{ '--active-color': option.color } as React.CSSProperties}
-                  >
-                    {option.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* 拼图形状选择 */}
-            <div className="shape-selector">
-              <h4>拼图形状</h4>
-              <div className="shape-options">
-                {[
-                  { value: 'square', label: '方形', icon: '⬜' },
-                  { value: 'triangle', label: '三角形', icon: '🔺' },
-                  { value: 'irregular', label: '异形', icon: '🧩' },
-                ].map(option => (
-                  <button
-                    key={option.value}
-                    className={`shape-btn ${pieceShape === option.value ? 'active' : ''}`}
-                    onClick={() => setPieceShape(option.value as PieceShape)}
-                  >
-                    <span className="shape-icon">{option.icon}</span>
-                    <span className="shape-label">{option.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* 操作按钮 */}
-            <div className="action-buttons">
-              <Button
-                onClick={handleStartGame}
-                variant="primary"
-                size="large"
-                disabled={!canStartGame}
-                className="start-btn"
-              >
-                {isGenerating ? '生成中...' : '开始游戏'}
-              </Button>
-              
-              <Button
-                onClick={onOpenEditor}
-                variant="secondary"
-                size="large"
-                className="editor-btn"
-              >
-                🎨 拼图编辑器
-              </Button>
-            </div>
-
-            {!selectedAsset && (
-              <div className="selection-hint">
-                <p>💡 请先从左侧素材库选择一个素材</p>
-              </div>
-            )}
-          </div>
+        <div className="h-[800px]">
+          <GameConfigPanel
+            selectedAsset={selectedAsset}
+            difficulty={difficulty}
+            pieceShape={pieceShape}
+            isGenerating={isGenerating}
+            onDifficultyChange={setDifficulty}
+            onShapeChange={setPieceShape}
+            onStartGame={handleStartGame}
+            onOpenEditor={onOpenEditor}
+          />
         </div>
-      </div>
-
-      {/* 页脚 */}
-      <div className="menu-footer">
-        <p>🎮 点击选择拼图块，再点击答题卡槽位放置 | R键旋转 | F键翻转 | Ctrl+Z 撤销</p>
-        <p>💡 详细游戏说明请查看项目目录下的 <code>GAME_GUIDE.md</code> 文件</p>
-        <p>© 2024 拼图大师 - Tauri + React + TypeScript</p>
       </div>
     </div>
   );

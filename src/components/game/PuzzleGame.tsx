@@ -175,7 +175,7 @@ export const PuzzleGame: React.FC<PuzzleGameProps> = ({
             onPieceSelect={setSelectedPiece}
             onPlacePiece={placePieceToSlot}
             onRemovePiece={removePieceFromSlot}
-            onRotatePiece={rotatePiece}
+            onRotatePiece={(pieceId) => rotatePiece(pieceId, 0)}
             onFlipPiece={flipPiece}
             draggedPiece={draggedPiece}
             dragOverSlot={dragOverSlot}
