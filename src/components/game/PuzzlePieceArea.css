@@ -28,6 +28,13 @@
   grid-auto-rows: minmax(120px, auto);
 }
 
+.puzzle-piece-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .puzzle-piece-item {
   position: relative;
   aspect-ratio: 1;
@@ -38,6 +45,7 @@
   transition: all 0.2s ease;
   overflow: hidden;
   user-select: none;
+  width: 100%;
 }
 
 .puzzle-piece-item:hover {
@@ -92,6 +100,29 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.selected-label {
+  margin-top: 4px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  text-align: center;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 4px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .selection-indicator {
@@ -201,6 +232,13 @@
 .triangle-piece.selected {
   box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.3);
   border-color: #fbbf24;
+}
+
+/* 三角形拼图块的选择标签 */
+.triangle-piece .selected-label {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  font-size: 10px;
+  padding: 1px 6px;
 }
 
 /* 三角形拼图块的选择指示器 */

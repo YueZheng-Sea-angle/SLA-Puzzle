@@ -29,7 +29,7 @@ export const PuzzlePieceArea: React.FC<PuzzlePieceAreaProps> = ({
   onDropToProcessingArea,
 }) => {
   const handlePieceClick = (pieceId: string) => {
-    onPieceSelect(pieceId);
+    onPieceSelect(selectedPieceId === pieceId ? null : pieceId);
   };
 
   const handlePieceDoubleClick = (pieceId: string) => {
@@ -88,36 +88,35 @@ export const PuzzlePieceArea: React.FC<PuzzlePieceAreaProps> = ({
       ) : (
         <div className="pieces-grid">
           {pieces.map((piece) => (
-            <div
-              key={piece.id}
-              className={`puzzle-piece-item ${piece.shape === 'triangle' ? 'triangle-piece' : ''} ${selectedPieceId === piece.id ? 'selected' : ''
-                } ${draggedPiece === piece.id ? 'dragging' : ''} ${piece.shape === 'triangle' && piece.id.includes('_upper') ? 'triangle-upper' : ''
-                } ${piece.shape === 'triangle' && piece.id.includes('_lower') ? 'triangle-lower' : ''
-                }`}
-              draggable={true}
-              onClick={() => handlePieceClick(piece.id)}
-              onDoubleClick={() => handlePieceDoubleClick(piece.id)}
-              onContextMenu={(e) => handleContextMenu(e, piece.id)}
-              onDragStart={(e) => handleDragStart(e, piece.id)}
-              onDragEnd={handleDragEnd}
-              style={{
-                transform: `rotate(${piece.rotation}deg) ${piece.isFlipped ? 'scaleX(-1)' : ''
-                  }`,
-              }}
-            >
-              {showAnswers && (
-                <div className="piece-number">{piece.originalIndex + 1}</div>
-              )}
-              <img
-                src={piece.imageData}
-                alt={`拼图块 ${piece.originalIndex + 1}`}
-                className={`piece-image ${piece.shape === 'triangle' ? 'triangle-image' : ''}`}
-                draggable={false}
-              />
+            <div key={piece.id} className="puzzle-piece-container">
+              <div
+                className={`puzzle-piece-item ${piece.shape === 'triangle' ? 'triangle-piece' : ''} ${selectedPieceId === piece.id ? 'selected' : ''
+                  } ${draggedPiece === piece.id ? 'dragging' : ''} ${piece.shape === 'triangle' && piece.id.includes('_upper') ? 'triangle-upper' : ''
+                  } ${piece.shape === 'triangle' && piece.id.includes('_lower') ? 'triangle-lower' : ''
+                  }`}
+                draggable={true}
+                onClick={() => handlePieceClick(piece.id)}
+                onDoubleClick={() => handlePieceDoubleClick(piece.id)}
+                onContextMenu={(e) => handleContextMenu(e, piece.id)}
+                onDragStart={(e) => handleDragStart(e, piece.id)}
+                onDragEnd={handleDragEnd}
+                style={{
+                  transform: `rotate(${piece.rotation}deg) ${piece.isFlipped ? 'scaleX(-1)' : ''
+                    }`,
+                }}
+              >
+                {showAnswers && (
+                  <div className="piece-number">{piece.originalIndex + 1}</div>
+                )}
+                <img
+                  src={piece.imageData}
+                  alt={`拼图块 ${piece.originalIndex + 1}`}
+                  className={`piece-image ${piece.shape === 'triangle' ? 'triangle-image' : ''}`}
+                  draggable={false}
+                />
+              </div>
               {selectedPieceId === piece.id && (
-                <div className="selection-indicator">
-                  <span>已选择</span>
-                </div>
+                <div className="selected-label">已选择</div>
               )}
             </div>
           ))}
