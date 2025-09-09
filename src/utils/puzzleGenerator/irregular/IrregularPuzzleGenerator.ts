@@ -103,12 +103,16 @@ export class IrregularPuzzleGenerator {
         position: sliceResult.basePositions[i],
         tolerance: 20
       }];
-
+      
+      // 随机旋转：0°, 90°, 180°, 270°
+      const rotations = [0, 90, 180, 270];
+      const randomRotation = i === fixedPieceIndex ? 0 : rotations[Math.floor(Math.random() * rotations.length)];
+      
       // 创建拼图块
       const piece: IrregularPuzzlePiece = {
         id: i.toString(),
         originalIndex: i,
-        rotation: 0,
+        rotation: randomRotation,
         imageData: sliceResult.pieces[i],
         width: sliceResult.expandedSizes[i].width,
         height: sliceResult.expandedSizes[i].height,
@@ -287,8 +291,14 @@ export class IrregularPuzzleGenerator {
 
       const deltaX = Math.abs(piece.x - targetX);
       const deltaY = Math.abs(piece.y - targetY);
-
-      if (deltaX <= tolerance && deltaY <= tolerance) {
+      
+      // 检查位置和旋转是否都正确
+      const isPositionCorrect = deltaX <= tolerance && deltaY <= tolerance;
+      const isRotationCorrect = piece.rotation === 0; // 正确的旋转角度应该是0°
+      
+      const isCorrect = isPositionCorrect && isRotationCorrect;
+      
+      if (isCorrect) {
         correctPieces++;
         piece.isCorrect = true;
       } else {
@@ -318,7 +328,9 @@ export class IrregularPuzzleGenerator {
       const randomPos = this.getRandomStartPosition();
       piece.x = randomPos.x;
       piece.y = randomPos.y;
-      piece.rotation = 0;
+      // 随机旋转：0°, 90°, 180°, 270°
+      const rotations = [0, 90, 180, 270];
+      piece.rotation = rotations[Math.floor(Math.random() * rotations.length)];
       piece.isCorrect = false;
       piece.isDraggable = true; // 确保所有块都可拖拽
     });
