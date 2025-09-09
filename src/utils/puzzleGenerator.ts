@@ -253,14 +253,29 @@ export class PuzzleGenerator {
     };
   }
 
-  // 打乱拼图块顺序
+  // 打乱拼图块顺序，并随机旋转和翻转
   private static shufflePieces(pieces: PuzzlePiece[]): PuzzlePiece[] {
     const shuffled = [...pieces];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
-    return shuffled;
+    
+    // 为每个拼图块随机应用旋转和翻转
+    return shuffled.map(piece => {
+      // 随机旋转：0°, 90°, 180°, 270°
+      const rotations = [0, 90, 180, 270];
+      const randomRotation = rotations[Math.floor(Math.random() * rotations.length)];
+      
+      // 50% 概率翻转
+      const shouldFlip = Math.random() > 0.5;
+      
+      return {
+        ...piece,
+        rotation: randomRotation,
+        isFlipped: shouldFlip
+      };
+    });
   }
 
   private static calculateDifficulty(
