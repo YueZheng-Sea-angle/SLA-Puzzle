@@ -246,19 +246,7 @@ export class IrregularPuzzleGenerator {
     };
   }
 
-  /**
-   * 计算网格对齐的位置（支持原点偏移）
-   * @param position 原始位置（相对于拼接板容器）
-   * @param gridSize 网格大小
-   * @param offset 原点偏移，例如 50
-   */
-  private static calculateGridAlignedPositionWithOffset(
-    position: number,
-    gridSize: number,
-    offset: number
-  ): number {
-    return Math.round((position - offset) / gridSize) * gridSize + offset;
-  }
+  // 删除了未使用的 calculateGridAlignedPositionWithOffset 方法
 
   /**
    * 计算拼图难度
@@ -324,7 +312,7 @@ export class IrregularPuzzleGenerator {
    * @param pieces 拼图块数组
    * @param fixedPieceIndex 固定块索引（已弃用，所有块现在都可拖拽）
    */
-  static resetPuzzle(pieces: IrregularPuzzlePiece[], fixedPieceIndex: number): void {
+  static resetPuzzle(pieces: IrregularPuzzlePiece[], _fixedPieceIndex: number): void {
     pieces.forEach((piece) => {
       // 所有块随机分布到待拼接区域
       const randomPos = this.getRandomStartPosition();
