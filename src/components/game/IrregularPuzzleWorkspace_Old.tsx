@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { IrregularPuzzleConfig, IrregularPuzzlePiece as PieceType } from '../../utils/puzzleGenerator/irregular';
-
+import './PuzzleWorkspace.css'; // 使用方形拼图的样式
 
 interface IrregularPuzzleWorkspaceProps {
   config: IrregularPuzzleConfig;
@@ -382,42 +382,8 @@ export const IrregularPuzzleWorkspace: React.FC<IrregularPuzzleWorkspaceProps> =
     );
   }, [pieces]);
 
-  const workspaceStyle: React.CSSProperties = {
-    position: 'relative',
-    width: '100%',
-    height: '100%',
-    backgroundColor: '#f8fafc',
-    display: 'flex',
-    gap: '10px',
-    padding: '10px'
-  };
-
-  // 左侧待拼接区域
-  const waitingAreaStyle: React.CSSProperties = {
-    width: '350px',
-    height: '100%',
-    backgroundColor: 'rgba(248, 250, 252, 0.9)',
-    border: '2px dashed #cbd5e1',
-    borderRadius: '8px',
-    padding: '10px',
-    overflow: 'auto'
-  };
-
-  // 右侧拼接板区域
-  const puzzleBoardStyle: React.CSSProperties = {
-    flex: 1,
-    height: '100%',
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    border: '2px solid #e2e8f0',
-    borderRadius: '8px',
-    position: 'relative',
-    overflow: 'hidden'
-  };
-
-  const boardWidth = config.gridSize.cols * config.gridLayout.baseSize.width;
-  const boardHeight = config.gridSize.rows * config.gridLayout.baseSize.height;
-
-  // 网格参数已在前面计算
+  // 获取处理区的拼图块（未放置的拼图块）
+  const processingAreaPieces = pieces.filter(piece => !piece.isCorrect);
 
   return (
     <div style={workspaceStyle}>

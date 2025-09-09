@@ -10,6 +10,7 @@ export interface PuzzlePiece {
   width: number;
   height: number;
   shape: PieceShape;
+  triangleType?: 'upper' | 'lower'; // 三角形类型，仅当shape为triangle时有效
 }
 
 // 拼图形状类型

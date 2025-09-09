@@ -170,3 +170,79 @@
     padding: 1px 4px;
   }
 }
+
+/* 三角形拼图块样式 */
+.puzzle-piece-item.triangle-piece {
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.puzzle-piece-item.triangle-upper {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%); /* 上三角形 */
+}
+
+.puzzle-piece-item.triangle-lower {
+  clip-path: polygon(0% 0%, 0% 100%, 100% 100%); /* 下三角形 */
+}
+
+.triangle-piece .triangle-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 三角形拼图块特殊效果 */
+.triangle-piece:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 25px rgba(59, 130, 246, 0.2);
+}
+
+.triangle-piece.selected {
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.3);
+  border-color: #fbbf24;
+}
+
+/* 三角形拼图块的选择指示器 */
+.triangle-piece .selection-indicator {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  font-size: 10px;
+  padding: 2px;
+}
+
+/* 三角形拼图块的编号 */
+.triangle-piece .piece-number {
+  font-size: 10px;
+  padding: 1px 4px;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* 为三角形添加视觉提示 */
+.triangle-piece::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  z-index: 1;
+  opacity: 0.1;
+  transition: opacity 0.2s ease;
+}
+
+.triangle-upper::before {
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 12px solid #3b82f6;
+}
+
+.triangle-lower::before {
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 12px solid #3b82f6;
+}
+
+.triangle-piece:hover::before {
+  opacity: 0.3;
+}

@@ -76,7 +76,7 @@ export const PuzzlePieceArea: React.FC<PuzzlePieceAreaProps> = ({
   };
 
   return (
-    <div 
+    <div
       className={`puzzle-piece-area ${draggedPiece ? 'can-drop' : ''}`}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
@@ -90,9 +90,10 @@ export const PuzzlePieceArea: React.FC<PuzzlePieceAreaProps> = ({
           {pieces.map((piece) => (
             <div
               key={piece.id}
-              className={`puzzle-piece-item ${
-                selectedPieceId === piece.id ? 'selected' : ''
-              } ${draggedPiece === piece.id ? 'dragging' : ''}`}
+              className={`puzzle-piece-item ${piece.shape === 'triangle' ? 'triangle-piece' : ''} ${selectedPieceId === piece.id ? 'selected' : ''
+                } ${draggedPiece === piece.id ? 'dragging' : ''} ${piece.shape === 'triangle' && piece.id.includes('_upper') ? 'triangle-upper' : ''
+                } ${piece.shape === 'triangle' && piece.id.includes('_lower') ? 'triangle-lower' : ''
+                }`}
               draggable={true}
               onClick={() => handlePieceClick(piece.id)}
               onDoubleClick={() => handlePieceDoubleClick(piece.id)}
@@ -100,9 +101,8 @@ export const PuzzlePieceArea: React.FC<PuzzlePieceAreaProps> = ({
               onDragStart={(e) => handleDragStart(e, piece.id)}
               onDragEnd={handleDragEnd}
               style={{
-                transform: `rotate(${piece.rotation}deg) ${
-                  piece.isFlipped ? 'scaleX(-1)' : ''
-                }`,
+                transform: `rotate(${piece.rotation}deg) ${piece.isFlipped ? 'scaleX(-1)' : ''
+                  }`,
               }}
             >
               {showAnswers && (
@@ -111,7 +111,7 @@ export const PuzzlePieceArea: React.FC<PuzzlePieceAreaProps> = ({
               <img
                 src={piece.imageData}
                 alt={`拼图块 ${piece.originalIndex + 1}`}
-                className="piece-image"
+                className={`piece-image ${piece.shape === 'triangle' ? 'triangle-image' : ''}`}
                 draggable={false}
               />
               {selectedPieceId === piece.id && (
@@ -123,7 +123,7 @@ export const PuzzlePieceArea: React.FC<PuzzlePieceAreaProps> = ({
           ))}
         </div>
       )}
-      
+
       {pieces.length > 0 && (
         <div className="area-tips">
           <p>💡 点击选择拼图块，然后点击答题卡中的目标位置</p>

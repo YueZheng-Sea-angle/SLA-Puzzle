@@ -44,7 +44,7 @@ export const PuzzleWorkspace: React.FC<PuzzleWorkspaceProps> = ({
 }) => {
   // 获取处理区的拼图块（currentSlot 为 null 的拼图块）
   const processingAreaPieces = gameState.config.pieces.filter(piece => piece.currentSlot === null);
-  
+
   return (
     <div className="puzzle-workspace">
       {/* 左侧：拼图处理区 */}
@@ -81,6 +81,7 @@ export const PuzzleWorkspace: React.FC<PuzzleWorkspaceProps> = ({
           originalImage={gameState.config.originalImage}
           selectedPieceId={selectedPiece}
           showAnswers={showAnswers}
+          pieceShape={gameState.config.pieceShape} // 传递拼图形状
           onPlacePiece={onPlacePiece}
           onRemovePiece={onRemovePiece}
           onPieceSelect={onPieceSelect}

@@ -1,9 +1,9 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { 
-  PuzzlePiece, 
-  GameState, 
-  GameMove, 
-  PuzzleConfig 
+import {
+  PuzzlePiece,
+  GameState,
+  GameMove,
+  PuzzleConfig
 } from '../types';
 import { PuzzleSaveService } from '../services/puzzleSaveService';
 
@@ -23,7 +23,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
   }, []);
   const [timer, setTimer] = useState(0);
   const timerRef = useRef<number | null>(null);
-  
+
   // 拖拽状态
   const [draggedPiece, setDraggedPiece] = useState<string | null>(null);
   const [dragOverSlot, setDragOverSlot] = useState<number | null>(null);
@@ -34,11 +34,11 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
       setGameState(preloadedGameState);
       setIsGameStarted(true);
       setSelectedPiece(null);
-      
+
       // 恢复计时器
       const elapsedSeconds = preloadedGameState.elapsedTime || 0;
       setTimer(elapsedSeconds);
-      
+
       // 如果游戏没有完成，启动计时器
       if (!preloadedGameState.isCompleted) {
         if (timerRef.current) {
@@ -64,16 +64,16 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
   // 初始化游戏
   const initializeGame = useCallback((config: PuzzleConfig) => {
     const totalSlots = config.gridSize.rows * config.gridSize.cols;
-    
+
     // 初始化答题卡网格（所有槽位都是空的）
     const answerGrid: (PuzzlePiece | null)[] = new Array(totalSlots).fill(null);
-    
+
     // 重置所有拼图块到处理区
     const resetPieces = config.pieces.map(piece => ({
       ...piece,
       currentSlot: null, // 所有拼图块都在处理区
     }));
-    
+
     const newGameState: GameState = {
       config: { ...config, pieces: resetPieces },
       startTime: new Date(),
@@ -87,7 +87,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
     setGameState(newGameState);
     setIsGameStarted(true);
     setTimer(0);
-    
+
     // 启动计时器
     if (timerRef.current) {
       clearInterval(timerRef.current);
@@ -116,17 +116,32 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
       const piece = prev.config.pieces.find(p => p.id === pieceId);
       if (!piece) return prev;
 
+      // 三角形拼图特殊验证：检查上三角是否尝试放置到下三角槽位，反之亦然
+      if (prev.config.pieceShape === 'triangle') {
+        // 使用triangleType属性判断，如果没有则从ID判断
+        const isUpperTrianglePiece = piece.triangleType === 'upper' || piece.id.includes('_upper');
+        const isLowerTrianglePiece = piece.triangleType === 'lower' || piece.id.includes('_lower');
+        const isUpperSlot = targetSlot % 2 === 0; // 偶数索引为上三角槽位
+        const isLowerSlot = targetSlot % 2 === 1; // 奇数索引为下三角槽位
+
+        // 如果上三角拼图块试图放置到下三角槽位，或下三角拼图块试图放置到上三角槽位，则取消操作
+        if ((isUpperTrianglePiece && isLowerSlot) || (isLowerTrianglePiece && isUpperSlot)) {
+          // 不执行放置操作，拼图块保持在处理区
+          return prev;
+        }
+      }
+
       // 检查目标槽位是否已有拼图块
       const existingPiece = prev.answerGrid[targetSlot];
-      
+
       // 更新答题卡网格
       const newAnswerGrid = [...prev.answerGrid];
-      
+
       // 如果拼图块之前在其他槽位，清空原槽位
       if (piece.currentSlot !== null) {
         newAnswerGrid[piece.currentSlot] = null;
       }
-      
+
       // 更新拼图块列表：处理现有拼图块和新拼图块
       const updatedPieces = prev.config.pieces.map(p => {
         if (existingPiece && p.id === existingPiece.id) {
@@ -138,14 +153,14 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
         }
         return p;
       });
-      
+
       // 将更新后的拼图块放入目标槽位
       const updatedPiece = updatedPieces.find(p => p.id === pieceId);
       newAnswerGrid[targetSlot] = updatedPiece || null;
 
       // 确定操作类型
       const actionType = existingPiece ? 'replace' : 'place';
-      
+
       const move: GameMove = {
         id: Date.now().toString(),
         pieceId,
@@ -175,7 +190,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
 
       return newGameState;
     });
-    
+
     // 成功放置后自动取消选择，避免用户误操作
     setSelectedPiece(null);
   }, []);
@@ -183,10 +198,10 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
   // 将拼图块从槽位移回处理区
   const removePieceFromSlot = useCallback((pieceId: string) => {
     setGameState(prev => {
-        if (!prev) return null;
+      if (!prev) return null;
 
       const piece = prev.config.pieces.find(p => p.id === pieceId);
-      
+
       if (!piece || piece.currentSlot === null) {
         return prev;
       }
@@ -194,7 +209,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
       // 更新答题卡网格
       const newAnswerGrid = [...prev.answerGrid];
       newAnswerGrid[piece.currentSlot] = null;
-      
+
       // 更新拼图块列表
       const updatedPieces = prev.config.pieces.map(p =>
         p.id === pieceId ? { ...p, currentSlot: null } : p
@@ -216,15 +231,159 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
         history: [...prev.history, move],
         answerGrid: newAnswerGrid,
       };
-      
+
       return newState;
     });
-    
+
     // 如果移除的是当前选中的拼图块，取消选择
     if (selectedPiece === pieceId) {
       setSelectedPiece(null);
     }
-  }, []);
+  }, [selectedPiece]);
+
+  // 获取提示：自动放置一个正确的拼图块，优先选择边缘位置
+  const getHint = useCallback(() => {
+    if (!gameState) return;
+
+    const { pieces, gridSize, pieceShape } = gameState.config;
+    const { answerGrid } = gameState;
+
+    // 找出所有可以放置的拼图块（未放置的拼图块 + 位置错误的拼图块）
+    const availablePieces: { piece: PuzzlePiece; isWrongPosition: boolean }[] = [];
+
+    pieces.forEach(piece => {
+      if (piece.currentSlot === null) {
+        // 未放置的拼图块
+        availablePieces.push({ piece, isWrongPosition: false });
+      } else if (piece.currentSlot !== piece.correctSlot || piece.rotation !== 0 || piece.isFlipped) {
+        // 位置错误的拼图块
+        availablePieces.push({ piece, isWrongPosition: true });
+      }
+    });
+
+    if (availablePieces.length === 0) return; // 没有可提示的拼图块
+
+    // 计算边缘位置的优先级（边缘位置优先）
+    const getSlotPriority = (slotIndex: number): number => {
+      if (pieceShape === 'triangle') {
+        // 对于三角形拼图，转换为方形索引来计算边缘
+        const squareIndex = Math.floor(slotIndex / 2);
+        const row = Math.floor(squareIndex / gridSize.cols);
+        const col = squareIndex % gridSize.cols;
+
+        // 边缘位置：第一行、最后一行、第一列、最后一列
+        if (row === 0 || row === gridSize.rows - 1 || col === 0 || col === gridSize.cols - 1) {
+          return 1; // 高优先级
+        }
+        return 2; // 低优先级
+      } else {
+        // 方形拼图
+        const row = Math.floor(slotIndex / gridSize.cols);
+        const col = slotIndex % gridSize.cols;
+
+        if (row === 0 || row === gridSize.rows - 1 || col === 0 || col === gridSize.cols - 1) {
+          return 1; // 高优先级
+        }
+        return 2; // 低优先级
+      }
+    };
+
+    // 按优先级排序可用拼图块
+    availablePieces.sort((a, b) => {
+      const priorityA = getSlotPriority(a.piece.correctSlot);
+      const priorityB = getSlotPriority(b.piece.correctSlot);
+
+      // 边缘位置优先，错误位置的拼图块优先于未放置的拼图块
+      if (priorityA !== priorityB) return priorityA - priorityB;
+      if (a.isWrongPosition !== b.isWrongPosition) return a.isWrongPosition ? -1 : 1;
+      return 0;
+    });
+
+    // 选择第一个拼图块进行提示
+    const selectedPieceInfo = availablePieces[0];
+    const targetPiece = selectedPieceInfo.piece;
+
+    // 检查目标位置是否可用
+    if (answerGrid[targetPiece.correctSlot] !== null &&
+      answerGrid[targetPiece.correctSlot]?.id !== targetPiece.id) {
+      // 如果目标位置被其他拼图块占用，先移除它
+      const occupyingPiece = answerGrid[targetPiece.correctSlot];
+      if (occupyingPiece) {
+        // 直接调用removePieceFromSlot来移除占用的拼图块
+        setGameState(prev => {
+          if (!prev) return null;
+
+          const newAnswerGrid = [...prev.answerGrid];
+          newAnswerGrid[occupyingPiece.currentSlot!] = null;
+
+          const updatedPieces = prev.config.pieces.map(p =>
+            p.id === occupyingPiece.id ? { ...p, currentSlot: null } : p
+          );
+
+          return {
+            ...prev,
+            config: { ...prev.config, pieces: updatedPieces },
+            answerGrid: newAnswerGrid,
+          };
+        });
+      }
+    }
+
+    // 放置拼图块到正确位置
+    setGameState(prev => {
+      if (!prev) return null;
+
+      const piece = prev.config.pieces.find(p => p.id === targetPiece.id);
+      if (!piece) return prev;
+
+      const newAnswerGrid = [...prev.answerGrid];
+
+      // 如果拼图块之前在其他槽位，清空原槽位
+      if (piece.currentSlot !== null) {
+        newAnswerGrid[piece.currentSlot] = null;
+      }
+
+      // 放置拼图块到正确位置，并重置旋转和翻转
+      newAnswerGrid[targetPiece.correctSlot] = { ...piece, rotation: 0, isFlipped: false };
+
+      const updatedPieces = prev.config.pieces.map(p =>
+        p.id === targetPiece.id
+          ? { ...p, currentSlot: targetPiece.correctSlot, rotation: 0, isFlipped: false }
+          : p
+      );
+
+      const newState = {
+        ...prev,
+        config: { ...prev.config, pieces: updatedPieces },
+        answerGrid: newAnswerGrid,
+        moves: prev.moves + 1,
+      };
+
+      // 检查游戏是否完成
+      const isComplete = checkPuzzleComplete(newAnswerGrid);
+      if (isComplete) {
+        newState.isCompleted = true;
+        newState.endTime = new Date();
+
+        // 停止计时器
+        if (timerRef.current) {
+          clearInterval(timerRef.current);
+          timerRef.current = null;
+        }
+      }
+
+      return newState;
+    });
+
+    // 高亮显示提示的拼图块
+    setSelectedPiece(targetPiece.id);
+
+    // 2秒后取消选择，避免干扰用户操作
+    setTimeout(() => {
+      setSelectedPiece(null);
+    }, 2000);
+
+  }, [gameState, setSelectedPiece]);
 
   // 旋转拼图块
   const rotatePiece = useCallback((pieceId: string, rotation: number) => {
@@ -286,7 +445,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
     if (answerGrid.some(slot => slot === null)) {
       return false;
     }
-    
+
     // 检查每个拼图块是否在正确的位置（考虑旋转和翻转）
     return answerGrid.every((piece, slotIndex) => {
       if (!piece) return false;
@@ -318,7 +477,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
             newAnswerGrid[lastMove.toSlot] = null;
           }
           updatedPieces = updatedPieces.map(piece =>
-            piece.id === lastMove.pieceId 
+            piece.id === lastMove.pieceId
               ? { ...piece, currentSlot: lastMove.fromSlot || null }
               : piece
           );
@@ -349,7 +508,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
             const toSlot = lastMove.toSlot as number;
             // 移除新放置的拼图块
             newAnswerGrid[toSlot] = null;
-            
+
             // 如果被替换的拼图块存在，将其恢复到原位置
             if (lastMove.replacedPieceId) {
               const replacedPiece = updatedPieces.find(p => p.id === lastMove.replacedPieceId);
@@ -360,14 +519,14 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
                 );
               }
             }
-            
+
             // 将新拼图块移回原位置
             updatedPieces = updatedPieces.map(piece =>
-              piece.id === lastMove.pieceId 
+              piece.id === lastMove.pieceId
                 ? { ...piece, currentSlot: lastMove.fromSlot || null }
                 : piece
             );
-            
+
             // 如果新拼图块原来在其他槽位，恢复那个槽位
             if (lastMove.fromSlot !== null && lastMove.fromSlot !== undefined) {
               const originalPiece = updatedPieces.find(p => p.id === lastMove.pieceId);
@@ -380,7 +539,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
         case 'rotate':
           // 撤销旋转（预留功能）
           updatedPieces = updatedPieces.map(piece =>
-            piece.id === lastMove.pieceId 
+            piece.id === lastMove.pieceId
               ? { ...piece, rotation: (piece.rotation - 90 + 360) % 360 }
               : piece
           );
@@ -388,7 +547,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
         case 'flip':
           // 撤销翻转（预留功能）
           updatedPieces = updatedPieces.map(piece =>
-            piece.id === lastMove.pieceId 
+            piece.id === lastMove.pieceId
               ? { ...piece, isFlipped: !piece.isFlipped }
               : piece
           );
@@ -438,7 +597,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
 
     // 使用现有的放置逻辑
     placePieceToSlot(draggedPiece, targetSlot);
-    
+
     // 清理拖拽状态
     setDraggedPiece(null);
     setDragOverSlot(null);
@@ -450,7 +609,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
 
     // 使用现有的移除逻辑
     removePieceFromSlot(draggedPiece);
-    
+
     // 清理拖拽状态
     setDraggedPiece(null);
     setDragOverSlot(null);
@@ -472,16 +631,16 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
   // 加载游戏进度
   const loadGame = useCallback((saveId: string) => {
     const result = PuzzleSaveService.loadGame(saveId);
-    
+
     if (result.success && result.gameState) {
       setGameState(result.gameState);
       setIsGameStarted(true);
       setSelectedPiece(null);
-      
+
       // 恢复计时器
       const elapsedSeconds = result.gameState.elapsedTime || 0;
       setTimer(elapsedSeconds);
-      
+
       // 如果游戏没有完成，启动计时器
       if (!result.gameState.isCompleted) {
         if (timerRef.current) {
@@ -502,7 +661,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
         }, 1000);
       }
     }
-    
+
     return result;
   }, []);
 
@@ -524,10 +683,10 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
   // 获取当前游戏进度百分比
   const getGameProgress = useCallback(() => {
     if (!gameState || !gameState.answerGrid) return 0;
-    
+
     const totalSlots = gameState.answerGrid.length;
     const filledSlots = gameState.answerGrid.filter(slot => slot !== null).length;
-    
+
     return totalSlots > 0 ? (filledSlots / totalSlots) * 100 : 0;
   }, [gameState]);
 
@@ -550,6 +709,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
     initializeGame,
     placePieceToSlot,
     removePieceFromSlot,
+    getHint,
     rotatePiece,
     flipPiece,
     undo,

@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react'; import { IrregularPuzzleConfig, IrregularPuzzleGenerator, IrregularPuzzlePiece } from '../utils/puzzleGenerator/irregular';
+import React, { useState, useEffect, useCallback } from 'react';
+import { IrregularPuzzleConfig, IrregularPuzzleGenerator, IrregularPuzzlePiece } from '../utils/puzzleGenerator/irregular';
 import { IrregularAnswerGrid } from '../components/game/IrregularAnswerGrid';
 import { Timer } from '../components/common/Timer';
 import { Button } from '../components/common/Button';
 import { GameHelpButton } from '../components/common/GameHelp';
-import { LeaderboardModal } from '../components/leaderboard/LeaderboardModal';
 import '../components/game/PuzzleGame.css';
 import '../components/game/PuzzleWorkspace.css';
 
@@ -32,7 +32,6 @@ export const IrregularPuzzleGame: React.FC<IrregularPuzzleGameProps> = ({
   const [draggedPiece, setDraggedPiece] = useState<string | null>(null);
   const [dragOverSlot, setDragOverSlot] = useState<number | null>(null);
   const [answerGrid, setAnswerGrid] = useState<(IrregularPuzzlePiece | null)[]>([]);
-  const [showLeaderboard, setShowLeaderboard] = useState(false);
 
   // 生成拼图配置
   const generatePuzzle = useCallback(async () => {
@@ -231,97 +230,6 @@ export const IrregularPuzzleGame: React.FC<IrregularPuzzleGameProps> = ({
     setMoves(prev => prev + 1);
   }, [puzzleConfig, answerGrid]);
 
-  // 获取提示：自动放置一个正确的拼图块，优先选择边缘位置
-  const getHint = useCallback(() => {
-    if (!puzzleConfig || isComplete) return;
-
-    const { pieces, gridSize } = puzzleConfig;
-
-    // 找出所有可以放置的拼图块（未放置的拼图块 + 位置错误的拼图块）
-    const availablePieces: { piece: IrregularPuzzlePiece; isWrongPosition: boolean; slotIndex?: number }[] = [];
-
-    pieces.forEach((piece) => {
-      const slotIndex = answerGrid.findIndex(slot => slot?.id === piece.id);
-      const correctSlotIndex = piece.gridRow * gridSize.cols + piece.gridCol;
-
-      if (slotIndex === -1) {
-        // 未放置的拼图块
-        availablePieces.push({ piece, isWrongPosition: false });
-      } else if (slotIndex !== correctSlotIndex) {
-        // 位置错误的拼图块
-        availablePieces.push({ piece, isWrongPosition: true, slotIndex });
-      }
-    });
-
-    if (availablePieces.length === 0) return; // 没有可提示的拼图块
-
-    // 计算边缘位置的优先级（边缘位置优先）
-    const getSlotPriority = (piece: IrregularPuzzlePiece): number => {
-      const row = piece.gridRow;
-      const col = piece.gridCol;
-
-      // 边缘位置：第一行、最后一行、第一列、最后一列
-      if (row === 0 || row === gridSize.rows - 1 || col === 0 || col === gridSize.cols - 1) {
-        return 1; // 高优先级
-      }
-      return 2; // 低优先级
-    };
-
-    // 按优先级排序可用拼图块
-    availablePieces.sort((a, b) => {
-      const priorityA = getSlotPriority(a.piece);
-      const priorityB = getSlotPriority(b.piece);
-
-      // 边缘位置优先，错误位置的拼图块优先于未放置的拼图块
-      if (priorityA !== priorityB) return priorityA - priorityB;
-      if (a.isWrongPosition !== b.isWrongPosition) return a.isWrongPosition ? -1 : 1;
-      return 0;
-    });
-
-    // 选择第一个拼图块进行提示
-    const selectedPieceInfo = availablePieces[0];
-    const targetPiece = selectedPieceInfo.piece;
-    const correctSlotIndex = targetPiece.gridRow * gridSize.cols + targetPiece.gridCol;
-
-    // 如果拼图块当前在错误位置，先移除它
-    if (selectedPieceInfo.isWrongPosition && selectedPieceInfo.slotIndex !== undefined) {
-      const newAnswerGrid = [...answerGrid];
-      newAnswerGrid[selectedPieceInfo.slotIndex] = null;
-      setAnswerGrid(newAnswerGrid);
-    }
-
-    // 检查目标位置是否被其他拼图块占用
-    if (answerGrid[correctSlotIndex] !== null) {
-      const occupyingPiece = answerGrid[correctSlotIndex];
-      if (occupyingPiece && occupyingPiece.id !== targetPiece.id) {
-        // 移除占用的拼图块
-        const newAnswerGrid = [...answerGrid];
-        newAnswerGrid[correctSlotIndex] = null;
-        setAnswerGrid(newAnswerGrid);
-
-        // 更新占用拼图块的状态
-        const updatedPieces = puzzleConfig.pieces.map(p =>
-          p.id === occupyingPiece.id ? { ...p, isCorrect: false } : p
-        );
-        setPuzzleConfig({ ...puzzleConfig, pieces: updatedPieces });
-      }
-    }
-
-    // 使用现有的handlePiecePlacement函数来放置拼图块
-    setTimeout(() => {
-      handlePiecePlacement(targetPiece.id, correctSlotIndex);
-
-      // 高亮显示提示的拼图块
-      setSelectedPiece(targetPiece.id);
-
-      // 2秒后取消选择
-      setTimeout(() => {
-        setSelectedPiece(null);
-      }, 2000);
-    }, 100); // 小延迟确保状态更新完成
-
-  }, [puzzleConfig, answerGrid, isComplete, handlePiecePlacement]);
-
   // 拖拽开始处理
   const handleDragStart = useCallback((pieceId: string) => {
     setDraggedPiece(pieceId);
@@ -443,23 +351,14 @@ export const IrregularPuzzleGame: React.FC<IrregularPuzzleGameProps> = ({
         <div className="game-controls">
           <GameHelpButton />
           <Button
-            onClick={getHint}
+            onClick={() => {
+              alert('提示功能正在开发中，敬请期待！');
+            }}
             variant="secondary"
             size="small"
             className="hint-button"
           >
             💡 提示
-          </Button>
-          <Button
-            onClick={() => {
-              // 打开排行榜模态框
-              setShowLeaderboard(true);
-            }}
-            variant="secondary"
-            size="small"
-            className="leaderboard-button"
-          >
-            🏆 排行榜
           </Button>
           <Button
             onClick={() => setShowAnswers(!showAnswers)}
@@ -604,19 +503,8 @@ export const IrregularPuzzleGame: React.FC<IrregularPuzzleGameProps> = ({
 
       {/* 操作提示 */}
       <div className="game-tips">
-        <p>💡 操作提示：点击选择拼图块，点击或拖拽到右侧答题卡放置 | ESC取消选择 | 异形拼图块保持原有的切割形状</p>
+        <p>💡 操作提示：点击选择拼图块，点击或拖拽到右侧答题卡放置 | ESC 取消选择 | 异形拼图块保持原有的切割形状</p>
       </div>
-
-      {/* 排行榜模态框 */}
-      <LeaderboardModal
-        isVisible={showLeaderboard}
-        onClose={() => setShowLeaderboard(false)}
-        puzzleName={puzzleConfig?.name}
-        difficulty="easy" // 三角形拼图默认难度
-        pieceShape="triangle"
-      />
     </div>
   );
 };
-
-export default IrregularPuzzleGame;
