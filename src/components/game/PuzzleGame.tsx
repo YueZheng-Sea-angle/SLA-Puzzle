@@ -162,6 +162,12 @@ export const PuzzleGame: React.FC<PuzzleGameProps> = ({
                 experience: authState.user.experience,
                 bestTimes: authState.user.bestTimes,
                 recentGameResults: (authState.user as any).recentGameResults || [], // 添加最近游戏结果
+                difficultyStats: (authState.user as any).difficultyStats || {
+                  easyCompleted: 0,
+                  mediumCompleted: 0,
+                  hardCompleted: 0,
+                  expertCompleted: 0,
+                }
               },
               authState.user.achievements || [],
               perfectMoves,

@@ -3,6 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { getLevelProgress } from '../utils/experienceSystem';
 import { AvatarSelector } from '../components/auth/AvatarSelector';
 import { Button } from '../components/common/Button';
+import { createAchievements } from '../data/achievementsData';
 import './Profile.css';
 
 interface ProfilePageProps {
@@ -69,8 +70,16 @@ export const Profile: React.FC<ProfilePageProps> = ({ onBackToMenu }) => {
   };
 
   const renderAvatar = () => {
-    // 如果有设置头像ID，从映射中获取对应的emoji
-    if (user.avatar && user.avatar !== 'default_user' && avatarMap[user.avatar]) {
+    const owned = user.ownedItems || [];
+    // 如果是默认头像（id 以 default_ 开头），直接渲染
+    if (user.avatar && /^default_/.test(user.avatar) && avatarMap[user.avatar]) {
+      return <span className="avatar-emoji">{avatarMap[user.avatar]}</span>;
+    }
+    // 如果是商店购买头像，需校验 owned
+    if (user.avatar && avatarMap[user.avatar]) {
+      if (!owned.includes(user.avatar)) {
+        return <span className="avatar-emoji">{avatarMap['default_user']}</span>;
+      }
       return <span className="avatar-emoji">{avatarMap[user.avatar]}</span>;
     }
     // 如果是直接的emoji字符串（兼容旧数据）
@@ -101,15 +110,10 @@ export const Profile: React.FC<ProfilePageProps> = ({ onBackToMenu }) => {
           {/* 头像区域 */}
           <div className="avatar-section">
             <div 
-              className={`profile-avatar ${user.avatarFrame ? 'with-frame' : ''}`}
+              className={`profile-avatar ${user.avatarFrame && (user.ownedItems || []).includes(user.avatarFrame) ? 'with-frame' : ''}`}
               onClick={() => setShowAvatarSelector(true)}
             >
               {renderAvatar()}
-              {user.avatarFrame && user.avatarFrame !== 'frame_none' && (
-                <div className="avatar-frame-indicator">
-                  {user.avatarFrame === 'decoration_frame' ? '🖼️' : '✨'}
-                </div>
-              )}
             </div>
             <button
               className="change-avatar-btn"
@@ -179,12 +183,31 @@ export const Profile: React.FC<ProfilePageProps> = ({ onBackToMenu }) => {
           <h3>🏆 我的成就</h3>
           <div className="achievements-grid">
             {user.achievements && user.achievements.length > 0 ? (
-              user.achievements.map((achievement, index) => (
-                <div key={index} className="achievement-item">
-                  <span className="achievement-icon">🏆</span>
-                  <span className="achievement-name">{achievement}</span>
-                </div>
-              ))
+              user.achievements.map((achievementId, index) => {
+                const allAchievements = createAchievements({
+                  gamesCompleted: user.gamesCompleted || 0,
+                  achievements: user.achievements || [],
+                  level: user.level || 1,
+                  experience: user.experience || 0,
+                  coins: user.coins || 0,
+                  totalScore: user.totalScore || 0,
+                  bestTimes: user.bestTimes,
+                  recentGameResults: (user as any).recentGameResults || [],
+                  difficultyStats: (user as any).difficultyStats || {
+                    easyCompleted: 0,
+                    mediumCompleted: 0,
+                    hardCompleted: 0,
+                    expertCompleted: 0,
+                  }
+                });
+                const found = allAchievements.find((a: any) => a.id === achievementId);
+                return (
+                  <div key={index} className="achievement-item">
+                    <span className="achievement-icon">{found ? found.icon : '🏆'}</span>
+                    <span className="achievement-name">{found ? found.title : achievementId}</span>
+                  </div>
+                );
+              })
             ) : (
               <div className="no-achievements">
                 <span className="empty-icon">🎯</span>

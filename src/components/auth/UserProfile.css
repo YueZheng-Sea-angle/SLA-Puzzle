@@ -63,27 +63,15 @@
 }
 
 .avatar-emoji {
-  font-size: 0.85rem;
-  /* 确保emoji不会溢出容器 */
-  line-height: 1;
-}
-
-.avatar-frame-indicator {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  font-size: 0.6rem;
-  background: white;
-  border-radius: 50%;
-  width: 12px;
-  height: 12px;
-  display: flex;
+  /* Emoji 字体回退，确保跨平台显示一致 */
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Symbol", "EmojiOne Mozilla", sans-serif;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  z-index: 2;
-  /* 防止头像框指示器影响其他元素的点击 */
-  pointer-events: none;
+  font-size: 1rem; /* 小头像使用适中字号，避免裁剪 */
+  line-height: 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 .user-name {

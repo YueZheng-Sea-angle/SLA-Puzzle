@@ -70,6 +70,24 @@ export const AvatarSelector: React.FC<AvatarSelectorProps> = ({ isOpen, onClose 
 
   const handleSave = async () => {
     try {
+      // 验证所选头像是否可用
+      const isAvatarValid = defaultAvatars.some(avatar => avatar.id === selectedAvatar) || 
+                           (purchasedAvatars.some(avatar => avatar.id === selectedAvatar) && userOwnedItems.includes(selectedAvatar));
+      
+      // 验证所选边框是否可用
+      const isFrameValid = defaultFrames.some(frame => frame.id === selectedFrame) || 
+                          (purchasedFrames.some(frame => frame.id === selectedFrame) && userOwnedItems.includes(selectedFrame));
+
+      if (!isAvatarValid) {
+        alert('您没有权限使用此头像，请先购买！');
+        return;
+      }
+
+      if (!isFrameValid) {
+        alert('您没有权限使用此边框，请先购买！');
+        return;
+      }
+
       // 使用AuthContext的更新函数
       const success = await updateUserProfile({
         avatar: selectedAvatar,

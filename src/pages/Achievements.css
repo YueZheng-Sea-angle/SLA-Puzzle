@@ -171,7 +171,7 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 0 20px var(--rarity-color, rgba(255, 255, 255, 0.3));
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8));
   transform: scale(1.02);
-  animation: shimmer 3s ease-in-out infinite;
+  /* 移除动画效果，保持静态显示 */
 }
 
 .achievement-card.unlocked:hover {
@@ -234,7 +234,7 @@
 .achievement-card.unlocked .achievement-icon {
   background: rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  animation: glow 2s ease-in-out infinite alternate;
+  /* 移除闪烁动画效果 */
 }
 
 .achievement-card.locked .achievement-icon {
@@ -337,8 +337,59 @@
   font-weight: 600;
 }
 
+/* 成就进度样式 - 仿照个人资料页面设计 */
 .achievement-progress {
-  margin-bottom: 16px;
+  margin: 16px 0;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.achievement-card.unlocked .achievement-progress {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.achievement-card.locked .achievement-progress {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.progress-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.achievement-card.unlocked .progress-label {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.achievement-card.locked .progress-label {
+  color: #555555;
+}
+
+.progress-numbers {
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+}
+
+.achievement-card.unlocked .progress-numbers {
+  color: #1a1a1a;
+}
+
+.achievement-card.locked .progress-numbers {
+  color: #666666;
 }
 
 .progress-bar {
@@ -347,64 +398,62 @@
   background: rgba(255, 255, 255, 0.2);
   border-radius: 4px;
   overflow: hidden;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.achievement-card.unlocked .progress-bar {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
 .achievement-card.locked .progress-bar {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
 }
 
-.progress-bar .progress-fill {
+.progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #4ade80, #22c55e);
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
   border-radius: 4px;
-  transition: width 0.3s ease;
+  transition: width 0.4s ease-in-out;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
-.achievement-card.locked .progress-bar .progress-fill {
-  background: linear-gradient(90deg, rgba(74, 222, 128, 0.5), rgba(34, 197, 94, 0.5));
+.progress-fill::after {
+  /* 移除进度条动画效果 */
+  display: none;
 }
 
-.achievement-progress .progress-text {
-  font-size: 0.875rem;
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.achievement-card.unlocked .progress-fill {
+  background: linear-gradient(90deg, #4ade80 0%, #22c55e 100%);
+}
+
+.achievement-card.locked .progress-fill {
+  background: linear-gradient(90deg, rgba(102, 126, 234, 0.6) 0%, rgba(118, 75, 162, 0.6) 100%);
+}
+
+.progress-percentage {
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 600;
   opacity: 0.8;
-  font-weight: 500;
+  font-family: 'Courier New', monospace;
 }
 
-.achievement-card.locked .achievement-progress .progress-text {
-  opacity: 1;
-  color: #333333;
-  font-weight: 600;
-}
-
-.achievement-card.unlocked .progress-text {
-  opacity: 1;
+.achievement-card.unlocked .progress-percentage {
   color: #1a1a1a;
-  font-weight: 600;
+  opacity: 1;
 }
 
-/* 进度容器样式 */
-.progress-container {
-  margin-bottom: 16px;
-}
-
-.progress-container .progress-text {
-  font-size: 0.875rem;
-  font-weight: 500;
-  margin-top: 4px;
-  display: block;
-}
-
-.achievement-card.unlocked .progress-container .progress-text {
-  color: #1a1a1a;
-  font-weight: 600;
-}
-
-.achievement-card.locked .progress-container .progress-text {
-  color: #333333;
-  font-weight: 600;
+.achievement-card.locked .progress-percentage {
+  color: #666666;
 }
 
 .achievement-reward {

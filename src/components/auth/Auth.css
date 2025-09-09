@@ -127,7 +127,9 @@
   padding: 0.5rem;
   background: #ffe1e1;
   border-radius: 4px;
-  text-align: center;
+  text-align: left;
+  white-space: pre-line;
+  line-height: 1.4;
 }
 
 .auth-button {

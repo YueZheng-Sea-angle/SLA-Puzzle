@@ -98,8 +98,16 @@ export const UserProfile: React.FC<UserProfileProps> = ({ onOpenShop, onOpenProf
   };
 
   const renderAvatar = () => {
-    // 如果有设置头像ID，从映射中获取对应的emoji
-    if (user.avatar && user.avatar !== 'default_user' && avatarMap[user.avatar]) {
+    const owned = user.ownedItems || [];
+    // 如果是默认头像（id 以 default_ 开头），直接渲染
+    if (user.avatar && /^default_/.test(user.avatar) && avatarMap[user.avatar]) {
+      return <span className="avatar-emoji">{avatarMap[user.avatar]}</span>;
+    }
+    // 如果是商店购买头像，需校验 owned
+    if (user.avatar && avatarMap[user.avatar]) {
+      if (!owned.includes(user.avatar)) {
+        return <span className="avatar-emoji">{avatarMap['default_user']}</span>;
+      }
       return <span className="avatar-emoji">{avatarMap[user.avatar]}</span>;
     }
     // 如果是直接的emoji字符串（兼容旧数据）
@@ -110,24 +118,19 @@ export const UserProfile: React.FC<UserProfileProps> = ({ onOpenShop, onOpenProf
     if (user.avatar && user.avatar.startsWith('http')) {
       return <img src={user.avatar} alt={user.username} />;
     }
-    // 默认显示用户名首字母
-    return <span>{user.username.charAt(0).toUpperCase()}</span>;
+  // 默认显示用户名首字母
+  return <span>{user.username.charAt(0).toUpperCase()}</span>;
   };
 
   return (
     <div className="user-profile">
       <div className="user-profile-header">
         <div 
-          className={`user-avatar ${user.avatarFrame ? 'with-frame' : ''}`}
+          className={`user-avatar ${user.avatarFrame && (user.ownedItems || []).includes(user.avatarFrame) ? 'with-frame' : ''}`}
           onClick={handleAvatarClick}
           title="点击更改头像"
         >
           {renderAvatar()}
-          {user.avatarFrame && user.avatarFrame !== 'frame_none' && (
-            <div className="avatar-frame-indicator">
-              {user.avatarFrame === 'decoration_frame' ? '🖼️' : '✨'}
-            </div>
-          )}
         </div>
         <button
           className="user-profile-button"

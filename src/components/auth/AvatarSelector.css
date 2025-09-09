@@ -192,6 +192,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Symbol", "EmojiOne Mozilla", sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 .item-name {

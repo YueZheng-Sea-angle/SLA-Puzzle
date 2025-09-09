@@ -1,18 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { LoginCredentials, RegisterCredentials } from '../../types';
+import { apiService } from '../../services/apiService';
 import './Auth.css';
 
 type AuthMode = 'login' | 'register';
 
 export const Auth: React.FC = () => {
-  const { authState, login, register, clearError } = useAuth();
+  const { authState, login, register, clearError, setAuthenticatedUser } = useAuth();
   const [mode, setMode] = useState<AuthMode>('login');
   const [formData, setFormData] = useState({
     username: '',
     password: '',
     confirmPassword: '',
   });
+  
+  // 本地错误状态，不依赖 AuthContext
+  const [localError, setLocalError] = useState<string | null>(null);
+  const [localLoading, setLocalLoading] = useState(false);
+
+  // 添加生命周期调试
+  useEffect(() => {
+    console.log('🔴 Auth组件挂载/重新挂载');
+    return () => {
+      console.log('🔴 Auth组件卸载');
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log('🟡 Auth组件 authState 改变:', {
+      isAuthenticated: authState.isAuthenticated,
+      isLoading: authState.isLoading,
+      hasError: !!authState.error,
+      error: authState.error
+    });
+  }, [authState]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -29,21 +51,33 @@ export const Auth: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (mode === 'login') {
-      const credentials: LoginCredentials = {
-        username: formData.username,
-        password: formData.password,
-      };
-      await login(credentials);
-    } else {
-      const credentials: RegisterCredentials = {
-        username: formData.username,
-        password: formData.password,
-        confirmPassword: formData.confirmPassword,
-      };
-      await register(credentials);
+    e.stopPropagation();
+    
+    try {
+      if (mode === 'login') {
+        const credentials: LoginCredentials = {
+          username: formData.username,
+          password: formData.password,
+        };
+        const result = await login(credentials);
+        console.log('登录结果:', result);
+      } else {
+        const credentials: RegisterCredentials = {
+          username: formData.username,
+          password: formData.password,
+          confirmPassword: formData.confirmPassword,
+        };
+        const result = await register(credentials);
+        console.log('注册结果:', result);
+        console.log('注册完成，停止进一步处理');
+      }
+    } catch (error) {
+      console.error('表单提交错误:', error);
+      // 确保错误被正确处理，不会导致页面刷新
     }
+    
+    // 确保函数总是返回 false，阻止任何默认行为
+    return false;
   };
 
   const switchMode = () => {
@@ -98,7 +132,12 @@ export const Auth: React.FC = () => {
           </p>
         </div>
 
-        <form className="auth-form" onSubmit={handleSubmit}>
+        <form 
+          className="auth-form" 
+          onSubmit={handleSubmit} 
+          noValidate
+          onReset={(e) => e.preventDefault()}
+        >
           {mode === 'register' && (
             <div className="form-group">
               <label className="form-label" htmlFor="username">
@@ -169,18 +208,95 @@ export const Auth: React.FC = () => {
             </div>
           )}
 
-          {authState.error && (
+          {(authState.error || localError) && (
             <div className="error-message">
-              {authState.error}
+              {(authState.error || localError)!.split('\n').map((line, index) => (
+                <div key={index}>{line}</div>
+              ))}
             </div>
           )}
 
           <button
-            type="submit"
+            type="button"
             className="auth-button"
-            disabled={!isFormValid() || authState.isLoading}
+            disabled={!isFormValid() || authState.isLoading || localLoading}
+            onClick={async (e) => {
+              console.log('直接按钮点击事件');
+              e.preventDefault();
+              e.stopPropagation();
+              
+              try {
+                console.log('测试：使用本地状态，不触发AuthContext状态更新');
+                console.log('当前时间戳:', Date.now());
+                
+                setLocalError(null);
+                setLocalLoading(true);
+                
+                // 直接调用 apiService，不通过 AuthContext
+                if (mode === 'login') {
+                  console.log('直接调用 apiService.login');
+                  const response = await apiService.login({
+                    username: formData.username,
+                    password: formData.password,
+                  });
+                  console.log('登录API响应:', response);
+                  
+                  setLocalLoading(false);
+                  if (response.success && response.data) {
+                    console.log('登录成功，更新 AuthContext');
+                    setLocalError(null);
+                    setLocalLoading(false);
+                    // 直接设置认证状态，避免重复 API 调用
+                    setAuthenticatedUser(response.data.user, response.data.token);
+                  } else {
+                    console.log('登录失败，设置本地错误');
+                    // 使用 formatApiError 来格式化错误信息
+                    const { formatApiError } = await import('../../utils/errorFormatter');
+                    const errorMessage = formatApiError(
+                      response.error || '登录失败',
+                      response.code,
+                      response.details
+                    );
+                    setLocalError(errorMessage);
+                  }
+                } else {
+                  console.log('直接调用 apiService.register');
+                  const response = await apiService.register({
+                    username: formData.username,
+                    password: formData.password,
+                    confirmPassword: formData.confirmPassword,
+                  });
+                  console.log('注册API响应:', response);
+                  
+                  setLocalLoading(false);
+                  if (response.success && response.data) {
+                    console.log('注册成功，更新 AuthContext');
+                    setLocalError(null);
+                    setLocalLoading(false);
+                    // 直接设置认证状态，避免重复 API 调用
+                    setAuthenticatedUser(response.data.user, response.data.token);
+                  } else {
+                    console.log('注册失败，设置本地错误');
+                    // 使用 formatApiError 来格式化错误信息
+                    const { formatApiError } = await import('../../utils/errorFormatter');
+                    const errorMessage = formatApiError(
+                      response.error || '注册失败',
+                      response.code,
+                      response.details
+                    );
+                    setLocalError(errorMessage);
+                  }
+                }
+                
+                console.log('本地状态操作完成');
+              } catch (error) {
+                console.error('直接按钮错误:', error);
+                setLocalLoading(false);
+                setLocalError('发生错误，请稍后重试');
+              }
+            }}
           >
-            {authState.isLoading && <span className="loading-spinner"></span>}
+            {(authState.isLoading || localLoading) && <span className="loading-spinner"></span>}
             {mode === 'login' ? '登录' : '注册'}
           </button>
         </form>

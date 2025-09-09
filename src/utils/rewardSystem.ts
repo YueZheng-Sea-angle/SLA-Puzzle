@@ -60,6 +60,70 @@ const ACHIEVEMENTS: Record<string, Omit<Achievement, 'unlocked' | 'unlockedAt'>>
     icon: '🏃',
     category: 'performance'
   },
+  // 新增成就定义
+  lightning_fast: {
+    id: 'lightning_fast',
+    name: '闪电快手',
+    description: '在1分钟内完成简单难度拼图',
+    icon: '⚡',
+    category: 'performance'
+  },
+  easy_master: {
+    id: 'easy_master',
+    name: '简单模式专家',
+    description: '完成20个简单难度拼图',
+    icon: '😊',
+    category: 'progress'
+  },
+  hard_challenger: {
+    id: 'hard_challenger',
+    name: '困难挑战者',
+    description: '完成10个困难难度拼图',
+    icon: '😤',
+    category: 'progress'
+  },
+  expert_elite: {
+    id: 'expert_elite',
+    name: '专家精英',
+    description: '完成5个专家难度拼图',
+    icon: '🔥',
+    category: 'milestone'
+  },
+  night_owl: {
+    id: 'night_owl',
+    name: '夜猫子',
+    description: '在凌晨2-6点完成拼图',
+    icon: '🦉',
+    category: 'special'
+  },
+  early_bird: {
+    id: 'early_bird',
+    name: '早起鸟儿',
+    description: '在早上5-7点完成拼图',
+    icon: '🐦',
+    category: 'special'
+  },
+  weekend_warrior: {
+    id: 'weekend_warrior',
+    name: '周末战士',
+    description: '在周末完成拼图',
+    icon: '🏖️',
+    category: 'special'
+  },
+  time_master: {
+    id: 'time_master',
+    name: '时间大师',
+    description: '在5次游戏中都打破个人最佳记录',
+    icon: '⏱️',
+    category: 'performance'
+  },
+  no_mistakes: {
+    id: 'no_mistakes',
+    name: '零失误专家',
+    description: '完成拼图过程中不放错任何拼块',
+    icon: '🎯',
+    category: 'performance'
+  },
   perfectionist: {
     id: 'perfectionist',
     name: '完美主义者',
@@ -82,31 +146,6 @@ const ACHIEVEMENTS: Record<string, Omit<Achievement, 'unlocked' | 'unlockedAt'>>
     description: '用少于标准步数30%完成拼图',
     icon: '🚀',
     category: 'performance'
-  },
-
-  // 特殊成就
-  night_owl: {
-    id: 'night_owl',
-    name: '夜猫子',
-    description: '在凌晨2-6点完成拼图',
-    icon: '🦉',
-    category: 'special'
-  },
-
-  early_bird: {
-    id: 'early_bird',
-    name: '早起鸟',
-    description: '在早晨6-9点完成拼图',
-    icon: '🐦',
-    category: 'special'
-  },
-
-  weekend_warrior: {
-    id: 'weekend_warrior',
-    name: '周末战士',
-    description: '在周末完成拼图',
-    icon: '⚔️',
-    category: 'special'
   },
 
   expert_speedster: {
@@ -200,6 +239,7 @@ export function checkAchievements(
     gamesCompleted: number;
     level: number;
     lastPlayDate?: Date;
+    bestTimes?: Record<string, number>;
     recentGameResults?: Array<{
       moves: number;
       totalPieces: number;
@@ -282,6 +322,30 @@ export function checkAchievements(
     });
   }
 
+  // 闪电快手：1分钟内完成简单难度拼图
+  if (gameResult.difficulty === 'easy' && 
+      gameResult.completionTime <= 60 && 
+      !unlockedAchievements.includes('lightning_fast')) {
+    newAchievements.push({
+      ...ACHIEVEMENTS.lightning_fast,
+      unlocked: true,
+      unlockedAt: now
+    });
+  }
+
+  // 难度相关成就 - 需要基于统计数据判断
+  // 注意：这些成就需要在用户数据中跟踪各难度的完成次数
+  // 目前的实现是简化版，实际应该在游戏完成时更新用户的难度统计
+  
+  // 由于没有准确的难度统计，这些成就暂时不在此处自动解锁
+  // 应该在用户数据更新时，根据累计的难度完成次数来判断
+  
+  // 如果要启用，需要先实现用户数据中的难度统计：
+  // - easyCompleted: number
+  // - mediumCompleted: number  
+  // - hardCompleted: number
+  // - expertCompleted: number
+
   // 检查步数相关成就（允许同时获得多个）
   if (gameResult.perfectMoves) {
     // 完美主义者：用最少步数完成
@@ -296,7 +360,7 @@ export function checkAchievements(
 
     // 高效解密者：连续三次使用步数不超过总拼图数的1.5倍
     if (gameResult.totalPieces && !unlockedAchievements.includes('efficient_solver')) {
-      // 获取最近的游戏结果（包括当前这局）
+      // 获取最近的游戏结果（不包括当前这局）
       const recentGames = userStats.recentGameResults || [];
       const currentGame = {
         moves: gameResult.moves,
@@ -307,12 +371,28 @@ export function checkAchievements(
       // 将当前游戏结果加入历史记录
       const allGames = [...recentGames, currentGame];
       
+      console.log('🧠 高效解密者检查:', {
+        recentGames: recentGames.length,
+        currentGame,
+        allGames: allGames.length,
+        requirement: '连续三次步数 <= 总拼图数 * 1.5'
+      });
+      
       // 检查最近的三局游戏是否都符合条件
       if (allGames.length >= 3) {
         const lastThreeGames = allGames.slice(-3);
-        const allMeetCriteria = lastThreeGames.every(game => 
-          game.moves <= game.totalPieces * 1.5
-        );
+        const criteria = lastThreeGames.map(game => ({
+          moves: game.moves,
+          maxAllowed: game.totalPieces * 1.5,
+          meets: game.moves <= game.totalPieces * 1.5
+        }));
+        
+        const allMeetCriteria = criteria.every(c => c.meets);
+        
+        console.log('🧠 高效解密者详细检查:', {
+          lastThreeGames: criteria,
+          allMeetCriteria
+        });
         
         if (allMeetCriteria) {
           newAchievements.push({
@@ -321,6 +401,8 @@ export function checkAchievements(
             unlockedAt: now
           });
         }
+      } else {
+        console.log('🧠 高效解密者: 游戏次数不足3次', { totalGames: allGames.length });
       }
     }
 
@@ -345,8 +427,8 @@ export function checkAchievements(
     });
   }
 
-  // 早起鸟成就（6-9点完成游戏）
-  if (hour >= 6 && hour <= 9 && !unlockedAchievements.includes('early_bird')) {
+  // 早起鸟成就（5-7点完成游戏）
+  if (hour >= 5 && hour <= 7 && !unlockedAchievements.includes('early_bird')) {
     newAchievements.push({
       ...ACHIEVEMENTS.early_bird,
       unlocked: true,
@@ -370,6 +452,29 @@ export function checkAchievements(
       !unlockedAchievements.includes('expert_speedster')) {
     newAchievements.push({
       ...ACHIEVEMENTS.expert_speedster,
+      unlocked: true,
+      unlockedAt: now
+    });
+  }
+
+  // 时间大师成就 - 打破个人最佳记录
+  if (userStats.bestTimes) {
+    const difficultyKey = `${gameResult.difficulty}_time`;
+    const previousBest = userStats.bestTimes[difficultyKey];
+    if (previousBest && gameResult.completionTime < previousBest && 
+        !unlockedAchievements.includes('time_master')) {
+      newAchievements.push({
+        ...ACHIEVEMENTS.time_master,
+        unlocked: true,
+        unlockedAt: now
+      });
+    }
+  }
+
+  // 等级提升成就
+  if (userStats.level > 1 && !unlockedAchievements.includes('level_up')) {
+    newAchievements.push({
+      ...ACHIEVEMENTS.level_up,
       unlocked: true,
       unlockedAt: now
     });
@@ -409,6 +514,12 @@ export function calculateGameCompletion(
       totalPieces: number;
       timestamp: Date;
     }>;
+    difficultyStats?: {
+      easyCompleted: number;
+      mediumCompleted: number;
+      hardCompleted: number;
+      expertCompleted: number;
+    };
   },
   unlockedAchievements: string[] = [],
   perfectMoves?: number,

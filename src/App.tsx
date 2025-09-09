@@ -43,7 +43,7 @@ const AppContent: React.FC = () => {
 
   // 如果未认证，显示登录页面
   if (!authState.isAuthenticated) {
-    return <Auth />;
+    return <Auth key="auth-component" />;
   }
 
   const handleStartGame = (puzzleConfig: PuzzleConfig) => {

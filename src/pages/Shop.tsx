@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '../components/common/Button';
 import { useAuth } from '../contexts/AuthContext';
 import './Shop.css';
@@ -122,7 +122,7 @@ const mockShopItems: ShopItem[] = [
 ];
 
 export const Shop: React.FC<ShopPageProps> = ({ onBackToMenu }) => {
-  const { authState } = useAuth();
+  const { authState, setAuthenticatedUser } = useAuth();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   
   const user = authState.user;
@@ -137,7 +137,12 @@ export const Shop: React.FC<ShopPageProps> = ({ onBackToMenu }) => {
     }));
   };
 
-  const [shopItems, setShopItems] = useState<ShopItem[]>(initializeShopItems());
+  const [shopItems, setShopItems] = useState<ShopItem[]>([]);
+
+  // 监听用户变化，更新商店物品状态
+  useEffect(() => {
+    setShopItems(initializeShopItems());
+  }, [user?.id, userOwnedItems]); // 当用户ID或拥有物品发生变化时重新初始化
 
   const categories = [
     { id: 'all', label: '全部', icon: '🛍️' },
@@ -170,7 +175,7 @@ export const Shop: React.FC<ShopPageProps> = ({ onBackToMenu }) => {
     return labels[rarity];
   };
 
-  const handlePurchase = (item: ShopItem) => {
+  const handlePurchase = async (item: ShopItem) => {
     if (item.owned) {
       alert('您已经拥有这个物品了！');
       return;
@@ -181,25 +186,69 @@ export const Shop: React.FC<ShopPageProps> = ({ onBackToMenu }) => {
       return;
     }
 
-    // 更新商店物品状态
-    const updatedItems = shopItems.map(shopItem => 
-      shopItem.id === item.id ? { ...shopItem, owned: true } : shopItem
-    );
-    setShopItems(updatedItems);
+    try {
+      // 调用后端 API 购买物品
+      const { apiService } = await import('../services/apiService');
+      // 根据物品类型映射到后端接受的类型
+      const itemTypeMapping: Record<string, string> = {
+        'avatar_cat': 'avatar',
+        'avatar_robot': 'avatar', 
+        'avatar_wizard': 'avatar',
+        'avatar_knight': 'avatar',
+        'avatar_princess': 'avatar',
+        'avatar_ninja': 'avatar',
+        'frame_gold': 'avatar_frame',
+        'frame_silver': 'avatar_frame',
+        'frame_diamond': 'avatar_frame',
+        'frame_rainbow': 'avatar_frame',
+        'frame_fire': 'avatar_frame',
+        'frame_ice': 'avatar_frame',
+        'decoration_star': 'decoration',
+        'decoration_crown': 'decoration',
+        'decoration_wing': 'decoration',
+        'decoration_halo': 'decoration',
+        'decoration_gem': 'decoration',
+        'theme_classic': 'theme',
+        'theme_modern': 'theme',
+        'theme_fantasy': 'theme',
+        'theme_space': 'theme',
+        'theme_ocean': 'theme'
+      };
+      
+      const backendItemType = itemTypeMapping[item.id] || 'decoration';
+      const response = await apiService.acquireItem(backendItemType, item.id, item.price);
+      
+      if (response.success) {
+        // 更新商店物品状态，确保在不同账号间有正确的状态
+        const updatedItems = shopItems.map(shopItem => 
+          shopItem.id === item.id ? { ...shopItem, owned: true } : shopItem
+        );
+        setShopItems(updatedItems);
 
-    // 更新用户数据
-    const currentUser = JSON.parse(localStorage.getItem('puzzle_current_user') || '{}');
-    const updatedUser = {
-      ...currentUser,
-      coins: currentUser.coins - item.price,
-      ownedItems: [...(currentUser.ownedItems || []), item.id]
-    };
-    localStorage.setItem('puzzle_current_user', JSON.stringify(updatedUser));
-
-    alert(`成功购买 ${item.name}！消耗 ${item.price} 金币`);
-    
-    // 刷新页面以更新UI
-    window.location.reload();
+        alert(`成功购买 ${item.name}！消耗 ${item.price} 金币`);
+        
+        // 刷新用户数据而不是整个页面
+        // 重新获取用户数据
+        const { apiService } = await import('../services/apiService');
+        const userResponse = await apiService.getUserProfile();
+        if (userResponse.success && userResponse.data) {
+          // 转换API用户类型到内部用户类型
+          const convertedUser = {
+            ...userResponse.data.user,
+            createdAt: new Date(userResponse.data.user.createdAt),
+            lastLoginAt: new Date(userResponse.data.user.lastLoginAt),
+          };
+          // 更新 AuthContext 中的用户数据
+          setAuthenticatedUser(convertedUser, apiService.getToken() || '');
+          console.log('购买成功，用户数据已更新');
+        }
+      } else {
+        alert(`购买失败：${response.error || '未知错误'}`);
+      }
+    } catch (error) {
+      console.error('购买物品时发生错误:', error);
+      alert('购买失败，请稍后重试');
+    }
   };
 
   return (
