@@ -111,7 +111,7 @@ class ApiService {
   constructor() {
     // 从环境变量或配置文件获取API基础URL
     // 使用云端服务器作为默认API地址
-    this.baseURL = import.meta.env.VITE_API_BASE_URL || 'http://api.sla.edev.uno/api';
+    this.baseURL = import.meta.env.VITE_API_BASE_URL || 'https://api.sla.edev.uno/api';
 
     // 从localStorage获取保存的token
     this.token = localStorage.getItem('puzzle_auth_token');
