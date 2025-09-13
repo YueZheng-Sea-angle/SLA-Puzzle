@@ -57,6 +57,7 @@ export const TetrisPuzzleGame: React.FC<TetrisPuzzleGameProps> = ({
         rotatePiece,
         flipPiece,
         undo,
+        redo,
         resetGame,
         // 拖拽相关
         draggedPiece,
@@ -338,6 +339,15 @@ export const TetrisPuzzleGame: React.FC<TetrisPuzzleGameProps> = ({
                         disabled={gameState.history.length === 0}
                     >
                         ↩️ 撤销
+                    </Button>
+                    <Button
+                        onClick={redo}
+                        variant="secondary"
+                        size="small"
+                        className="redo-button"
+                        disabled={gameState.redoStack.length === 0}
+                    >
+                        ↪️ 重做
                     </Button>
                     <Button
                         onClick={handleOpenSaveModal}

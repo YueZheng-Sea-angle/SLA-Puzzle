@@ -67,6 +67,7 @@ export const PuzzleGame: React.FC<PuzzleGameProps> = ({
     rotatePiece,
     flipPiece,
     undo,
+    redo,
     resetGame,
     // 拖拽相关
     draggedPiece,
@@ -328,6 +329,13 @@ export const PuzzleGame: React.FC<PuzzleGameProps> = ({
             undo();
           }
           break;
+        case 'y':
+        case 'Y':
+          if (e.ctrlKey || e.metaKey) {
+            e.preventDefault();
+            redo();
+          }
+          break;
         case 's':
         case 'S':
           if (e.ctrlKey || e.metaKey) {
@@ -362,7 +370,7 @@ export const PuzzleGame: React.FC<PuzzleGameProps> = ({
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [selectedPiece, rotatePiece, flipPiece, undo, setSelectedPiece, canSaveGame, handleSaveGame, showAnswers, setShowAnswers, showSaveLoadModal]);
+  }, [selectedPiece, rotatePiece, flipPiece, undo, redo, setSelectedPiece, canSaveGame, handleSaveGame, showAnswers, setShowAnswers, showSaveLoadModal]);
 
   // 订阅主题变化
   useEffect(() => {
@@ -471,6 +479,9 @@ export const PuzzleGame: React.FC<PuzzleGameProps> = ({
           )}
           <Button onClick={undo} variant="primary" size="small" disabled={!gameState || gameState.history.length === 0}>
             ↩️ 撤销
+          </Button>
+          <Button onClick={redo} variant="primary" size="small" disabled={!gameState || gameState.redoStack.length === 0}>
+            ↪️ 重做
           </Button>
           <Button
             onClick={handleSaveGame}

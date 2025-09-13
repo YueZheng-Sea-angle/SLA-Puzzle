@@ -59,6 +59,8 @@ export const DailyChallengeGame: React.FC<DailyChallengeGameProps> = ({
     removePieceFromSlot,
     rotatePiece,
     flipPiece,
+    undo,
+    redo,
     handlePieceSelect,
     handleDragStart,
     handleDragEnd,
@@ -1272,6 +1274,22 @@ export const DailyChallengeGame: React.FC<DailyChallengeGameProps> = ({
               disabled={isAnswerDisabled}
             >
               {isAnswerDisabled ? '🚫 答案' : (showAnswer ? '🙈 隐藏答案' : '💡 显示答案')}
+            </Button>
+            <Button 
+              onClick={undo}
+              variant="secondary" 
+              size="small"
+              disabled={!gameState || gameState.history.length === 0}
+            >
+              ↩️ 撤销
+            </Button>
+            <Button 
+              onClick={redo}
+              variant="secondary" 
+              size="small"
+              disabled={!gameState || gameState.redoStack.length === 0}
+            >
+              ↪️ 重做
             </Button>
             <Button onClick={handleRestart} variant="secondary" size="small">
               🔄 重新开始

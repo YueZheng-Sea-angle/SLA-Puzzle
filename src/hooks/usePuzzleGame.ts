@@ -31,7 +31,12 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
   // 如果有预加载的游戏状态，初始化游戏
   useEffect(() => {
     if (preloadedGameState) {
-      setGameState(preloadedGameState);
+      // 确保预加载的状态包含 redoStack
+      const stateWithRedoStack = {
+        ...preloadedGameState,
+        redoStack: preloadedGameState.redoStack || []
+      };
+      setGameState(stateWithRedoStack);
       setIsGameStarted(true);
       setSelectedPiece(null);
 
@@ -81,6 +86,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
       isCompleted: false,
       elapsedTime: 0,
       history: [],
+      redoStack: [], // 初始化重做栈
       answerGrid,
     };
 
@@ -207,6 +213,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
           config: { ...prev.config, pieces: updatedPieces },
           moves: prev.moves + 1,
           history: [...prev.history, move],
+          redoStack: [], // 执行新操作时清空重做栈
           answerGrid: newAnswerGrid,
         };
 
@@ -283,6 +290,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
         config: { ...prev.config, pieces: updatedPieces },
         moves: prev.moves + 1,
         history: [...prev.history, move],
+        redoStack: [], // 执行新操作时清空重做栈
         answerGrid: newAnswerGrid,
       };
 
@@ -348,6 +356,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
         config: { ...prev.config, pieces: updatedPieces },
         moves: prev.moves + 1,
         history: [...prev.history, move],
+        redoStack: [], // 执行新操作时清空重做栈
         answerGrid: newAnswerGrid,
       };
 
@@ -628,6 +637,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
         config: { ...prev.config, pieces: updatedPieces },
         moves: prev.moves + 1,
         history: [...prev.history, move],
+        redoStack: [], // 执行新操作时清空重做栈
       };
     });
   }, [gameState]);
@@ -655,6 +665,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
         config: { ...prev.config, pieces: updatedPieces },
         moves: prev.moves + 1,
         history: [...prev.history, move],
+        redoStack: [], // 执行新操作时清空重做栈
       };
     });
   }, [gameState]);
@@ -743,7 +754,6 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
           break;
         case 'rotate':
           // 撤销旋转：应用相反的delta值
-
           if (lastMove.delta !== undefined) {
             updatedPieces = updatedPieces.map(piece =>
               piece.id === lastMove.pieceId
@@ -786,19 +796,8 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
             }
           }
           break;
-
-        case 'rotate':
-          // 撤销旋转（预留功能）
-          updatedPieces = updatedPieces.map(piece =>
-            piece.id === lastMove.pieceId
-              ? { ...piece, rotation: (piece.rotation - 90 + 360) % 360 }
-
-              : piece
-          );
-          break;
-
         case 'flip':
-          // 撤销翻转（预留功能）
+          // 撤销翻转
           updatedPieces = updatedPieces.map(piece =>
             piece.id === lastMove.pieceId
               ? { ...piece, isFlipped: !piece.isFlipped }
@@ -812,6 +811,107 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
         config: { ...prev.config, pieces: updatedPieces },
         moves: Math.max(0, prev.moves - 1),
         history: newHistory,
+        redoStack: [...prev.redoStack, lastMove], // 将撤销的操作加入重做栈
+        answerGrid: newAnswerGrid,
+      };
+    });
+  }, [gameState]);
+
+  // 重做操作
+  const redo = useCallback(() => {
+    if (!gameState || gameState.redoStack.length === 0) return;
+
+    const moveToRedo = gameState.redoStack[gameState.redoStack.length - 1];
+    const newRedoStack = gameState.redoStack.slice(0, -1);
+
+    setGameState(prev => {
+      if (!prev) return null;
+
+      let newAnswerGrid = [...prev.answerGrid];
+      let updatedPieces = [...prev.config.pieces];
+
+      switch (moveToRedo.action) {
+        case 'place':
+          // 重做放置：将拼图块放置到目标槽位
+          if (moveToRedo.toSlot !== null && moveToRedo.toSlot !== undefined) {
+            const piece = updatedPieces.find(p => p.id === moveToRedo.pieceId);
+            if (piece) {
+              const toSlot = moveToRedo.toSlot as number;
+              newAnswerGrid[toSlot] = { ...piece, currentSlot: toSlot };
+              updatedPieces = updatedPieces.map(p =>
+                p.id === moveToRedo.pieceId ? { ...p, currentSlot: toSlot } : p
+              );
+            }
+          }
+          // 如果从其他槽位移动，清空原槽位
+          if (moveToRedo.fromSlot !== null && moveToRedo.fromSlot !== undefined) {
+            newAnswerGrid[moveToRedo.fromSlot] = null;
+          }
+          break;
+        case 'remove':
+          // 重做移除：将拼图块从槽位移回处理区
+          if (moveToRedo.fromSlot !== null && moveToRedo.fromSlot !== undefined) {
+            newAnswerGrid[moveToRedo.fromSlot] = null;
+            updatedPieces = updatedPieces.map(piece =>
+              piece.id === moveToRedo.pieceId
+                ? { ...piece, currentSlot: null }
+                : piece
+            );
+          }
+          break;
+        case 'rotate':
+          // 重做旋转：应用相同的delta值
+          if (moveToRedo.delta !== undefined) {
+            updatedPieces = updatedPieces.map(piece =>
+              piece.id === moveToRedo.pieceId
+                ? { ...piece, rotation: piece.rotation + moveToRedo.delta! }
+                : piece
+            );
+          }
+          break;
+        case 'replace':
+          // 重做替换：执行替换操作
+          if (moveToRedo.toSlot !== null && moveToRedo.toSlot !== undefined) {
+            const toSlot = moveToRedo.toSlot as number;
+            const piece = updatedPieces.find(p => p.id === moveToRedo.pieceId);
+            
+            if (piece) {
+              // 如果有被替换的拼图块，先移除它
+              if (moveToRedo.replacedPieceId) {
+                updatedPieces = updatedPieces.map(p =>
+                  p.id === moveToRedo.replacedPieceId ? { ...p, currentSlot: null } : p
+                );
+              }
+              
+              // 放置新拼图块
+              newAnswerGrid[toSlot] = { ...piece, currentSlot: toSlot };
+              updatedPieces = updatedPieces.map(p =>
+                p.id === moveToRedo.pieceId ? { ...p, currentSlot: toSlot } : p
+              );
+              
+              // 如果从其他槽位移动，清空原槽位
+              if (moveToRedo.fromSlot !== null && moveToRedo.fromSlot !== undefined) {
+                newAnswerGrid[moveToRedo.fromSlot] = null;
+              }
+            }
+          }
+          break;
+        case 'flip':
+          // 重做翻转
+          updatedPieces = updatedPieces.map(piece =>
+            piece.id === moveToRedo.pieceId
+              ? { ...piece, isFlipped: !piece.isFlipped }
+              : piece
+          );
+          break;
+      }
+
+      return {
+        ...prev,
+        config: { ...prev.config, pieces: updatedPieces },
+        moves: prev.moves + 1,
+        history: [...prev.history, moveToRedo], // 将重做的操作加回历史记录
+        redoStack: newRedoStack, // 从重做栈中移除
         answerGrid: newAnswerGrid,
       };
     });
@@ -886,7 +986,12 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
     const result = PuzzleSaveService.loadGame(saveId);
 
     if (result.success && result.gameState) {
-      setGameState(result.gameState);
+      // 确保加载的状态包含 redoStack
+      const stateWithRedoStack = {
+        ...result.gameState,
+        redoStack: result.gameState.redoStack || []
+      };
+      setGameState(stateWithRedoStack);
       setIsGameStarted(true);
       setSelectedPiece(null);
 
@@ -966,6 +1071,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
     rotatePiece,
     flipPiece,
     undo,
+    redo,
     resetGame,
     checkPuzzleComplete,
     // 拖拽相关
