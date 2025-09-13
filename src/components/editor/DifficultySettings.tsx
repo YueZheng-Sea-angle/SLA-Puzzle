@@ -14,7 +14,6 @@ interface DifficultySettingsProps {
   onShapeChange: (shape: PieceShape) => void;
   onRecrop?: () => void; // 新增：重新剪裁回调
   hasUploadedImage?: boolean; // 新增：是否有已上传图片
-  onCustomGridChange?: (rows: number, cols: number) => void; // 新增：自定义网格更新回调
 }
 
 export const DifficultySettings: React.FC<DifficultySettingsProps> = ({
@@ -27,8 +26,7 @@ export const DifficultySettings: React.FC<DifficultySettingsProps> = ({
   onDifficultyChange,
   onShapeChange,
   onRecrop,
-  hasUploadedImage,
-  onCustomGridChange
+  hasUploadedImage
 }) => {
   const [customRows, setCustomRows] = useState('3');
   const [customCols, setCustomCols] = useState('3');
@@ -148,10 +146,7 @@ export const DifficultySettings: React.FC<DifficultySettingsProps> = ({
     if (rows >= 2 && rows <= 10 && cols >= 2 && cols <= 10) {
       // 更新配置并关闭自定义设置面板
       setShowCustomInputs(false);
-      // 调用父组件的回调函数更新临时状态
-      if (onCustomGridChange) {
-        onCustomGridChange(rows, cols);
-      }
+      // 这里可以添加其他配置更新逻辑
       console.log(`自定义网格已更新: ${rows}×${cols}`);
     } else {
       alert('请输入有效的行数和列数（2-10之间）');

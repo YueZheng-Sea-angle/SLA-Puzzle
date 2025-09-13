@@ -141,14 +141,6 @@
   left: 5%;
 }
 
-/* 16:9宽屏比例的网格样式 */
-.grid-overlay-inner.widescreen {
-  width: 90%;
-  height: 50.625%; /* 16:9比例的高度计算：90% * 9/16 = 50.625% */
-  top: 25%;
-  left: 5%;
-}
-
 .grid-line {
   position: absolute;
   background: #2563eb;

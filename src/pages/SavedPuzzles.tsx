@@ -234,7 +234,6 @@ const SavedPuzzlesPage: React.FC<SavedPuzzlesPageProps> = ({ onBackToMenu, onOpe
                   }}>
                     <span>难度：{puzzle.data?.difficulty || '未知'}</span>
                     <span>形状：{puzzle.data?.pieceShape || '未知'}</span>
-                    <span>裁剪比例：{puzzle.data?.aspectRatio || '1:1'}</span>
                     <span>
                       拼图块数：{
                         (() => {

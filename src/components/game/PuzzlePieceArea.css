@@ -43,6 +43,7 @@
 .puzzle-piece-item {
   opacity: 1 !important;
   position: relative;
+  aspect-ratio: 1;
   background: #f8fafc;
   border: 2px solid #e2e8f0;
   border-radius: 8px;
@@ -93,9 +94,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   min-height: 110px;
-  width: 100%;
 }
 
 .puzzle-piece-container:has(.tetris-piece) {
@@ -258,14 +258,18 @@
 .piece-image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
-  margin: 0 auto;
 }
 
 .selection-indicator {
   position: absolute;
   bottom: 0;
+}
+
+.puzzle-piece-container {
+  position: relative;
+  display: inline-block;
 }
 
 .selected-label {

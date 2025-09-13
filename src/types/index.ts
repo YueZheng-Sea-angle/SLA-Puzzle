@@ -40,7 +40,6 @@ export interface PuzzleConfig {
   pieceShape: PieceShape;
   difficulty: DifficultyLevel;
   pieces: PuzzlePiece[];
-  aspectRatio?: '1:1' | '16:9'; // 裁剪比例
   createdAt: Date;
   updatedAt: Date;
 }
