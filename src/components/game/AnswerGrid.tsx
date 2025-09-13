@@ -9,6 +9,7 @@ interface AnswerGridProps {
   selectedPieceId: string | null;
   showAnswers: boolean;
   pieceShape?: PieceShape; // 添加拼图形状属性
+  aspectRatio?: '1:1' | '16:9'; // 添加裁剪比例属性
   onPlacePiece: (pieceId: string, slotIndex: number) => void;
   onRemovePiece: (pieceId: string) => void;
   onPieceSelect: (pieceId: string | null) => void;
@@ -31,6 +32,7 @@ export const AnswerGrid: React.FC<AnswerGridProps> = ({
   selectedPieceId,
   showAnswers,
   pieceShape = 'square', // 默认为方形
+  aspectRatio = '16:9', // 默认为1:1
   onPlacePiece,
   onRemovePiece,
   onPieceSelect,
@@ -70,15 +72,24 @@ export const AnswerGrid: React.FC<AnswerGridProps> = ({
     const maxCellWidth = Math.floor(availableWidth / gridSize.cols);
     const maxCellHeight = Math.floor(availableHeight / gridSize.rows);
 
-    // 取较小值确保所有单元格都能显示
-    const newSize = Math.min(maxCellWidth, maxCellHeight, 140); // 最大140px (降低以避免溢出)
+    // 根据宽高比计算合适的单元格大小
+    let newSize;
+    if (aspectRatio === '16:9') {
+      // 对于16:9比例，优先保证宽度，然后根据比例计算高度
+      const targetWidth = Math.min(maxCellWidth, 160); // 限制最大宽度
+      const targetHeight = Math.floor(targetWidth * 9 / 16);
+      newSize = Math.min(targetWidth, targetHeight, maxCellHeight);
+    } else {
+      // 对于1:1比例，取较小值确保所有单元格都能显示
+      newSize = Math.min(maxCellWidth, maxCellHeight, 140); // 最大140px (降低以避免溢出)
+    }
 
     // 确保单元格大小合理，但对于小网格(如3x3)允许更小的尺寸
     const minSize = (gridSize.rows <= 3 && gridSize.cols <= 3) ? 80 : 100;
     const finalSize = Math.max(minSize, newSize);
 
     setCellSize(finalSize);
-  }, [gridSize.cols, gridSize.rows]);
+  }, [gridSize.cols, gridSize.rows, aspectRatio]);
 
   // 处理槽位点击
   const handleSlotClick = (slotIndex: number) => {
@@ -179,11 +190,49 @@ export const AnswerGrid: React.FC<AnswerGridProps> = ({
   // 创建网格样式对象
   const gridStyle: React.CSSProperties = {
     gridTemplateColumns: `repeat(${gridSize.cols}, ${cellSize}px)`,
-    gridTemplateRows: `repeat(${gridSize.rows}, ${cellSize}px)`,
+    gridTemplateRows: `repeat(${gridSize.rows}, ${aspectRatio === '16:9' ? Math.floor(cellSize * 9 / 16) : cellSize}px)`,
   };
 
+  // 根据网格尺寸动态计算16:9裁剪的缩放因子
+  const get16by9ScaleFactors = () => {
+    const totalCells = gridSize.rows * gridSize.cols;
+    
+    // 根据网格尺寸动态调整缩放比例
+    if (totalCells <= 9) { // 3x3或更小
+      return {
+        gridScale: 1.5,    // 较小放大倍数
+        imageScale: 0.98   // 较小图片缩小
+      };
+    } else if (totalCells <= 16) { // 4x4
+      return {
+        gridScale: 1.9,    // 标准放大倍数
+        imageScale: 0.95   // 标准图片缩小
+      };
+    } else if (totalCells <= 25) { // 5x5
+      return {
+        gridScale: 1.7,    // 中等放大倍数
+        imageScale: 0.96   // 中等图片缩小
+      };
+    } else { // 6x6或更大
+      return {
+        gridScale: 1.4,    // 较小放大倍数
+        imageScale: 0.98   // 较小图片缩小
+      };
+    }
+  };
+
+  const scaleFactors = aspectRatio === '16:9' ? get16by9ScaleFactors() : null;
+
   return (
-    <div className="answer-grid-container" ref={containerRef}>
+    <div 
+      className="answer-grid-container" 
+      ref={containerRef}
+      data-aspect-ratio={aspectRatio}
+      style={{
+        '--grid-scale-factor': scaleFactors?.gridScale,
+        '--image-scale-factor': scaleFactors?.imageScale
+      } as React.CSSProperties}
+    >
       {/* 网格槽位 */}
       <div
         ref={gridRef}
@@ -206,7 +255,7 @@ export const AnswerGrid: React.FC<AnswerGridProps> = ({
                 className="triangle-square-container"
                 style={{
                   width: `${cellSize}px`,
-                  height: `${cellSize}px`,
+                  height: `${aspectRatio === '16:9' ? Math.floor(cellSize * 9 / 16) : cellSize}px`,
                 }}
               >
                 {/* 上三角形槽位 */}
@@ -371,7 +420,7 @@ export const AnswerGrid: React.FC<AnswerGridProps> = ({
                 onDrop={(e) => handleSlotDrop(e, index)}
                 style={{
                   width: `${cellSize}px`,
-                  height: `${cellSize}px`,
+                  height: `${aspectRatio === '16:9' ? Math.floor(cellSize * 9 / 16) : cellSize}px`,
                 }}
               >
                 {/* 槽位编号 */}
@@ -445,7 +494,7 @@ export const AnswerGrid: React.FC<AnswerGridProps> = ({
                 onDrop={(e) => handleSlotDrop(e, index)}
                 style={{
                   width: `${cellSize}px`,
-                  height: `${cellSize}px`,
+                  height: `${aspectRatio === '16:9' ? Math.floor(cellSize * 9 / 16) : cellSize}px`,
                 }}
               >
                 {/* 槽位编号 */}
@@ -461,6 +510,12 @@ export const AnswerGrid: React.FC<AnswerGridProps> = ({
                     style={{
                       transform: `rotate(${piece.rotation}deg) ${piece.isFlipped ? 'scaleX(-1)' : ''
                         }`,
+                      // 对于16:9裁剪方形拼图，确保拼图块完全填充槽位
+                      width: aspectRatio === '16:9' && piece.shape === 'square' ? '100%' : 
+                            (piece.shape === 'square' ? `${piece.width}px` : undefined),
+                      height: aspectRatio === '16:9' && piece.shape === 'square' ? '100%' : 
+                             (piece.shape === 'square' ? `${piece.height}px` : undefined),
+                      aspectRatio: piece.shape === 'square' ? piece.width / piece.height : undefined,
                     }}
                   >
                     <img
@@ -468,6 +523,11 @@ export const AnswerGrid: React.FC<AnswerGridProps> = ({
                       alt={`拼图块 ${piece.originalIndex + 1}`}
                       className="piece-image"
                       draggable={false}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover'
+                      }}
                     />
                     {showAnswers && (
                       <div className="piece-info">
