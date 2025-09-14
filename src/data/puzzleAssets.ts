@@ -7,7 +7,7 @@ export interface PuzzleAsset {
   id: string;
   name: string;
   imagePath: string;
-  category: 'nature' | 'animals' | 'architecture' | 'art' | 'volcanic_journey';
+  category: 'nature' | 'animals' | 'architecture' | 'art' | 'volcanic_journey' | 'test_style';
   difficulty: 'easy' | 'medium' | 'hard' | 'expert';
   description: string;
   tags: string[];
@@ -46,65 +46,56 @@ export const puzzleAssets: PuzzleAsset[] = [
   
   // 自然风光
   {
-    id: 'landscape1',
-    name: '山景风光',
-    imagePath: '/images/nature/landscape1.svg',
+    id: 'bit',
+    name: '北理工',
+    imagePath: '/images/nature/BIT.jpg',
     category: 'nature',
     difficulty: 'medium',
-    description: '美丽的山景风光',
-    tags: ['山景', '风景', '自然']
+    description: '北京理工大学的美丽校园风光',
+    tags: ['大学', '校园', '教育', '建筑']
   },
   {
-    id: 'landscape2',
-    name: '落日海景',
-    imagePath: '/images/nature/landscape2.svg',
+    id: 'white_lake_snow',
+    name: '北湖雪',
+    imagePath: '/images/nature/WhiteLake_Snow.jpg',
     category: 'nature',
     difficulty: 'hard',
-    description: '壮丽的落日海景',
-    tags: ['海景', '落日', '浪漫']
+    description: '北湖雪景，银装素裹的美丽景色',
+    tags: ['雪景', '湖泊', '冬季', '自然']
   },
   {
-    id: 'landscape3',
-    name: '森林风光',
-    imagePath: '/images/nature/landscape3.svg',
+    id: 'liangting',
+    name: '北湖凉亭',
+    imagePath: '/images/nature/liangting.jpg',
     category: 'nature',
-    difficulty: 'hard',
-    description: '茂密的森林风光',
-    tags: ['森林', '绿色', '自然']
+    difficulty: 'medium',
+    description: '北湖边的古典凉亭，宁静雅致',
+    tags: ['凉亭', '湖泊', '古典', '建筑']
   },
   
   // 动物
   {
-    id: 'cat',
-    name: '可爱小猫',
-    imagePath: '/images/animals/cat.svg',
+    id: 'snowbao',
+    name: '诡异雪豹',
+    imagePath: '/images/animals/snowbao.jpg',
     category: 'animals',
-    difficulty: 'easy',
-    description: '萌萌的小猫咪',
-    tags: ['猫咪', '萌宠', '可爱']
+    difficulty: 'hard',
+    description: '神秘的雪豹，散发着诡异的气息',
+    tags: ['雪豹', '野生动物', '神秘', '雪地']
   },
   
   // 建筑
   {
-    id: 'castle',
-    name: '古典建筑',
-    imagePath: '/images/buildings/castle.svg',
+    id: 'shengbide_cathedral',
+    name: '圣彼得大教堂',
+    imagePath: '/images/buildings/shengbidecathedral.jpg',
     category: 'architecture',
     difficulty: 'expert',
-    description: '古典的城堡建筑',
-    tags: ['城堡', '建筑', '历史']
+    description: '宏伟的圣彼得大教堂，建筑艺术的杰作',
+    tags: ['教堂', '宗教', '建筑', '艺术', '历史']
   },
   
   // 动漫角色
-  {
-    id: 'character',
-    name: '动漫角色',
-    imagePath: '/images/anime/character.svg',
-    category: 'art',
-    difficulty: 'medium',
-    description: '可爱的动漫角色',
-    tags: ['动漫', '角色', '艺术']
-  },
   
   // 测试图片
   {
@@ -225,6 +216,62 @@ export const puzzleAssets: PuzzleAsset[] = [
     difficulty: 'expert',
     description: '火山旅梦CG回顾',
     tags: ['火山旅梦', 'CG', '回顾']
+  },
+
+  // 测试画风
+  {
+    id: 'landscape1',
+    name: '山景风光',
+    imagePath: '/images/nature/landscape1.svg',
+    category: 'test_style',
+    difficulty: 'medium',
+    description: '美丽的山景风光',
+    tags: ['山景', '风景', '自然']
+  },
+  {
+    id: 'landscape2',
+    name: '日落海景',
+    imagePath: '/images/nature/landscape2.svg',
+    category: 'test_style',
+    difficulty: 'hard',
+    description: '壮丽的落日海景',
+    tags: ['海景', '落日', '浪漫']
+  },
+  {
+    id: 'landscape3',
+    name: '森林风光',
+    imagePath: '/images/nature/landscape3.svg',
+    category: 'test_style',
+    difficulty: 'hard',
+    description: '茂密的森林风光',
+    tags: ['森林', '绿色', '自然']
+  },
+  {
+    id: 'cat',
+    name: '可爱小猫',
+    imagePath: '/images/animals/cat.svg',
+    category: 'test_style',
+    difficulty: 'easy',
+    description: '萌萌的小猫咪',
+    tags: ['猫咪', '萌宠', '可爱']
+  },
+  {
+    id: 'castle',
+    name: '古典建筑',
+    imagePath: '/images/buildings/castle.svg',
+    category: 'test_style',
+    difficulty: 'expert',
+    description: '古典的城堡建筑',
+    tags: ['城堡', '建筑', '历史']
+  },
+  {
+    id: 'character',
+    name: '动漫角色',
+    imagePath: '/images/anime/character.svg',
+    category: 'test_style',
+    difficulty: 'medium',
+    description: '可爱的动漫角色',
+    tags: ['动漫', '角色', '艺术']
   }
 ];
 
@@ -273,5 +320,6 @@ export const categoryLabels = {
   animals: '动物世界',
   architecture: '建筑艺术',
   art: '艺术作品',
-  volcanic_journey: '火山旅梦'
+  volcanic_journey: '火山旅梦',
+  test_style: '测试画风'
 };

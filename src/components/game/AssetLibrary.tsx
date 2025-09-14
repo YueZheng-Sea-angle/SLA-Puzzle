@@ -184,42 +184,6 @@ const builtinAssets: Asset[] = [
   },
 
   // 自然风光类
-  {
-    id: 'landscape1',
-    name: '山景风光',
-    category: '自然风光',
-    tags: ['山景', '自然', '风光', '天空'],
-    filePath: '/images/nature/landscape1.svg',
-    thumbnail: '/images/nature/landscape1.svg',
-    width: 400,
-    height: 400,
-    fileSize: 8000,
-    createdAt: new Date('2024-01-01'),
-  },
-  {
-    id: 'landscape2',
-    name: '日落海景',
-    category: '自然风光',
-    tags: ['日落', '海景', '夕阳', '水面'],
-    filePath: '/images/nature/landscape2.svg',
-    thumbnail: '/images/nature/landscape2.svg',
-    width: 400,
-    height: 400,
-    fileSize: 7500,
-    createdAt: new Date('2024-01-01'),
-  },
-  {
-    id: 'landscape3',
-    name: '森林风光',
-    category: '自然风光',
-    tags: ['森林', '绿色', '树木', '自然'],
-    filePath: '/images/nature/landscape3.svg',
-    thumbnail: '/images/nature/landscape3.svg',
-    width: 400,
-    height: 400,
-    fileSize: 6000,
-    createdAt: new Date('2024-01-01'),
-  },
   // 新增的自然风光PNG图片
   {
     id: 'aurora',
@@ -245,20 +209,44 @@ const builtinAssets: Asset[] = [
     fileSize: 138000,
     createdAt: new Date('2024-01-01'),
   },
-
-  // 动物类
   {
-    id: 'cat1',
-    name: '可爱小猫',
-    category: '动物',
-    tags: ['猫', '宠物', '可爱', '动物'],
-    filePath: '/images/animals/cat.svg',
-    thumbnail: '/images/animals/cat.svg',
+    id: 'bit',
+    name: '北理工',
+    category: '自然风光',
+    tags: ['大学', '校园', '教育', '建筑'],
+    filePath: '/images/nature/BIT.jpg',
+    thumbnail: '/images/nature/BIT.jpg',
     width: 400,
     height: 400,
-    fileSize: 5500,
+    fileSize: 120000,
     createdAt: new Date('2024-01-01'),
   },
+  {
+    id: 'white_lake_snow',
+    name: '北湖雪',
+    category: '自然风光',
+    tags: ['雪景', '湖泊', '冬季', '自然'],
+    filePath: '/images/nature/WhiteLake_Snow.jpg',
+    thumbnail: '/images/nature/WhiteLake_Snow.jpg',
+    width: 400,
+    height: 400,
+    fileSize: 130000,
+    createdAt: new Date('2024-01-01'),
+  },
+  {
+    id: 'liangting',
+    name: '北湖凉亭',
+    category: '自然风光',
+    tags: ['凉亭', '湖泊', '古典', '建筑'],
+    filePath: '/images/nature/liangting.jpg',
+    thumbnail: '/images/nature/liangting.jpg',
+    width: 400,
+    height: 400,
+    fileSize: 110000,
+    createdAt: new Date('2024-01-01'),
+  },
+
+  // 动物类
   // 新增的动物PNG图片
   {
     id: 'fox',
@@ -284,20 +272,20 @@ const builtinAssets: Asset[] = [
     fileSize: 593600,
     createdAt: new Date('2024-01-01'),
   },
-
-  // 建筑类
   {
-    id: 'castle1',
-    name: '古典建筑',
-    category: '建筑',
-    tags: ['城堡', '建筑', '古典', '历史'],
-    filePath: '/images/buildings/castle.svg',
-    thumbnail: '/images/buildings/castle.svg',
+    id: 'snowbao',
+    name: '诡异雪豹',
+    category: '动物',
+    tags: ['雪豹', '野生动物', '神秘', '雪地'],
+    filePath: '/images/animals/snowbao.jpg',
+    thumbnail: '/images/animals/snowbao.jpg',
     width: 400,
     height: 400,
-    fileSize: 6500,
+    fileSize: 150000,
     createdAt: new Date('2024-01-01'),
   },
+
+  // 建筑类
   // 新增的建筑PNG图片
   {
     id: 'eiffel_tower',
@@ -323,20 +311,20 @@ const builtinAssets: Asset[] = [
     fileSize: 214000,
     createdAt: new Date('2024-01-01'),
   },
-
-  // 动漫类
   {
-    id: 'anime1',
-    name: '动漫角色',
-    category: '动漫',
-    tags: ['动漫', '角色', '卡通', '二次元'],
-    filePath: '/images/anime/character.svg',
-    thumbnail: '/images/anime/character.svg',
+    id: 'shengbide_cathedral',
+    name: '圣彼得大教堂',
+    category: '建筑',
+    tags: ['教堂', '宗教', '建筑', '艺术', '历史'],
+    filePath: '/images/buildings/shengbidecathedral.jpg',
+    thumbnail: '/images/buildings/shengbidecathedral.jpg',
     width: 400,
     height: 400,
-    fileSize: 7000,
+    fileSize: 180000,
     createdAt: new Date('2024-01-01'),
   },
+
+  // 动漫类
   // 新增的动漫PNG图片
   {
     id: 'blue_eyes',
@@ -374,6 +362,80 @@ const builtinAssets: Asset[] = [
     fileSize: 636500,
     createdAt: new Date('2024-01-01'),
   },
+
+  // 测试画风
+  {
+    id: 'landscape1',
+    name: '山景风光',
+    category: '测试画风',
+    tags: ['山景', '自然', '风光', '天空'],
+    filePath: '/images/nature/landscape1.svg',
+    thumbnail: '/images/nature/landscape1.svg',
+    width: 400,
+    height: 400,
+    fileSize: 8000,
+    createdAt: new Date('2024-01-01'),
+  },
+  {
+    id: 'landscape2',
+    name: '日落海景',
+    category: '测试画风',
+    tags: ['日落', '海景', '夕阳', '水面'],
+    filePath: '/images/nature/landscape2.svg',
+    thumbnail: '/images/nature/landscape2.svg',
+    width: 400,
+    height: 400,
+    fileSize: 7500,
+    createdAt: new Date('2024-01-01'),
+  },
+  {
+    id: 'landscape3',
+    name: '森林风光',
+    category: '测试画风',
+    tags: ['森林', '绿色', '树木', '自然'],
+    filePath: '/images/nature/landscape3.svg',
+    thumbnail: '/images/nature/landscape3.svg',
+    width: 400,
+    height: 400,
+    fileSize: 6000,
+    createdAt: new Date('2024-01-01'),
+  },
+  {
+    id: 'cat1',
+    name: '可爱小猫',
+    category: '测试画风',
+    tags: ['猫', '宠物', '可爱', '动物'],
+    filePath: '/images/animals/cat.svg',
+    thumbnail: '/images/animals/cat.svg',
+    width: 400,
+    height: 400,
+    fileSize: 5500,
+    createdAt: new Date('2024-01-01'),
+  },
+  {
+    id: 'castle1',
+    name: '古典建筑',
+    category: '测试画风',
+    tags: ['城堡', '建筑', '古典', '历史'],
+    filePath: '/images/buildings/castle.svg',
+    thumbnail: '/images/buildings/castle.svg',
+    width: 400,
+    height: 400,
+    fileSize: 6500,
+    createdAt: new Date('2024-01-01'),
+  },
+  {
+    id: 'anime1',
+    name: '动漫角色',
+    category: '测试画风',
+    tags: ['动漫', '角色', '卡通', '二次元'],
+    filePath: '/images/anime/character.svg',
+    thumbnail: '/images/anime/character.svg',
+    width: 400,
+    height: 400,
+    fileSize: 7000,
+    createdAt: new Date('2024-01-01'),
+  },
 ];
 
 // 商店拼图素材 - 默认显示但需要解锁
@@ -381,7 +443,7 @@ const shopPuzzleAssets: Asset[] = [
   {
     id: 'puzzle_image_1',
     name: '森林花园',
-    category: '拼图素材',
+    category: '专属奖励',
     tags: ['拼图', '素材', '商店', '森林', '花园', '自然', '绿色'],
     filePath: '/images/test1.svg',
     thumbnail: '/images/test1.svg',
@@ -393,7 +455,7 @@ const shopPuzzleAssets: Asset[] = [
   {
     id: 'puzzle_image_2',
     name: '黄昏日落',
-    category: '拼图素材',
+    category: '专属奖励',
     tags: ['拼图', '素材', '商店', '日落', '黄昏', '太阳', '橙色'],
     filePath: '/images/test2.svg',
     thumbnail: '/images/test2.svg',
@@ -405,7 +467,7 @@ const shopPuzzleAssets: Asset[] = [
   {
     id: 'puzzle_image_3',
     name: '玫瑰花园',
-    category: '拼图素材',
+    category: '专属奖励',
     tags: ['拼图', '素材', '商店', '玫瑰', '花园', '红色', '浪漫'],
     filePath: '/images/test3.svg',
     thumbnail: '/images/test3.svg',
@@ -436,8 +498,8 @@ export const AssetLibrary: React.FC<AssetLibraryProps> = ({
     { id: '动物', name: '动物' },
     { id: '建筑', name: '建筑' },
     { id: '动漫', name: '动漫' },
-    { id: '拼图素材', name: '拼图素材' },
-    { id: '自定义', name: '自定义' },
+    { id: '专属奖励', name: '专属奖励' },
+    { id: '测试画风', name: '测试画风' },
   ];
 
   // 获取用户购买的物品列表
@@ -520,7 +582,7 @@ export const AssetLibrary: React.FC<AssetLibraryProps> = ({
       const newAsset: Asset = {
         id: `custom_${Date.now()}`,
         name: file.name.split('.')[0],
-        category: '自定义',
+        category: '测试画风',
         tags: [],
         filePath: file.name,
         thumbnail: file.name,
@@ -610,7 +672,7 @@ export const AssetLibrary: React.FC<AssetLibraryProps> = ({
               key={asset.id}
               asset={asset}
               onSelect={handleAssetClick}
-              onDelete={asset.category === '自定义' ? (assetId) => {
+              onDelete={asset.category === '测试画风' ? (assetId) => {
                 setCustomAssets(prev => prev.filter(a => a.id !== assetId));
               } : undefined}
               isLocked={isLocked}
