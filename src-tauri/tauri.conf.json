@@ -1,11 +1,11 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "tauri-yz",
+  "productName": "拼图大师",
   "version": "0.1.0",
   "identifier": "com.elecmonkey.tauri-yz",
   "build": {
     "beforeDevCommand": "pnpm dev",
-    "devUrl": "http://localhost:1420",
+    "devUrl": "http://localhost:5173",
     "beforeBuildCommand": "pnpm build",
     "frontendDist": "../dist"
   },
@@ -13,8 +13,8 @@
     "windows": [
       {
         "title": "拼图大师-SLA",
-        "width": 1330,
-        "height": 875,
+        "width": 1500,
+        "height": 950,
         "resizable": false,
         "maximizable": false,
         "minimizable": true,
