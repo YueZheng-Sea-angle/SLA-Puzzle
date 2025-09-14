@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "tauri-yz",
+  "productName": "拼图大师",
   "version": "0.1.0",
   "identifier": "com.elecmonkey.tauri-yz",
   "build": {
