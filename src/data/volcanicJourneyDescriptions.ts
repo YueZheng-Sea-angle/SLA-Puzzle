@@ -38,7 +38,7 @@ export const volcanicJourneyDescriptions: VolcanicJourneyDescription[] = [
   },
   {
     id: 'enjoy_summer',
-    description: '阿黛尔：多利先生，你真的已经和小黑羊们说清楚了，不能再这样捣乱了吗？多利：嗯......再捣乱的话，我会否认他们是我的一部分。',
+    description: '阿黛尔：多利先生，你真的已经和小黑羊们说清楚了，不能再这样捣乱了吗？\n多利：嗯......再捣乱的话，我会否认他们是我的一部分。',
     isMultiline: true
   },
   {

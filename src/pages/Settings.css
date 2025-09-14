@@ -309,6 +309,160 @@ input:checked + .slider:before {
   box-shadow: 0 6px 16px rgba(255, 192, 203, 0.4) !important;
 }
 
+/* 夜晚模式特殊样式 - 避免黑色，使用深粉红色系 */
+[data-theme="night"] .settings-page {
+  background: var(--background-main);
+}
+
+[data-theme="night"] .settings-container {
+  background: rgba(255, 255, 255, 0.95);  /* 保持白色背景 */
+  border: 3px solid var(--primary-pink);  /* 深粉红色边框 */
+  box-shadow: 0 20px 60px rgba(214, 123, 168, 0.6);  /* 增强深粉色阴影 */
+}
+
+[data-theme="night"] .settings-header {
+  background: linear-gradient(
+    135deg,
+    var(--primary-pink) 0%,    /* 深马卡龙粉 */
+    var(--secondary-pink) 100% /* 深马卡龙浅粉 */
+  );
+}
+
+[data-theme="night"] .back-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid var(--button-text);
+  color: var(--button-text);
+}
+
+[data-theme="night"] .back-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="night"] .settings-section h2 {
+  color: var(--text-primary);  /* 保持原有文字颜色 */
+}
+
+[data-theme="night"] .setting-item label {
+  color: var(--text-primary);  /* 保持原有文字颜色 */
+}
+
+[data-theme="night"] .setting-description {
+  color: var(--text-secondary);  /* 保持原有文字颜色 */
+}
+
+[data-theme="night"] .theme-preview {
+  background: var(--light-pink);  /* 保持浅粉色背景 */
+  border: 1px solid var(--border-color);  /* 深粉红色边框 */
+}
+
+[data-theme="night"] .theme-preview span {
+  color: var(--text-primary);  /* 保持原有文字颜色 */
+}
+
+[data-theme="night"] .theme-indicator {
+  background: rgba(214, 123, 168, 0.2);  /* 深马卡龙粉背景，降低不透明度 */
+  color: var(--text-primary);  /* 保持原有文字颜色 */
+}
+
+[data-theme="night"] .theme-toggle-button {
+  background: linear-gradient(135deg, var(--primary-pink), var(--accent-pink));
+  color: white;
+  box-shadow: 0 2px 8px rgba(214, 123, 168, 0.5);  /* 增强深粉色阴影 */
+}
+
+[data-theme="night"] .theme-toggle-button:hover {
+  box-shadow: 0 4px 12px rgba(214, 123, 168, 0.6);  /* 增强悬停阴影 */
+}
+
+[data-theme="night"] .setting-control select {
+  background: var(--card-background);  /* 保持白色背景 */
+  border: 1px solid var(--border-color);  /* 深粉红色边框 */
+  color: var(--text-primary);  /* 保持原有文字颜色 */
+}
+
+[data-theme="night"] .setting-control select:focus {
+  border-color: var(--primary-pink);
+  box-shadow: 0 0 0 2px rgba(214, 123, 168, 0.3);
+}
+
+[data-theme="night"] .setting-control select option {
+  background: var(--card-background);  /* 保持白色背景 */
+  color: var(--text-primary);  /* 保持原有文字颜色 */
+}
+
+[data-theme="night"] .settings-notice {
+  background: linear-gradient(
+    135deg,
+    rgba(214, 123, 168, 0.1) 0%,  /* 深马卡龙粉背景，降低不透明度 */
+    rgba(214, 123, 168, 0.05) 100%
+  );
+  border: 1px solid var(--border-color);  /* 深粉红色边框 */
+}
+
+[data-theme="night"] .settings-notice h3 {
+  color: var(--text-primary);  /* 保持原有文字颜色 */
+}
+
+[data-theme="night"] .settings-notice p {
+  color: var(--text-secondary);  /* 保持原有文字颜色 */
+}
+
+[data-theme="night"] .back-home-button {
+  background: linear-gradient(
+    135deg,
+    var(--primary-pink) 0%,    /* 深马卡龙粉 */
+    var(--accent-pink) 100%    /* 深马卡龙橘粉 */
+  ) !important;
+  box-shadow: 0 4px 12px rgba(214, 123, 168, 0.5) !important;  /* 增强深粉色阴影 */
+}
+
+[data-theme="night"] .back-home-button:hover {
+  box-shadow: 0 6px 16px rgba(214, 123, 168, 0.6) !important;  /* 增强悬停阴影 */
+}
+
+/* 夜晚模式滑块样式 */
+[data-theme="night"] input[type="range"] {
+  background: rgba(214, 123, 168, 0.2);  /* 深马卡龙粉背景，降低不透明度 */
+}
+
+[data-theme="night"] input[type="range"]::-webkit-slider-thumb {
+  background: var(--primary-pink);  /* 深马卡龙粉滑块 */
+  box-shadow: 0 2px 4px var(--shadow-pink);
+}
+
+[data-theme="night"] input[type="range"]::-moz-range-thumb {
+  background: var(--primary-pink);  /* 深马卡龙粉滑块 */
+  box-shadow: 0 2px 4px var(--shadow-pink);
+}
+
+/* 夜晚模式开关样式 */
+[data-theme="night"] .slider {
+  background-color: rgba(214, 123, 168, 0.2);  /* 深马卡龙粉背景，降低不透明度 */
+}
+
+[data-theme="night"] input:checked + .slider {
+  background-color: var(--primary-pink);  /* 深马卡龙粉激活状态 */
+}
+
+/* 夜晚模式音乐选择框样式 */
+[data-theme="night"] .setting-control select {
+  background: white !important;  /* 强制白色背景 */
+  border: 1px solid var(--border-color) !important;  /* 深粉红色边框 */
+  color: var(--text-primary) !important;  /* 保持原有文字颜色 */
+}
+
+[data-theme="night"] .setting-control select:focus {
+  border-color: var(--primary-pink) !important;
+  box-shadow: 0 0 0 2px rgba(214, 123, 168, 0.3) !important;
+}
+
+[data-theme="night"] .setting-control select option {
+  background: white !important;  /* 强制白色背景 */
+  color: var(--text-primary) !important;  /* 保持原有文字颜色 */
+  padding: 0.5rem !important;
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
   .settings-overlay {
