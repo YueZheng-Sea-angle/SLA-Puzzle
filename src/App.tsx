@@ -263,7 +263,7 @@ const AppContent: React.FC = () => {
       case 'multiplayer':
         return (
           <Multiplayer 
-            onBackToMenu={handleBackToMenu} 
+            onBackToMenu={handleBackToHome} 
             onStartGame={handleStartMultiplayerGame}
           />
         );

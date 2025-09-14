@@ -12,6 +12,10 @@ export const Settings: React.FC<SettingsProps> = ({ onBackToHome }) => {
   const [musicSettings, setMusicSettings] = useState(musicManager.getSettings());
   const [themeState, setThemeState] = useState<ThemeState>(themeManager.getThemeState());
   const [themeSettings, setThemeSettings] = useState(themeManager.getSettings());
+  const [showAnimation, setShowAnimation] = useState(() => {
+    const saved = localStorage.getItem('showAnimation');
+    return saved !== null ? JSON.parse(saved) : true; // 默认开启
+  });
 
   // 订阅主题变化
   useEffect(() => {
@@ -58,6 +62,12 @@ export const Settings: React.FC<SettingsProps> = ({ onBackToHome }) => {
     musicManager.playLobbyMusic(newTheme);
   };
 
+  // 处理动画开关变化
+  const handleAnimationToggle = (enabled: boolean) => {
+    setShowAnimation(enabled);
+    localStorage.setItem('showAnimation', JSON.stringify(enabled));
+  };
+
   return (
     <div 
       className="settings-page"
@@ -86,18 +96,21 @@ export const Settings: React.FC<SettingsProps> = ({ onBackToHome }) => {
 
           {/* 设置内容 */}
           <div className="settings-content">
-            <div className="settings-section">
-              <h2>🎨 主题设置</h2>
-              <div className="setting-item">
-                <label>当前主题</label>
-                <div className="theme-preview">
-                  <div className="theme-color primary"></div>
-                  <div className="theme-color secondary"></div>
-                  <div className="theme-color accent"></div>
-                  <span>慵懒夏日淡粉色</span>
+            {/* 主题设置暂时隐藏 */}
+            {false && (
+              <div className="settings-section">
+                <h2>🎨 主题设置</h2>
+                <div className="setting-item">
+                  <label>当前主题</label>
+                  <div className="theme-preview">
+                    <div className="theme-color primary"></div>
+                    <div className="theme-color secondary"></div>
+                    <div className="theme-color accent"></div>
+                    <span>慵懒夏日淡粉色</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
 
             <div className="settings-section">
               <h2>🎮 游戏设置</h2>
@@ -223,13 +236,16 @@ export const Settings: React.FC<SettingsProps> = ({ onBackToHome }) => {
                 </p>
               </div>
 
-              <div className="setting-item">
-                <label>背景模糊</label>
-                <div className="setting-control">
-                  <input type="range" min="0" max="10" defaultValue="3" />
-                  <span>30%</span>
+              {/* 背景模糊设置暂时隐藏 */}
+              {false && (
+                <div className="setting-item">
+                  <label>背景模糊</label>
+                  <div className="setting-control">
+                    <input type="range" min="0" max="10" defaultValue="3" />
+                    <span>30%</span>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
             <div className="settings-section">
@@ -238,20 +254,30 @@ export const Settings: React.FC<SettingsProps> = ({ onBackToHome }) => {
                 <label>显示动画</label>
                 <div className="setting-control">
                   <label className="toggle">
-                    <input type="checkbox" defaultChecked />
+                    <input 
+                      type="checkbox" 
+                      checked={showAnimation}
+                      onChange={(e) => handleAnimationToggle(e.target.checked)}
+                    />
                     <span className="slider"></span>
                   </label>
                 </div>
+                <p className="setting-description">
+                  开启后在页面切换时会显示精美的过渡动画
+                </p>
               </div>
-              <div className="setting-item">
-                <label>震动反馈</label>
-                <div className="setting-control">
-                  <label className="toggle">
-                    <input type="checkbox" defaultChecked />
-                    <span className="slider"></span>
-                  </label>
+              {/* 震动反馈暂时隐藏 */}
+              {false && (
+                <div className="setting-item">
+                  <label>震动反馈</label>
+                  <div className="setting-control">
+                    <label className="toggle">
+                      <input type="checkbox" defaultChecked />
+                      <span className="slider"></span>
+                    </label>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* 开发中提示 */}
