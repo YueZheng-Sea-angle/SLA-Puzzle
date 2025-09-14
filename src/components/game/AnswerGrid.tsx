@@ -9,6 +9,8 @@ interface AnswerGridProps {
   selectedPieceId: string | null;
   showAnswers: boolean;
   pieceShape?: PieceShape; // 添加拼图形状属性
+  // 裁剪比例相关
+  aspectRatio?: '1:1' | '16:9'; // 画幅比例，1:1或16:9
   onPlacePiece: (pieceId: string, slotIndex: number) => void;
   onRemovePiece: (pieceId: string) => void;
   onPieceSelect: (pieceId: string | null) => void;
@@ -31,6 +33,7 @@ export const AnswerGrid: React.FC<AnswerGridProps> = ({
   selectedPieceId,
   showAnswers,
   pieceShape = 'square', // 默认为方形
+  aspectRatio = '1:1', // 默认1:1比例
   onPlacePiece,
   onRemovePiece,
   onPieceSelect,

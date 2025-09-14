@@ -17,6 +17,8 @@ interface PuzzlePieceAreaProps {
   // 鱼目混珠特效相关
   fakePieces?: Set<string>;
   hasFakePiecesEffect?: boolean;
+  // 裁剪比例相关
+  aspectRatio?: '1:1' | '16:9';
 }
 
 export const PuzzlePieceArea: React.FC<PuzzlePieceAreaProps> = ({
@@ -32,6 +34,7 @@ export const PuzzlePieceArea: React.FC<PuzzlePieceAreaProps> = ({
   onDropToProcessingArea,
   fakePieces,
   hasFakePiecesEffect,
+  aspectRatio = '1:1', // 默认1:1比例
 }) => {
   const handlePieceClick = (pieceId: string) => {
     onPieceSelect(selectedPieceId === pieceId ? null : pieceId);
