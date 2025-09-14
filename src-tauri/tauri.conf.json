@@ -13,8 +13,8 @@
     "windows": [
       {
         "title": "拼图大师-SLA",
-        "width": 1330,
-        "height": 875,
+        "width": 1500,
+        "height": 950,
         "resizable": false,
         "maximizable": false,
         "minimizable": true,
