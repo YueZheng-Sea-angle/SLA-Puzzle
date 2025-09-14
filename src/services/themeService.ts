@@ -26,6 +26,12 @@ export class ThemeManager {
   constructor() {
     this.loadSettings();
     this.startAutoUpdate();
+    
+    // 初始化时设置data-theme属性
+    if (typeof document !== 'undefined') {
+      const currentTheme = this.getCurrentTheme();
+      document.documentElement.setAttribute('data-theme', currentTheme);
+    }
   }
 
   // 加载设置
@@ -157,6 +163,11 @@ export class ThemeManager {
         console.warn('主题回调执行失败:', error);
       }
     });
+    
+    // 设置HTML元素的data-theme属性，用于CSS变量切换
+    if (typeof document !== 'undefined') {
+      document.documentElement.setAttribute('data-theme', themeState.currentTheme);
+    }
   }
 
   // 获取设置

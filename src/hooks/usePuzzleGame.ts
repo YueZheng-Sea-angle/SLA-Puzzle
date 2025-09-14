@@ -31,7 +31,12 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
   // 如果有预加载的游戏状态，初始化游戏
   useEffect(() => {
     if (preloadedGameState) {
-      setGameState(preloadedGameState);
+      // 确保预加载的状态包含 redoStack
+      const stateWithRedoStack = {
+        ...preloadedGameState,
+        redoStack: preloadedGameState.redoStack || []
+      };
+      setGameState(stateWithRedoStack);
       setIsGameStarted(true);
       setSelectedPiece(null);
 
@@ -81,6 +86,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
       isCompleted: false,
       elapsedTime: 0,
       history: [],
+      redoStack: [], // 初始化重做栈
       answerGrid,
     };
 
@@ -207,6 +213,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
           config: { ...prev.config, pieces: updatedPieces },
           moves: prev.moves + 1,
           history: [...prev.history, move],
+          redoStack: [], // 执行新操作时清空重做栈
           answerGrid: newAnswerGrid,
         };
 
@@ -283,6 +290,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
         config: { ...prev.config, pieces: updatedPieces },
         moves: prev.moves + 1,
         history: [...prev.history, move],
+        redoStack: [], // 执行新操作时清空重做栈
         answerGrid: newAnswerGrid,
       };
 
@@ -348,6 +356,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
         config: { ...prev.config, pieces: updatedPieces },
         moves: prev.moves + 1,
         history: [...prev.history, move],
+        redoStack: [], // 执行新操作时清空重做栈
         answerGrid: newAnswerGrid,
       };
 
@@ -628,6 +637,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
         config: { ...prev.config, pieces: updatedPieces },
         moves: prev.moves + 1,
         history: [...prev.history, move],
+        redoStack: [], // 执行新操作时清空重做栈
       };
     });
   }, [gameState]);
@@ -655,6 +665,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
         config: { ...prev.config, pieces: updatedPieces },
         moves: prev.moves + 1,
         history: [...prev.history, move],
+        redoStack: [], // 执行新操作时清空重做栈
       };
     });
   }, [gameState]);
@@ -713,18 +724,57 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
         case 'place':
           // 撤销放置：将拼图块从槽位移回原位置
           if (lastMove.toSlot !== null && lastMove.toSlot !== undefined) {
-            newAnswerGrid[lastMove.toSlot] = null;
+            // 俄罗斯方块特殊处理：清空所有相关槽位
+            if (prev.config.pieceShape === 'tetris') {
+              // 找到该俄罗斯方块占据的所有槽位并清空
+              for (let i = 0; i < newAnswerGrid.length; i++) {
+                if (newAnswerGrid[i]?.id === lastMove.pieceId) {
+                  newAnswerGrid[i] = null;
+                }
+              }
+            } else {
+              // 普通拼图块只清空单个槽位
+              newAnswerGrid[lastMove.toSlot] = null;
+            }
           }
+
+          // 更新拼图块状态，将其移回原位置
           updatedPieces = updatedPieces.map(piece =>
             piece.id === lastMove.pieceId
               ? { ...piece, currentSlot: lastMove.fromSlot || null }
               : piece
           );
-          // 如果从其他槽位移动，需要恢复原槽位
+
+          // 如果从其他槽位移动，需要恢复原槽位的状态
           if (lastMove.fromSlot !== null && lastMove.fromSlot !== undefined) {
             const originalPiece = updatedPieces.find(p => p.id === lastMove.pieceId);
             if (originalPiece) {
-              newAnswerGrid[lastMove.fromSlot] = { ...originalPiece, currentSlot: lastMove.fromSlot };
+              const fromSlot = lastMove.fromSlot as number;
+
+              if (prev.config.pieceShape === 'tetris' && originalPiece.occupiedPositions) {
+                // 俄罗斯方块：计算原位置占据的所有槽位
+                const gridCols = prev.config.gridSize.cols;
+                const fromRow = Math.floor(fromSlot / gridCols);
+                const fromCol = fromSlot % gridCols;
+
+                // 计算相对位置偏移
+                const minRow = Math.min(...originalPiece.occupiedPositions.map(pos => pos[0]));
+                const minCol = Math.min(...originalPiece.occupiedPositions.map(pos => pos[1]));
+
+                // 计算并恢复所有原始槽位
+                for (const [relRow, relCol] of originalPiece.occupiedPositions) {
+                  const slotRow = fromRow + (relRow - minRow);
+                  const slotCol = fromCol + (relCol - minCol);
+                  const slotIndex = slotRow * gridCols + slotCol;
+
+                  if (slotIndex >= 0 && slotIndex < newAnswerGrid.length) {
+                    newAnswerGrid[slotIndex] = { ...originalPiece, currentSlot: fromSlot };
+                  }
+                }
+              } else {
+                // 普通拼图块恢复到单个槽位
+                newAnswerGrid[fromSlot] = { ...originalPiece, currentSlot: fromSlot };
+              }
             }
           }
           break;
@@ -734,16 +784,43 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
             const piece = updatedPieces.find(p => p.id === lastMove.pieceId);
             if (piece) {
               const fromSlot = lastMove.fromSlot as number;
-              newAnswerGrid[fromSlot] = { ...piece, currentSlot: fromSlot };
-              updatedPieces = updatedPieces.map(p =>
-                p.id === lastMove.pieceId ? { ...p, currentSlot: fromSlot } : p
-              );
+
+              if (prev.config.pieceShape === 'tetris' && piece.occupiedPositions) {
+                // 俄罗斯方块：计算并恢复到所有占据的槽位
+                const gridCols = prev.config.gridSize.cols;
+                const fromRow = Math.floor(fromSlot / gridCols);
+                const fromCol = fromSlot % gridCols;
+
+                // 计算相对位置偏移
+                const minRow = Math.min(...piece.occupiedPositions.map(pos => pos[0]));
+                const minCol = Math.min(...piece.occupiedPositions.map(pos => pos[1]));
+
+                // 计算并恢复所有槽位
+                for (const [relRow, relCol] of piece.occupiedPositions) {
+                  const slotRow = fromRow + (relRow - minRow);
+                  const slotCol = fromCol + (relCol - minCol);
+                  const slotIndex = slotRow * gridCols + slotCol;
+
+                  if (slotIndex >= 0 && slotIndex < newAnswerGrid.length) {
+                    newAnswerGrid[slotIndex] = { ...piece, currentSlot: fromSlot };
+                  }
+                }
+
+                updatedPieces = updatedPieces.map(p =>
+                  p.id === lastMove.pieceId ? { ...p, currentSlot: fromSlot } : p
+                );
+              } else {
+                // 普通拼图块：恢复到单个槽位
+                newAnswerGrid[fromSlot] = { ...piece, currentSlot: fromSlot };
+                updatedPieces = updatedPieces.map(p =>
+                  p.id === lastMove.pieceId ? { ...p, currentSlot: fromSlot } : p
+                );
+              }
             }
           }
           break;
         case 'rotate':
           // 撤销旋转：应用相反的delta值
-
           if (lastMove.delta !== undefined) {
             updatedPieces = updatedPieces.map(piece =>
               piece.id === lastMove.pieceId
@@ -756,14 +833,49 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
           // 撤销替换：将新拼图块移回原位置，恢复被替换的拼图块
           if (lastMove.toSlot !== null && lastMove.toSlot !== undefined) {
             const toSlot = lastMove.toSlot as number;
+
             // 移除新放置的拼图块
-            newAnswerGrid[toSlot] = null;
+            if (prev.config.pieceShape === 'tetris') {
+              // 俄罗斯方块：清空所有占据的槽位
+              for (let i = 0; i < newAnswerGrid.length; i++) {
+                if (newAnswerGrid[i]?.id === lastMove.pieceId) {
+                  newAnswerGrid[i] = null;
+                }
+              }
+            } else {
+              // 普通拼图块：清空单个槽位
+              newAnswerGrid[toSlot] = null;
+            }
 
             // 如果被替换的拼图块存在，将其恢复到原位置
             if (lastMove.replacedPieceId) {
               const replacedPiece = updatedPieces.find(p => p.id === lastMove.replacedPieceId);
               if (replacedPiece) {
-                newAnswerGrid[toSlot] = { ...replacedPiece, currentSlot: toSlot };
+                if (prev.config.pieceShape === 'tetris' && replacedPiece.occupiedPositions) {
+                  // 俄罗斯方块：计算并恢复到所有槽位
+                  const gridCols = prev.config.gridSize.cols;
+                  const toRow = Math.floor(toSlot / gridCols);
+                  const toCol = toSlot % gridCols;
+
+                  // 计算相对位置偏移
+                  const minRow = Math.min(...replacedPiece.occupiedPositions.map(pos => pos[0]));
+                  const minCol = Math.min(...replacedPiece.occupiedPositions.map(pos => pos[1]));
+
+                  // 计算并恢复所有槽位
+                  for (const [relRow, relCol] of replacedPiece.occupiedPositions) {
+                    const slotRow = toRow + (relRow - minRow);
+                    const slotCol = toCol + (relCol - minCol);
+                    const slotIndex = slotRow * gridCols + slotCol;
+
+                    if (slotIndex >= 0 && slotIndex < newAnswerGrid.length) {
+                      newAnswerGrid[slotIndex] = { ...replacedPiece, currentSlot: toSlot };
+                    }
+                  }
+                } else {
+                  // 普通拼图块：恢复到单个槽位
+                  newAnswerGrid[toSlot] = { ...replacedPiece, currentSlot: toSlot };
+                }
+
                 updatedPieces = updatedPieces.map(p =>
                   p.id === lastMove.replacedPieceId ? { ...p, currentSlot: toSlot } : p
                 );
@@ -781,24 +893,38 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
             if (lastMove.fromSlot !== null && lastMove.fromSlot !== undefined) {
               const originalPiece = updatedPieces.find(p => p.id === lastMove.pieceId);
               if (originalPiece) {
-                newAnswerGrid[lastMove.fromSlot] = { ...originalPiece, currentSlot: lastMove.fromSlot };
+                const fromSlot = lastMove.fromSlot as number;
+
+                if (prev.config.pieceShape === 'tetris' && originalPiece.occupiedPositions) {
+                  // 俄罗斯方块：计算并恢复到所有原始槽位
+                  const gridCols = prev.config.gridSize.cols;
+                  const fromRow = Math.floor(fromSlot / gridCols);
+                  const fromCol = fromSlot % gridCols;
+
+                  // 计算相对位置偏移
+                  const minRow = Math.min(...originalPiece.occupiedPositions.map(pos => pos[0]));
+                  const minCol = Math.min(...originalPiece.occupiedPositions.map(pos => pos[1]));
+
+                  // 计算并恢复所有原始槽位
+                  for (const [relRow, relCol] of originalPiece.occupiedPositions) {
+                    const slotRow = fromRow + (relRow - minRow);
+                    const slotCol = fromCol + (relCol - minCol);
+                    const slotIndex = slotRow * gridCols + slotCol;
+
+                    if (slotIndex >= 0 && slotIndex < newAnswerGrid.length) {
+                      newAnswerGrid[slotIndex] = { ...originalPiece, currentSlot: fromSlot };
+                    }
+                  }
+                } else {
+                  // 普通拼图块：恢复到单个槽位
+                  newAnswerGrid[fromSlot] = { ...originalPiece, currentSlot: fromSlot };
+                }
               }
             }
           }
           break;
-
-        case 'rotate':
-          // 撤销旋转（预留功能）
-          updatedPieces = updatedPieces.map(piece =>
-            piece.id === lastMove.pieceId
-              ? { ...piece, rotation: (piece.rotation - 90 + 360) % 360 }
-
-              : piece
-          );
-          break;
-
         case 'flip':
-          // 撤销翻转（预留功能）
+          // 撤销翻转
           updatedPieces = updatedPieces.map(piece =>
             piece.id === lastMove.pieceId
               ? { ...piece, isFlipped: !piece.isFlipped }
@@ -812,6 +938,271 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
         config: { ...prev.config, pieces: updatedPieces },
         moves: Math.max(0, prev.moves - 1),
         history: newHistory,
+        redoStack: [...prev.redoStack, lastMove], // 将撤销的操作加入重做栈
+        answerGrid: newAnswerGrid,
+      };
+    });
+  }, [gameState]);
+
+  // 重做操作
+  const redo = useCallback(() => {
+    if (!gameState || gameState.redoStack.length === 0) return;
+
+    const moveToRedo = gameState.redoStack[gameState.redoStack.length - 1];
+    const newRedoStack = gameState.redoStack.slice(0, -1);
+
+    setGameState(prev => {
+      if (!prev) return null;
+
+      let newAnswerGrid = [...prev.answerGrid];
+      let updatedPieces = [...prev.config.pieces];
+
+      switch (moveToRedo.action) {
+        case 'place':
+          // 重做放置：将拼图块放置到目标槽位
+          if (moveToRedo.toSlot !== null && moveToRedo.toSlot !== undefined) {
+            const piece = updatedPieces.find(p => p.id === moveToRedo.pieceId);
+            if (piece) {
+              const toSlot = moveToRedo.toSlot as number;
+
+              if (prev.config.pieceShape === 'tetris' && piece.occupiedPositions) {
+                // 俄罗斯方块：计算并放置到所有槽位
+                const gridCols = prev.config.gridSize.cols;
+                const toRow = Math.floor(toSlot / gridCols);
+                const toCol = toSlot % gridCols;
+
+                // 计算相对位置偏移
+                const minRow = Math.min(...piece.occupiedPositions.map(pos => pos[0]));
+                const minCol = Math.min(...piece.occupiedPositions.map(pos => pos[1]));
+
+                // 计算并放置到所有槽位
+                for (const [relRow, relCol] of piece.occupiedPositions) {
+                  const slotRow = toRow + (relRow - minRow);
+                  const slotCol = toCol + (relCol - minCol);
+                  const slotIndex = slotRow * gridCols + slotCol;
+
+                  if (slotIndex >= 0 && slotIndex < newAnswerGrid.length) {
+                    newAnswerGrid[slotIndex] = { ...piece, currentSlot: toSlot };
+                  }
+                }
+              } else {
+                // 普通拼图块：放置到单个槽位
+                newAnswerGrid[toSlot] = { ...piece, currentSlot: toSlot };
+              }
+
+              updatedPieces = updatedPieces.map(p =>
+                p.id === moveToRedo.pieceId ? { ...p, currentSlot: toSlot } : p
+              );
+            }
+          }
+
+          // 如果从其他槽位移动，清空原槽位
+          if (moveToRedo.fromSlot !== null && moveToRedo.fromSlot !== undefined) {
+            const piece = updatedPieces.find(p => p.id === moveToRedo.pieceId);
+            if (piece && prev.config.pieceShape === 'tetris' && piece.occupiedPositions) {
+              // 俄罗斯方块：清空所有原始槽位（但保留目标槽位）
+              const gridCols = prev.config.gridSize.cols;
+              const fromRow = Math.floor(moveToRedo.fromSlot / gridCols);
+              const fromCol = moveToRedo.fromSlot % gridCols;
+
+              // 计算相对位置偏移
+              const minRow = Math.min(...piece.occupiedPositions.map(pos => pos[0]));
+              const minCol = Math.min(...piece.occupiedPositions.map(pos => pos[1]));
+
+              // 清空原始位置的所有槽位
+              for (const [relRow, relCol] of piece.occupiedPositions) {
+                const slotRow = fromRow + (relRow - minRow);
+                const slotCol = fromCol + (relCol - minCol);
+                const slotIndex = slotRow * gridCols + slotCol;
+
+                // 只有当槽位不是目标槽位的一部分时才清空
+                if (slotIndex >= 0 && slotIndex < newAnswerGrid.length &&
+                  slotIndex !== moveToRedo.toSlot &&
+                  newAnswerGrid[slotIndex]?.id === moveToRedo.pieceId) {
+
+                  // 检查该槽位是否也是目标位置的一部分
+                  const toSlot = moveToRedo.toSlot as number;
+                  const toRow = Math.floor(toSlot / gridCols);
+                  const toCol = toSlot % gridCols;
+                  let isTargetSlot = false;
+
+                  for (const [targetRelRow, targetRelCol] of piece.occupiedPositions) {
+                    const targetSlotRow = toRow + (targetRelRow - minRow);
+                    const targetSlotCol = toCol + (targetRelCol - minCol);
+                    const targetSlotIndex = targetSlotRow * gridCols + targetSlotCol;
+
+                    if (slotIndex === targetSlotIndex) {
+                      isTargetSlot = true;
+                      break;
+                    }
+                  }
+
+                  if (!isTargetSlot) {
+                    newAnswerGrid[slotIndex] = null;
+                  }
+                }
+              }
+            } else {
+              // 普通拼图块：清空单个原始槽位
+              newAnswerGrid[moveToRedo.fromSlot] = null;
+            }
+          }
+          break;
+        case 'remove':
+          // 重做移除：将拼图块从槽位移回处理区
+          if (moveToRedo.fromSlot !== null && moveToRedo.fromSlot !== undefined) {
+            if (prev.config.pieceShape === 'tetris') {
+              // 俄罗斯方块：清空所有相关槽位
+              for (let i = 0; i < newAnswerGrid.length; i++) {
+                if (newAnswerGrid[i]?.id === moveToRedo.pieceId) {
+                  newAnswerGrid[i] = null;
+                }
+              }
+            } else {
+              // 普通拼图块：清空单个槽位
+              newAnswerGrid[moveToRedo.fromSlot] = null;
+            }
+            updatedPieces = updatedPieces.map(piece =>
+              piece.id === moveToRedo.pieceId
+                ? { ...piece, currentSlot: null }
+                : piece
+            );
+          }
+          break;
+        case 'rotate':
+          // 重做旋转：应用相同的delta值
+          if (moveToRedo.delta !== undefined) {
+            updatedPieces = updatedPieces.map(piece =>
+              piece.id === moveToRedo.pieceId
+                ? { ...piece, rotation: piece.rotation + moveToRedo.delta! }
+                : piece
+            );
+          }
+          break;
+        case 'replace':
+          // 重做替换：执行替换操作
+          if (moveToRedo.toSlot !== null && moveToRedo.toSlot !== undefined) {
+            const toSlot = moveToRedo.toSlot as number;
+            const piece = updatedPieces.find(p => p.id === moveToRedo.pieceId);
+
+            if (piece) {
+              // 如果有被替换的拼图块，先移除它
+              if (moveToRedo.replacedPieceId) {
+                if (prev.config.pieceShape === 'tetris') {
+                  // 俄罗斯方块：清空被替换拼图块的所有槽位
+                  for (let i = 0; i < newAnswerGrid.length; i++) {
+                    if (newAnswerGrid[i]?.id === moveToRedo.replacedPieceId) {
+                      newAnswerGrid[i] = null;
+                    }
+                  }
+                } else {
+                  // 普通拼图块：清空单个槽位
+                  newAnswerGrid[toSlot] = null;
+                }
+                updatedPieces = updatedPieces.map(p =>
+                  p.id === moveToRedo.replacedPieceId ? { ...p, currentSlot: null } : p
+                );
+              }
+
+              // 放置新拼图块
+              if (prev.config.pieceShape === 'tetris' && piece.occupiedPositions) {
+                // 俄罗斯方块：计算并放置到所有槽位
+                const gridCols = prev.config.gridSize.cols;
+                const toRow = Math.floor(toSlot / gridCols);
+                const toCol = toSlot % gridCols;
+
+                // 计算相对位置偏移
+                const minRow = Math.min(...piece.occupiedPositions.map(pos => pos[0]));
+                const minCol = Math.min(...piece.occupiedPositions.map(pos => pos[1]));
+
+                // 计算并放置到所有槽位
+                for (const [relRow, relCol] of piece.occupiedPositions) {
+                  const slotRow = toRow + (relRow - minRow);
+                  const slotCol = toCol + (relCol - minCol);
+                  const slotIndex = slotRow * gridCols + slotCol;
+
+                  if (slotIndex >= 0 && slotIndex < newAnswerGrid.length) {
+                    newAnswerGrid[slotIndex] = { ...piece, currentSlot: toSlot };
+                  }
+                }
+              } else {
+                // 普通拼图块：放置到单个槽位
+                newAnswerGrid[toSlot] = { ...piece, currentSlot: toSlot };
+              }
+
+              updatedPieces = updatedPieces.map(p =>
+                p.id === moveToRedo.pieceId ? { ...p, currentSlot: toSlot } : p
+              );
+
+              // 如果从其他槽位移动，清空原槽位
+              if (moveToRedo.fromSlot !== null && moveToRedo.fromSlot !== undefined) {
+                const fromSlot = moveToRedo.fromSlot as number;
+
+                if (prev.config.pieceShape === 'tetris' && piece.occupiedPositions) {
+                  // 俄罗斯方块：清空原始位置的所有槽位（但保留目标槽位）
+                  const gridCols = prev.config.gridSize.cols;
+                  const fromRow = Math.floor(fromSlot / gridCols);
+                  const fromCol = fromSlot % gridCols;
+
+                  // 计算相对位置偏移
+                  const minRow = Math.min(...piece.occupiedPositions.map(pos => pos[0]));
+                  const minCol = Math.min(...piece.occupiedPositions.map(pos => pos[1]));
+
+                  // 清空原始位置的所有槽位
+                  for (const [relRow, relCol] of piece.occupiedPositions) {
+                    const slotRow = fromRow + (relRow - minRow);
+                    const slotCol = fromCol + (relCol - minCol);
+                    const slotIndex = slotRow * gridCols + slotCol;
+
+                    // 只有当槽位不是目标槽位的一部分时才清空
+                    if (slotIndex >= 0 && slotIndex < newAnswerGrid.length &&
+                      newAnswerGrid[slotIndex]?.id === moveToRedo.pieceId) {
+
+                      // 检查该槽位是否也是目标位置的一部分
+                      const toRow = Math.floor(toSlot / gridCols);
+                      const toCol = toSlot % gridCols;
+                      let isTargetSlot = false;
+
+                      for (const [targetRelRow, targetRelCol] of piece.occupiedPositions) {
+                        const targetSlotRow = toRow + (targetRelRow - minRow);
+                        const targetSlotCol = toCol + (targetRelCol - minCol);
+                        const targetSlotIndex = targetSlotRow * gridCols + targetSlotCol;
+
+                        if (slotIndex === targetSlotIndex) {
+                          isTargetSlot = true;
+                          break;
+                        }
+                      }
+
+                      if (!isTargetSlot) {
+                        newAnswerGrid[slotIndex] = null;
+                      }
+                    }
+                  }
+                } else {
+                  // 普通拼图块：清空原始槽位
+                  newAnswerGrid[fromSlot] = null;
+                }
+              }
+            }
+          }
+          break;
+        case 'flip':
+          // 重做翻转
+          updatedPieces = updatedPieces.map(piece =>
+            piece.id === moveToRedo.pieceId
+              ? { ...piece, isFlipped: !piece.isFlipped }
+              : piece
+          );
+          break;
+      }
+
+      return {
+        ...prev,
+        config: { ...prev.config, pieces: updatedPieces },
+        moves: prev.moves + 1,
+        history: [...prev.history, moveToRedo], // 将重做的操作加回历史记录
+        redoStack: newRedoStack, // 从重做栈中移除
         answerGrid: newAnswerGrid,
       };
     });
@@ -886,7 +1277,12 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
     const result = PuzzleSaveService.loadGame(saveId);
 
     if (result.success && result.gameState) {
-      setGameState(result.gameState);
+      // 确保加载的状态包含 redoStack
+      const stateWithRedoStack = {
+        ...result.gameState,
+        redoStack: result.gameState.redoStack || []
+      };
+      setGameState(stateWithRedoStack);
       setIsGameStarted(true);
       setSelectedPiece(null);
 
@@ -966,6 +1362,7 @@ export function usePuzzleGame({ userId, preloadedGameState }: UsePuzzleGameProps
     rotatePiece,
     flipPiece,
     undo,
+    redo,
     resetGame,
     checkPuzzleComplete,
     // 拖拽相关

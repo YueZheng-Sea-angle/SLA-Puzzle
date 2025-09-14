@@ -12,13 +12,11 @@ interface GeneratePuzzleParams {
 
   upsideDown?: boolean; // 颠倒世界特效
 
-  aspectRatio?: '1:1' | '16:9'; // 裁剪比例
-
 }
 
 export class PuzzleGenerator {
   static async generatePuzzle(params: GeneratePuzzleParams): Promise<PuzzleConfig> {
-    const { imageData, gridSize, pieceShape, name, allowRotation = false, upsideDown = false, aspectRatio = '1:1' } = params;
+    const { imageData, gridSize, pieceShape, name, allowRotation = false, upsideDown = false } = params;
 
     // 确保图片是正方形，统一处理尺寸
     const targetSize = 400; // 统一的目标尺寸
@@ -75,16 +73,7 @@ export class PuzzleGenerator {
     } else {
       // 方形拼图
       totalPieces = gridSize.rows * gridSize.cols;
-      
-      // 根据裁剪比例计算拼图块尺寸
-      let pieceWidth, pieceHeight;
-      if (aspectRatio === '16:9') {
-        pieceWidth = targetSize / gridSize.cols;
-        pieceHeight = pieceWidth * 9 / 16; // 16:9比例
-      } else {
-        pieceWidth = targetSize / gridSize.rows;
-        pieceHeight = pieceWidth; // 1:1比例
-      }
+      pieceSize = targetSize / gridSize.rows;
 
       for (let i = 0; i < totalPieces; i++) {
         const row = Math.floor(i / gridSize.cols);
@@ -96,10 +85,8 @@ export class PuzzleGenerator {
           row,
           col,
           gridSize,
-          pieceWidth,
-          pieceHeight,
+          pieceSize,
           targetSize,
-          aspectRatio,
         });
         pieces.push(piece);
       }
@@ -118,7 +105,6 @@ export class PuzzleGenerator {
       pieceShape,
       difficulty,
       pieces: shuffledPieces,
-      aspectRatio, // 添加裁剪比例到配置中
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -164,12 +150,10 @@ export class PuzzleGenerator {
     row: number;
     col: number;
     gridSize: { rows: number; cols: number };
-    pieceWidth: number;
-    pieceHeight: number;
+    pieceSize: number;
     targetSize: number;
-    aspectRatio: '1:1' | '16:9';
   }): Promise<PuzzlePiece> {
-    const { imageData, index, row, col, gridSize, pieceWidth, pieceHeight, aspectRatio } = params;
+    const { imageData, index, row, col, gridSize, pieceSize } = params;
 
     // 创建canvas来裁剪图片
     const canvas = document.createElement('canvas');
@@ -178,8 +162,8 @@ export class PuzzleGenerator {
       throw new Error('无法获取canvas上下文');
     }
 
-    canvas.width = pieceWidth;
-    canvas.height = pieceHeight;
+    canvas.width = pieceSize;
+    canvas.height = pieceSize;
 
     // 创建原始图片
     const img = new Image();
@@ -192,46 +176,22 @@ export class PuzzleGenerator {
       img.crossOrigin = 'anonymous';
     });
 
-    // 计算源图片的实际尺寸和裁剪区域
-    let sourceWidth, sourceHeight, offsetX, offsetY;
-    
-    if (aspectRatio === '16:9') {
-      // 16:9比例：保持原始图片的宽高比，计算16:9的裁剪区域
-      const targetAspectRatio = 16 / 9;
-      const imgAspectRatio = img.width / img.height;
-      
-      if (imgAspectRatio > targetAspectRatio) {
-        // 图片比16:9更宽，裁剪左右
-        sourceHeight = img.height;
-        sourceWidth = sourceHeight * targetAspectRatio;
-        offsetX = (img.width - sourceWidth) / 2;
-        offsetY = 0;
-      } else {
-        // 图片比16:9更高，裁剪上下
-        sourceWidth = img.width;
-        sourceHeight = sourceWidth / targetAspectRatio;
-        offsetX = 0;
-        offsetY = (img.height - sourceHeight) / 2;
-      }
-    } else {
-      // 1:1比例：从正方形区域中裁剪
-      sourceWidth = Math.min(img.width, img.height);
-      sourceHeight = sourceWidth;
-      offsetX = (img.width - sourceWidth) / 2;
-      offsetY = (img.height - sourceHeight) / 2;
-    }
+    // 计算源图片的实际尺寸
+    const sourceSize = Math.min(img.width, img.height);
+    const offsetX = (img.width - sourceSize) / 2;
+    const offsetY = (img.height - sourceSize) / 2;
 
-    // 裁剪对应区域
+    // 裁剪对应区域（从正方形区域中裁剪）
     ctx.drawImage(
       img,
-      offsetX + col * (sourceWidth / gridSize.cols), // 源x
-      offsetY + row * (sourceHeight / gridSize.rows), // 源y
-      sourceWidth / gridSize.cols, // 源宽度
-      sourceHeight / gridSize.rows, // 源高度
+      offsetX + col * (sourceSize / gridSize.cols), // 源x
+      offsetY + row * (sourceSize / gridSize.rows), // 源y
+      sourceSize / gridSize.cols, // 源宽度
+      sourceSize / gridSize.rows, // 源高度
       0, // 目标x
       0, // 目标y
-      pieceWidth, // 目标宽度
-      pieceHeight  // 目标高度
+      pieceSize, // 目标宽度
+      pieceSize  // 目标高度
     );
 
     const pieceImageData = canvas.toDataURL('image/png');
@@ -246,8 +206,8 @@ export class PuzzleGenerator {
       correctRotation: 0, // 正确的旋转角度
       correctIsFlipped: false, // 正确的翻转状态
       imageData: pieceImageData,
-      width: pieceWidth,
-      height: pieceHeight,
+      width: pieceSize,
+      height: pieceSize,
       shape: 'square',
     };
   }

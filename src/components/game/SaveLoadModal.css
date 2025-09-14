@@ -52,7 +52,7 @@
   font-weight: 600;
 }
 
-.close-button {
+.save-load-modal .close-button {
   background: rgba(255, 255, 255, 0.2);
   border: none;
   border-radius: 50%;
@@ -62,13 +62,14 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: white;
+  color: #dc2626 !important;
   font-size: 1.2rem;
   transition: background-color 0.2s;
 }
 
-.close-button:hover:not(:disabled) {
+.save-load-modal .close-button:hover:not(:disabled) {
   background: rgba(255, 255, 255, 0.3);
+  color: #dc2626 !important;
 }
 
 .close-button:disabled {

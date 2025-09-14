@@ -1,0 +1,288 @@
+.summer-animation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 182, 193, 0.9) 0%,
+    rgba(255, 218, 185, 0.9) 50%,
+    rgba(173, 216, 230, 0.9) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.summer-animation-overlay.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.summer-animation-overlay.fade-out {
+  opacity: 0;
+  transform: scale(1.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 汽水瓶动画 */
+.soda-bottle {
+  position: absolute;
+  top: 20%;
+  right: 15%;
+  width: 80px;
+  height: 120px;
+  animation: bottleBounce 1s ease-in-out infinite alternate;
+}
+
+.bottle-body {
+  position: relative;
+  width: 60px;
+  height: 100px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 99, 132, 0.8) 0%,
+    rgba(255, 159, 64, 0.8) 100%
+  );
+  border-radius: 15px 15px 25px 25px;
+  margin: 0 auto;
+  box-shadow: 0 8px 32px rgba(255, 99, 132, 0.3);
+  overflow: hidden;
+}
+
+.bottle-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  animation: labelGlow 2s ease-in-out infinite;
+}
+
+.bottle-sparkle {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  width: 15px;
+  height: 15px;
+  background: radial-gradient(circle, white 0%, transparent 70%);
+  border-radius: 50%;
+  animation: sparkleMove 3s ease-in-out infinite;
+}
+
+.bottle-cap {
+  width: 40px;
+  height: 20px;
+  background: linear-gradient(180deg, #FFD700 0%, #FFA500 100%);
+  border-radius: 20px 20px 5px 5px;
+  margin: -10px auto 0;
+  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.4);
+}
+
+/* 气泡动画 */
+.bubbles-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.bubble {
+  position: absolute;
+  font-size: 16px;
+  opacity: 0;
+  animation: bubbleFloat linear infinite;
+}
+
+/* 闪光效果 */
+.sparkles-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.sparkle {
+  position: absolute;
+  font-size: 12px;
+  opacity: 0;
+  animation: sparkleShine ease-in-out infinite;
+}
+
+/* 中心文字 */
+.center-text {
+  text-align: center;
+  color: #2C3E50;
+  text-shadow: 3px 3px 12px rgba(255, 255, 255, 0.8), 1px 1px 4px rgba(0, 0, 0, 0.5);
+  animation: textPulse 2s ease-in-out infinite;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.welcome-text {
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 12px;
+  color: #34495E;
+  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.9);
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+.game-title {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  background: linear-gradient(45deg, #E74C3C, #3498DB, #2ECC71, #F39C12, #9B59B6);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  animation: gradientShift 3s ease-in-out infinite, fadeInUp 0.6s ease-out 0.4s both;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 18px;
+  font-weight: 400;
+  color: #2C3E50;
+  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.9);
+  animation: fadeInUp 0.6s ease-out 0.6s both;
+  line-height: 1.4;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* 动画关键帧 */
+@keyframes bottleBounce {
+  0% { transform: translateY(0px) rotate(-3deg); }
+  100% { transform: translateY(-15px) rotate(3deg); }
+}
+
+@keyframes labelGlow {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); filter: brightness(1); }
+  50% { transform: translate(-50%, -50%) scale(1.1); filter: brightness(1.3); }
+}
+
+@keyframes sparkleMove {
+  0% { transform: translate(0, 0) scale(0); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translate(20px, -30px) scale(1); opacity: 0; }
+}
+
+@keyframes bubbleFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(100vh) scale(0);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(90vh) scale(0.5);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(-10vh) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20vh) scale(0);
+  }
+}
+
+@keyframes sparkleShine {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+}
+
+@keyframes textPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .soda-bottle {
+    top: 15%;
+    right: 10%;
+    width: 60px;
+    height: 90px;
+  }
+  
+  .bottle-body {
+    width: 45px;
+    height: 75px;
+  }
+  
+  .bottle-label {
+    font-size: 18px;
+  }
+  
+  .center-text {
+    padding: 15px 20px;
+    margin: 0 20px;
+  }
+  
+  .game-title {
+    font-size: 32px;
+  }
+  
+  .welcome-text {
+    font-size: 18px;
+  }
+  
+  .subtitle {
+    font-size: 14px;
+  }
+}
+
+/* 性能优化 */
+.summer-animation-overlay * {
+  will-change: transform, opacity;
+}
+
+/* 减弱动画效果 (可选，用于偏好减少动画的用户) */
+@media (prefers-reduced-motion: reduce) {
+  .summer-animation-overlay .bubble,
+  .summer-animation-overlay .sparkle,
+  .summer-animation-overlay .bottle-body {
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+  }
+  
+  .summer-animation-overlay .soda-bottle {
+    animation: none;
+  }
+}

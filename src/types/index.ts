@@ -40,7 +40,6 @@ export interface PuzzleConfig {
   pieceShape: PieceShape;
   difficulty: DifficultyLevel;
   pieces: PuzzlePiece[];
-  aspectRatio?: '1:1' | '16:9'; // 裁剪比例
   createdAt: Date;
   updatedAt: Date;
 }
@@ -57,6 +56,7 @@ export interface GameState {
   isCompleted: boolean;
   elapsedTime: number;
   history: GameMove[];
+  redoStack: GameMove[]; // 重做栈，存储可重做的操作
   answerGrid: (PuzzlePiece | null)[]; // 答题卡网格，存储每个槽位的拼图块
 }
 

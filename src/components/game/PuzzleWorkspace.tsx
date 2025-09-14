@@ -93,8 +93,6 @@ export const PuzzleWorkspace: React.FC<PuzzleWorkspaceProps> = ({
           onDropToProcessingArea={onDropToProcessingArea}
           fakePieces={fakePieces}
           hasFakePiecesEffect={hasFakePiecesEffect}
-          pieceShape={gameState.config.pieceShape} // 传递拼图形状
-          aspectRatio={gameState.config.aspectRatio} // 传递裁剪比例
         />
       </div>
 
@@ -113,7 +111,6 @@ export const PuzzleWorkspace: React.FC<PuzzleWorkspaceProps> = ({
           selectedPieceId={selectedPiece}
           showAnswers={showAnswers}
           pieceShape={gameState.config.pieceShape} // 传递拼图形状
-          aspectRatio={gameState.config.aspectRatio} // 传递裁剪比例
           onPlacePiece={onPlacePiece}
           onRemovePiece={onRemovePiece}
           onPieceSelect={onPieceSelect}

@@ -77,7 +77,6 @@ export const PuzzleEditor: React.FC<PuzzleEditorProps> = ({ onBackToMenu, onBack
   const [importPreviewImage, setImportPreviewImage] = useState<string | null>(null);
   const [importPreviewShape, setImportPreviewShape] = useState<string>('');
   const [importPreviewGrid, setImportPreviewGrid] = useState<string>('');
-  const [importPreviewAspectRatio, setImportPreviewAspectRatio] = useState<string>('');
 
   // 监听分享代码输入，实时解析图片
   const handleImportCodeChange = (val: string) => {
@@ -107,17 +106,10 @@ export const PuzzleEditor: React.FC<PuzzleEditorProps> = ({ onBackToMenu, onBack
       } else {
         setImportPreviewGrid('');
       }
-      // 裁剪比例
-      if (data.aspectRatio) {
-        setImportPreviewAspectRatio(data.aspectRatio);
-      } else {
-        setImportPreviewAspectRatio('');
-      }
     } catch {
       setImportPreviewImage(null);
       setImportPreviewShape('');
       setImportPreviewGrid('');
-      setImportPreviewAspectRatio('');
     }
   };
 
@@ -253,22 +245,15 @@ export const PuzzleEditor: React.FC<PuzzleEditorProps> = ({ onBackToMenu, onBack
     }
     // 生成唯一id
     const id = Date.now().toString();
-    // 确保保存完整的配置信息，包括裁剪比例
     const newPuzzle = {
       id,
       name: customPuzzleConfig.name,
-      data: {
-        ...customPuzzleConfig,
-        // 明确包含裁剪比例信息
-        aspectRatio: customPuzzleConfig.aspectRatio || '1:1',
-        // 包含裁剪后的图片数据
-        croppedImageData: customPuzzleConfig.croppedImageData
-      },
+      data: customPuzzleConfig,
       date: new Date().toLocaleString(),
     };
     puzzles.push(newPuzzle);
     localStorage.setItem('savedPuzzles', JSON.stringify(puzzles));
-    setShowSavedPage({ highlightId: id });
+  setShowSavedPage({ highlightId: id });
   }, [customPuzzleConfig]);
 
   // 分享弹窗相关状态
@@ -367,7 +352,6 @@ export const PuzzleEditor: React.FC<PuzzleEditorProps> = ({ onBackToMenu, onBack
         gridSize,
         pieceShape,
         name: customPuzzleConfig.name || '自定义拼图',
-        aspectRatio: customPuzzleConfig.aspectRatio,
       });
       if (typeof onStartGame === 'function') {
         onStartGame(puzzleConfig);
@@ -491,13 +475,11 @@ export const PuzzleEditor: React.FC<PuzzleEditorProps> = ({ onBackToMenu, onBack
                 {importPreviewImage && (
                   <img src={importPreviewImage} alt="预览" style={{ maxWidth: 180, maxHeight: 120, borderRadius: 4, boxShadow: '0 1px 6px #0001', marginBottom: (importPreviewShape || importPreviewGrid) ? 6 : 0 }} />
                 )}
-                {(importPreviewShape || importPreviewGrid || importPreviewAspectRatio) && (
+                {(importPreviewShape || importPreviewGrid) && (
                   <div style={{ fontSize: 13, color: '#333', marginBottom: 2 }}>
                     {importPreviewShape && <span>形状：{importPreviewShape}</span>}
                     {importPreviewShape && importPreviewGrid && <span style={{ margin: '0 6px' }}>|</span>}
                     {importPreviewGrid && <span>块数：{importPreviewGrid}</span>}
-                    {(importPreviewShape || importPreviewGrid) && importPreviewAspectRatio && <span style={{ margin: '0 6px' }}>|</span>}
-                    {importPreviewAspectRatio && <span>比例：{importPreviewAspectRatio}</span>}
                   </div>
                 )}
               </div>
@@ -533,8 +515,8 @@ export const PuzzleEditor: React.FC<PuzzleEditorProps> = ({ onBackToMenu, onBack
               <button onClick={() => { setImportDialogOpen(false); setImportError(''); setImportCode(''); setImportPreviewImage(null); }} style={{ padding: '6px 16px', fontSize: 14, cursor: 'pointer' }}>取消</button>
             </div>
             <div style={{ fontSize: 12, color: '#888', marginTop: 8 }}>
-                分享代码可由好友生成，包含图片、形状、难度、块数、裁剪比例等信息。
-              </div>
+              分享代码可由好友生成，包含图片、形状、难度、块数等信息。
+            </div>
           </div>
         </div>
       )}
@@ -603,8 +585,7 @@ export const PuzzleEditor: React.FC<PuzzleEditorProps> = ({ onBackToMenu, onBack
           selectedShape={tempPieceShape}
           onDifficultyChange={handleTempDifficultyChange}
           onShapeChange={handleTempPieceShapeChange}
-          // 新增：自定义行列同步
-          onCustomGridChange={handleTempCustomGrid}
+          // 新增：自定义行列同步（已移除无用 prop）
           // 新增：重新剪裁功能
           onRecrop={() => setCurrentStep('crop')}
           hasUploadedImage={!!uploadedImage}
@@ -776,25 +757,14 @@ export const PuzzleEditor: React.FC<PuzzleEditorProps> = ({ onBackToMenu, onBack
           showPuzzleGrid={true}
           gridSize={
             currentStep === 'settings'
-              ? (tempDifficulty === 'easy' ? '3x3' 
-                : tempDifficulty === 'medium' ? '4x4' 
-                : tempDifficulty === 'hard' ? '5x5' 
-                : tempDifficulty === 'expert' ? '6x6'
-                : tempDifficulty === 'custom' ? `${tempCustomRows}x${tempCustomCols}`
-                : '4x4')
-              : (customPuzzleConfig.difficulty === 'easy' ? '3x3' 
-                : customPuzzleConfig.difficulty === 'medium' ? '4x4' 
-                : customPuzzleConfig.difficulty === 'hard' ? '5x5' 
-                : customPuzzleConfig.difficulty === 'expert' ? '6x6'
-                : customPuzzleConfig.difficulty === 'custom' ? `${customPuzzleConfig.customRows || 3}x${customPuzzleConfig.customCols || 3}`
-                : '4x4')
+              ? (tempDifficulty === 'easy' ? '3x3' : tempDifficulty === 'medium' ? '4x4' : tempDifficulty === 'hard' ? '5x5' : '6x6')
+              : (customPuzzleConfig.difficulty === 'easy' ? '3x3' : customPuzzleConfig.difficulty === 'medium' ? '4x4' : customPuzzleConfig.difficulty === 'hard' ? '5x5' : '6x6')
           }
           pieceShape={
             currentStep === 'settings'
               ? tempPieceShape
               : customPuzzleConfig.pieceShape
           }
-          aspectRatio={customPuzzleConfig.aspectRatio}
         />
         {/* 分享代码弹窗 */}
         {shareDialogOpen && (

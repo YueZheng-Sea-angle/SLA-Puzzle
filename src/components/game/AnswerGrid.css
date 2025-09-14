@@ -10,15 +10,9 @@
   max-width: 100%;
   max-height: 100%;
   box-sizing: border-box;
-  overflow: hidden; /* 默认隐藏溢出 */
+  overflow: hidden;
   align-items: center;      /* 新增：内容水平居中 */
   justify-content: center;  /* 新增：内容垂直居中 */
-}
-
-/* 为16:9答题卡添加额外的滚动容器包装 */
-.answer-grid-container[data-aspect-ratio="16:9"] {
-  overflow: auto; /* 16:9答题卡允许滚动 */
-  position: relative;
 }
 
 .background-image {
@@ -71,82 +65,6 @@
   min-width: 0;  /* 重要：允许内容收缩 */
 }
 
-/* 16:9答题卡网格放大效果 */
-/* 为16:9答题卡添加专门的滚动容器 */
-.answer-grid-container[data-aspect-ratio="16:9"] {
-  overflow: auto; /* 16:9答题卡允许滚动 */
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start; /* 从顶部开始对齐 */
-  
-  /* 向下平移header的高度，避免被area-header挡住 */
-  margin-top: 30px; /* 减少margin-top，避免顶部被截断 */
-  margin-bottom: -30px; /* 相应减少抵消值 */
-  
-  /* 确保底部内容不被网格信息区域挡住 */
-  padding-bottom: 60px; /* 增加底部内边距 */
-  padding-top: 10px; /* 添加顶部内边距确保内容可见 */
-}
-
-/* 16:9答题卡网格放大效果 - 动态调整放大倍数 */
-.answer-grid-container[data-aspect-ratio="16:9"] .answer-grid {
-  transform: scale(var(--grid-scale-factor, 1.9)); /* 使用CSS变量动态控制放大倍数 */
-  transform-origin: center top; /* 从顶部中心开始缩放，避免顶部被截断 */
-  gap: 2px; /* 添加2px间距避免拼图块遮挡 */
-  row-gap: 4px; /* 垂直方向增加额外2px间距 */
-  
-  /* 修复滚动问题：确保缩放后的内容仍然可以正确滚动 */
-  position: relative;
-  z-index: 1;
-  margin-bottom: 20px; /* 添加底部边距，确保内容不被网格信息挡住 */
-}
-
-/* 确保16:9答题卡的网格信息区域不会挡住内容 */
-.answer-grid-container[data-aspect-ratio="16:9"] .grid-info {
-  position: sticky;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.95); /* 使用半透明背景避免完全遮挡 */
-  z-index: 10;
-  padding: 12px 16px;
-  margin-top: auto;
-  border-top: 1px solid #e2e8f0;
-  backdrop-filter: blur(5px); /* 添加毛玻璃效果 */
-  
-  /* 保留原始flex布局 */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 8px 8px 0 0;
-  flex-shrink: 0;
-}
-
-/* 确保缩放后的网格内容能够正确触发滚动 */
-.answer-grid-container[data-aspect-ratio="16:9"]::before {
-  content: '';
-  position: absolute;
-  top: -10px; /* 扩展可滚动区域到顶部 */
-  left: 0;
-  right: 0;
-  bottom: -60px; /* 扩展可滚动区域到底部 */
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* 16:9方形拼图块的图片样式 - 确保图片在边框内显示 */
-.grid-slot[data-aspect-ratio="16:9"] .placed-piece .piece-image {
-  transform: scale(var(--image-scale-factor, 0.95)); /* 使用CSS变量动态控制图片缩小倍数 */
-  transform-origin: center;
-}
-
-/* 16:9网格槽位虚线边框 */
-.grid-slot[data-aspect-ratio="16:9"] {
-  border-style: dashed;
-  border-color: #cbd5e1;
-  box-sizing: border-box; /* 确保边框不增加元素尺寸 */
-}
-
 /* 自定义滚动条样式 */
 .answer-grid::-webkit-scrollbar {
   width: 8px;
@@ -166,6 +84,7 @@
   background: #a8a8a8;
 }
 
+
 .grid-slot {
   position: relative;
   background: white;
@@ -177,6 +96,8 @@
   justify-content: center;
   overflow: hidden;
   border: 2px solid transparent;
+  /* 确保单元格保持正方形 */
+  aspect-ratio: 1;
   /* 添加最小尺寸防止过度缩小 */
   min-height: 60px;
   min-width: 60px;
@@ -280,8 +201,6 @@
   object-fit: cover;
   display: block;
 }
-
-
 
 .piece-info {
   position: absolute;

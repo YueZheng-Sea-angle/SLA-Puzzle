@@ -17,9 +17,6 @@ interface PuzzlePieceAreaProps {
   // 鱼目混珠特效相关
   fakePieces?: Set<string>;
   hasFakePiecesEffect?: boolean;
-  // 拼图形状和裁剪比例
-  pieceShape?: string;
-  aspectRatio?: '1:1' | '16:9';
 }
 
 export const PuzzlePieceArea: React.FC<PuzzlePieceAreaProps> = ({
@@ -35,8 +32,6 @@ export const PuzzlePieceArea: React.FC<PuzzlePieceAreaProps> = ({
   onDropToProcessingArea,
   fakePieces,
   hasFakePiecesEffect,
-  pieceShape,
-  aspectRatio,
 }) => {
   const handlePieceClick = (pieceId: string) => {
     onPieceSelect(selectedPieceId === pieceId ? null : pieceId);
@@ -123,11 +118,7 @@ export const PuzzlePieceArea: React.FC<PuzzlePieceAreaProps> = ({
                       : piece.tetrisShape === 'I3'
                         ? '240px'
                         : `${Math.min(Math.max(piece.width * 1.2, 120), 200)}px`
-                    : piece.shape === 'square' && piece.width && piece.height
-                      ? aspectRatio === '16:9' && pieceShape === 'square'
-                        ? `${Math.min(Math.max(piece.width * 1.3, 160), 220)}px` // 16:9方形拼图块稍大
-                        : `${piece.width}px`
-                      : undefined,
+                    : undefined,
                   height: piece.tetrisShape
                     ? piece.tetrisShape === 'I'
                       ? '100px' // 俄罗斯方块使用1:1比例

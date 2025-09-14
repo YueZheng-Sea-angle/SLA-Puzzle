@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { UserProfile } from '../components/auth/UserProfile';
+import { SummerAnimation } from '../components/common/SummerAnimation';
 import { themeManager, ThemeState } from '../services/themeService';
 import { musicManager } from '../services/musicService';
+import { shouldShowTransitionAnimation } from '../utils/animationSettings';
 import '../styles/HomePage.css';
 
 interface HomePageProps {
@@ -22,6 +24,8 @@ export const HomePage: React.FC<HomePageProps> = ({
   onOpenShop
 }) => {
   const [themeState, setThemeState] = useState<ThemeState>(themeManager.getThemeState());
+  const [showAnimation, setShowAnimation] = useState(false);
+  const [animationType, setAnimationType] = useState<'single' | 'multiplayer' | 'editor' | null>(null);
 
   useEffect(() => {
     // 订阅主题变化
@@ -36,6 +40,54 @@ export const HomePage: React.FC<HomePageProps> = ({
       // 注意：不在这里停止音乐，因为可能需要在其他页面继续播放
     };
   }, []);
+
+  // 处理进入单人游戏
+  const handleOpenSinglePlayer = () => {
+    if (shouldShowTransitionAnimation()) {
+      setAnimationType('single');
+      setShowAnimation(true);
+    } else {
+      onOpenSinglePlayer();
+    }
+  };
+
+  // 处理进入多人对战
+  const handleOpenMultiplayer = () => {
+    if (shouldShowTransitionAnimation()) {
+      setAnimationType('multiplayer');
+      setShowAnimation(true);
+    } else {
+      onOpenMultiplayer();
+    }
+  };
+
+  // 处理进入拼图编辑器
+  const handleOpenEditor = () => {
+    if (shouldShowTransitionAnimation()) {
+      setAnimationType('editor');
+      setShowAnimation(true);
+    } else {
+      onOpenEditor();
+    }
+  };
+
+  // 动画完成后的回调
+  const handleAnimationComplete = () => {
+    setShowAnimation(false);
+    setAnimationType(null);
+    
+    switch (animationType) {
+      case 'single':
+        onOpenSinglePlayer();
+        break;
+      case 'multiplayer':
+        onOpenMultiplayer();
+        break;
+      case 'editor':
+        onOpenEditor();
+        break;
+    }
+  };
 
   return (
     <div 
@@ -68,7 +120,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             <div className="menu-grid">
               <button 
                 className="menu-item"
-                onClick={onOpenSinglePlayer}
+                onClick={handleOpenSinglePlayer}
               >
                 <div className="menu-icon">🎯</div>
                 <div className="menu-text">
@@ -79,7 +131,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
               <button 
                 className="menu-item"
-                onClick={onOpenMultiplayer}
+                onClick={handleOpenMultiplayer}
               >
                 <div className="menu-icon">⚔️</div>
                 <div className="menu-text">
@@ -90,7 +142,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
               <button 
                 className="menu-item"
-                onClick={onOpenEditor}
+                onClick={handleOpenEditor}
               >
                 <div className="menu-icon">🎨</div>
                 <div className="menu-text">
@@ -122,6 +174,25 @@ export const HomePage: React.FC<HomePageProps> = ({
           </div>
         </div>
       </div>
+
+      {/* 夏日动画效果 */}
+      <SummerAnimation 
+        isVisible={showAnimation} 
+        onComplete={handleAnimationComplete}
+        title={
+          animationType === 'single' ? "SLA 爱之歌" :
+          animationType === 'multiplayer' ? "SLA-EX 常青树" :
+          animationType === 'editor' ? "SLA-S 答案在风中" :
+          "拼图大师"
+        }
+        subtitle="欢迎来到"
+        description={
+          animationType === 'single' ? "此生挚爱，爱如火山。" :
+          animationType === 'multiplayer' ? "往事长青，一见如旧。" :
+          animationType === 'editor' ? "火山屹立，沙滩安歇，大海回归......我们无法视而不见。" :
+          "享受清爽夏日时光"
+        }
+      />
     </div>
   );
 };

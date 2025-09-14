@@ -36,12 +36,37 @@
   
   color: var(--text-primary);
   background-color: var(--background-main);
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+/* 夜晚模式 - 深粉红色调 - 仅影响首页和设置界面 */
+[data-theme="night"] .home-page,
+[data-theme="night"] .settings-page {
+  /* 夜晚模式下的深粉红色调 - 避免黑色，使用深粉红色系 */
+  --primary-pink: #D67BA8;           /* 深马卡龙粉：夜晚主色调 - 更深更饱和 */
+  --secondary-pink: #D4A574;         /* 深马卡龙浅粉：夜晚辅助色1 - 更深更暖 */
+  --accent-pink: #C8965A;            /* 深马卡龙橘粉：夜晚辅助色2 - 更深更暖 */
+  --light-pink: #F5E6F0;             /* 浅粉白色：夜晚中性色 - 保持明亮 */
+  --light-pink-1: #F5E6F0;           /* 浅粉白色：夜晚中性色 - 与light-pink一致 */
+  --light-pink-2: #E6D1E0;           /* 浅粉灰色：夜晚增强对比度 - 保持明亮 */
+  --mint-green: #7BC4A8;             /* 深马卡龙薄荷绿：夜晚点缀色1 - 更深更饱和 */
+  --soft-blue: #7DA8D1;              /* 深马卡龙蓝：夜晚点缀色2 - 更深更饱和 */
+  --lavender: #A87BC9;               /* 深马卡龙薰衣草紫：夜晚点缀色3 - 更深更饱和 */
+  --cream-yellow: #D4B85F;           /* 深马卡龙奶油黄：夜晚点缀色4 - 更深更暖 */
+  --text-primary: #4A4458;           /* 深灰紫色：夜晚主要文字色 - 保持原有对比度 */
+  --text-secondary: #6B5B73;         /* 中灰紫色：夜晚次要文字色 - 保持原有可读性 */
+  --text-light: #8B7E8F;             /* 浅灰紫色：夜晚提示文字色 - 保持原有可读性 */
+  --text-color: #4A4458;             /* 文字颜色 - 与text-primary一致 */
+  --background-main: #FFFDFA;        /* 极浅粉色：夜晚页面背景 - 保持明亮 */
+  --background-secondary: #FFEEE6;   /* 浅粉色：夜晚次级背景 - 保持明亮 */
+  --card-background: #FFFFFF;        /* 白色：夜晚卡片背景 - 保持明亮 */
+  --neutral-color: #FFFFFF;          /* 中性色 - 与card-background一致 */
+  --shadow-pink: rgba(214, 123, 168, 0.4); /* 深粉色阴影 - 增强夜晚感 */
+  --border-color: rgba(214, 123, 168, 0.5);  /* 深粉色边框 - 增强夜晚感 */
+  --accent-green: #7BC4A8;           /* 深马卡龙薄荷绿：夜晚替代绿色 */
+  --accent-yellow: #D4B85F;          /* 深马卡龙奶油黄：夜晚替代黄色 */
+  --rarity-color: #A87BC9;           /* 深马卡龙薰衣草紫：夜晚稀有物品边框 */
+  --button-text: #FFFFFF;            /* 按钮文字颜色：纯白色确保可读性 */
+  --button-text-dark: #4A4458;      /* 深色按钮文字：夜晚深色背景使用 */
 }
 
 * {

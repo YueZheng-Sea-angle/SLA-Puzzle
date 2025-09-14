@@ -217,6 +217,76 @@
   }
 }
 
+/* 夜晚模式特殊样式 */
+[data-theme="night"] .home-page {
+  background: var(--background-main);
+}
+
+[data-theme="night"] .home-overlay {
+  background: linear-gradient(
+    135deg, 
+    rgba(214, 123, 168, 0.4) 0%,    /* 深马卡龙粉 - 夜晚主色调 */
+    rgba(212, 165, 116, 0.3) 25%,   /* 深马卡龙浅粉 - 夜晚辅助色1 */
+    rgba(61, 42, 63, 0.2) 50%,      /* 深紫红色 - 夜晚辅助色2 */
+    rgba(212, 165, 116, 0.3) 75%,   /* 深马卡龙浅粉 - 夜晚辅助色1 */
+    rgba(214, 123, 168, 0.4) 100%   /* 深马卡龙粉 - 夜晚主色调 */
+  );
+  backdrop-filter: blur(1px);
+}
+
+[data-theme="night"] .home-container {
+  background: rgba(255, 255, 255, 0.9);  /* 保持白色背景 */
+  border: 3px solid var(--primary-pink);
+  box-shadow: 0 20px 60px rgba(214, 123, 168, 0.6);
+}
+
+[data-theme="night"] .menu-item {
+  background: rgba(255, 255, 255, 0.85);  /* 保持白色背景 */
+  border: 3px solid var(--primary-pink);
+  box-shadow: 0 12px 30px rgba(214, 123, 168, 0.5);
+}
+
+[data-theme="night"] .menu-item::before {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(214, 123, 168, 0.15),  /* 深马卡龙粉的RGB值 */
+    transparent
+  );
+}
+
+[data-theme="night"] .menu-item:hover {
+  background: var(--light-pink);  /* 浅粉白色悬停背景 */
+  border-color: var(--accent-pink);
+  box-shadow: 0 20px 40px rgba(214, 123, 168, 0.7);
+}
+
+[data-theme="night"] .menu-item:active {
+  box-shadow: 0 3px 8px var(--shadow-pink);
+}
+
+[data-theme="night"] .menu-text h3 {
+  color: var(--text-primary);  /* 保持原有文字颜色 */
+  text-shadow: 0 1px 3px rgba(214, 123, 168, 0.2);
+}
+
+[data-theme="night"] .menu-text p {
+  color: var(--text-secondary);  /* 保持原有文字颜色 */
+}
+
+[data-theme="night"] .home-title {
+  color: var(--text-primary);  /* 保持原有文字颜色 */
+  text-shadow: 0 2px 8px var(--shadow-pink);
+}
+
+[data-theme="night"] .home-subtitle {
+  color: var(--text-secondary);  /* 保持原有文字颜色 */
+}
+
+[data-theme="night"] .summer-icon {
+  filter: drop-shadow(0 2px 4px var(--shadow-pink));
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
   .home-user-profile {

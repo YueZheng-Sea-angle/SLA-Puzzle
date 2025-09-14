@@ -170,10 +170,7 @@ export const DifficultySettings: React.FC<DifficultySettingsProps> = ({
     if (rows >= 2 && rows <= 10 && cols >= 2 && cols <= 10) {
       // 更新配置并关闭自定义设置面板
       setShowCustomInputs(false);
-      // 调用父组件的回调函数更新临时状态
-      if (onCustomGridChange) {
-        onCustomGridChange(rows, cols);
-      }
+      // 这里可以添加其他配置更新逻辑
       console.log(`自定义网格已更新: ${rows}×${cols}`);
     } else {
       alert('请输入有效的行数和列数（2-10之间）');

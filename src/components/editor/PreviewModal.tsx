@@ -10,7 +10,6 @@ interface PreviewModalProps {
   showPuzzleGrid?: boolean;
   gridSize?: string;
   pieceShape?: string; // 新增：拼块形状
-  aspectRatio?: string; // 新增：画幅比例
 }
 
 export const PreviewModal: React.FC<PreviewModalProps> = ({
@@ -20,8 +19,7 @@ export const PreviewModal: React.FC<PreviewModalProps> = ({
   imageTitle,
   showPuzzleGrid = false,
   gridSize = '4x4',
-  pieceShape = 'square', // 默认方形
-  aspectRatio = '1:1' // 默认1:1比例
+  pieceShape = 'square' // 默认方形
 }) => {
   if (!isOpen) return null;
 
@@ -36,10 +34,6 @@ export const PreviewModal: React.FC<PreviewModalProps> = ({
 
     const [rows, cols] = gridSize.split('x').map(Number);
     const gridLines = [];
-
-    // 根据画幅比例调整网格显示
-    const isWidescreen = aspectRatio === '16:9';
-    const gridContainerClass = isWidescreen ? 'grid-overlay-inner widescreen' : 'grid-overlay-inner';
 
     // 添加垂直线
     for (let i = 1; i < cols; i++) {
@@ -109,7 +103,7 @@ export const PreviewModal: React.FC<PreviewModalProps> = ({
 
     return (
       <div className="puzzle-grid-overlay">
-        <div className={gridContainerClass}>
+        <div className="grid-overlay-inner">
           {gridLines}
         </div>
       </div>
