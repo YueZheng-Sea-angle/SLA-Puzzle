@@ -1,0 +1,4394 @@
+{
+  "totalGames": 3379,
+  "totalDuration": 3601.017,
+  "avgTime": 1003.516424977804,
+  "errorCount": 0,
+  "crashDetected": false,
+  "performanceMetrics": [
+    {
+      "gameCount": 10,
+      "avgTime": 950.3,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:32:29.222Z"
+    },
+    {
+      "gameCount": 20,
+      "avgTime": 941.1,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:32:39.167Z"
+    },
+    {
+      "gameCount": 30,
+      "avgTime": 962.5333333333333,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:32:49.843Z"
+    },
+    {
+      "gameCount": 40,
+      "avgTime": 964.325,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:33:00.163Z"
+    },
+    {
+      "gameCount": 50,
+      "avgTime": 987.88,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:33:11.607Z"
+    },
+    {
+      "gameCount": 60,
+      "avgTime": 997.05,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:33:22.660Z"
+    },
+    {
+      "gameCount": 70,
+      "avgTime": 1001.8571428571429,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:33:33.588Z"
+    },
+    {
+      "gameCount": 80,
+      "avgTime": 1005.025,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:33:44.484Z"
+    },
+    {
+      "gameCount": 90,
+      "avgTime": 1005.0444444444445,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:33:55.159Z"
+    },
+    {
+      "gameCount": 100,
+      "avgTime": 1016.16,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:34:06.944Z"
+    },
+    {
+      "gameCount": 110,
+      "avgTime": 1003.2181818181818,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:34:16.306Z"
+    },
+    {
+      "gameCount": 120,
+      "avgTime": 1014.325,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:34:28.289Z"
+    },
+    {
+      "gameCount": 130,
+      "avgTime": 1005.1076923076923,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:34:37.856Z"
+    },
+    {
+      "gameCount": 140,
+      "avgTime": 1010.5071428571429,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:34:49.286Z"
+    },
+    {
+      "gameCount": 150,
+      "avgTime": 1011.8,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:35:00.209Z"
+    },
+    {
+      "gameCount": 160,
+      "avgTime": 1021.68125,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:35:12.537Z"
+    },
+    {
+      "gameCount": 170,
+      "avgTime": 1020.535294117647,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:35:23.182Z"
+    },
+    {
+      "gameCount": 180,
+      "avgTime": 1017.1388888888889,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:35:33.397Z"
+    },
+    {
+      "gameCount": 190,
+      "avgTime": 1020.2052631578947,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:35:44.768Z"
+    },
+    {
+      "gameCount": 200,
+      "avgTime": 1019.63,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:35:55.481Z"
+    },
+    {
+      "gameCount": 210,
+      "avgTime": 1029.0285714285715,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:36:08.277Z"
+    },
+    {
+      "gameCount": 220,
+      "avgTime": 1018.3818181818182,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:36:16.851Z"
+    },
+    {
+      "gameCount": 230,
+      "avgTime": 1011.2217391304348,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:36:26.010Z"
+    },
+    {
+      "gameCount": 240,
+      "avgTime": 1016.2375,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:36:37.948Z"
+    },
+    {
+      "gameCount": 250,
+      "avgTime": 1019.24,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:36:49.485Z"
+    },
+    {
+      "gameCount": 260,
+      "avgTime": 1021.5038461538461,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:37:00.884Z"
+    },
+    {
+      "gameCount": 270,
+      "avgTime": 1029.2888888888888,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:37:13.826Z"
+    },
+    {
+      "gameCount": 280,
+      "avgTime": 1025.982142857143,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:37:23.818Z"
+    },
+    {
+      "gameCount": 290,
+      "avgTime": 1028.8172413793104,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:37:35.519Z"
+    },
+    {
+      "gameCount": 300,
+      "avgTime": 1022.6833333333333,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:37:44.591Z"
+    },
+    {
+      "gameCount": 310,
+      "avgTime": 1020.2064516129033,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:37:54.672Z"
+    },
+    {
+      "gameCount": 320,
+      "avgTime": 1021.559375,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:38:05.930Z"
+    },
+    {
+      "gameCount": 330,
+      "avgTime": 1015.8757575757576,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:38:14.887Z"
+    },
+    {
+      "gameCount": 340,
+      "avgTime": 1017.4323529411764,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:38:26.196Z"
+    },
+    {
+      "gameCount": 350,
+      "avgTime": 1019.1885714285714,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:38:37.608Z"
+    },
+    {
+      "gameCount": 360,
+      "avgTime": 1014.9527777777778,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:38:46.895Z"
+    },
+    {
+      "gameCount": 370,
+      "avgTime": 1015.827027027027,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:38:57.992Z"
+    },
+    {
+      "gameCount": 380,
+      "avgTime": 1014.4947368421052,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:39:08.258Z"
+    },
+    {
+      "gameCount": 390,
+      "avgTime": 1013.3179487179488,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:39:18.564Z"
+    },
+    {
+      "gameCount": 400,
+      "avgTime": 1012.9275,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:39:29.165Z"
+    },
+    {
+      "gameCount": 410,
+      "avgTime": 1009.9048780487805,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:39:38.672Z"
+    },
+    {
+      "gameCount": 420,
+      "avgTime": 1011.9738095238096,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:39:50.268Z"
+    },
+    {
+      "gameCount": 430,
+      "avgTime": 1011.4325581395349,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:40:00.778Z"
+    },
+    {
+      "gameCount": 440,
+      "avgTime": 1011.4863636363636,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:40:11.538Z"
+    },
+    {
+      "gameCount": 450,
+      "avgTime": 1013.4755555555555,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:40:23.170Z"
+    },
+    {
+      "gameCount": 460,
+      "avgTime": 1016.1,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:40:35.135Z"
+    },
+    {
+      "gameCount": 470,
+      "avgTime": 1016.3148936170213,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:40:46.021Z"
+    },
+    {
+      "gameCount": 480,
+      "avgTime": 1017.2395833333334,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:40:57.250Z"
+    },
+    {
+      "gameCount": 490,
+      "avgTime": 1017.8857142857142,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:41:08.360Z"
+    },
+    {
+      "gameCount": 500,
+      "avgTime": 1018.6,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:41:19.516Z"
+    },
+    {
+      "gameCount": 510,
+      "avgTime": 1017.7823529411764,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:41:29.910Z"
+    },
+    {
+      "gameCount": 520,
+      "avgTime": 1015.7942307692308,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:41:39.678Z"
+    },
+    {
+      "gameCount": 530,
+      "avgTime": 1017.0490566037736,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:41:51.127Z"
+    },
+    {
+      "gameCount": 540,
+      "avgTime": 1014.7166666666667,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:42:00.657Z"
+    },
+    {
+      "gameCount": 550,
+      "avgTime": 1014.4127272727272,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:42:11.259Z"
+    },
+    {
+      "gameCount": 560,
+      "avgTime": 1013.6910714285714,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:42:21.617Z"
+    },
+    {
+      "gameCount": 570,
+      "avgTime": 1015.2701754385965,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:42:33.274Z"
+    },
+    {
+      "gameCount": 580,
+      "avgTime": 1012.8931034482758,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:42:42.668Z"
+    },
+    {
+      "gameCount": 590,
+      "avgTime": 1012.7796610169491,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:42:53.352Z"
+    },
+    {
+      "gameCount": 600,
+      "avgTime": 1012.9383333333334,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:43:04.192Z"
+    },
+    {
+      "gameCount": 610,
+      "avgTime": 1015.0311475409836,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:43:16.216Z"
+    },
+    {
+      "gameCount": 620,
+      "avgTime": 1016.4403225806452,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:43:27.861Z"
+    },
+    {
+      "gameCount": 630,
+      "avgTime": 1016.1793650793651,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:43:38.477Z"
+    },
+    {
+      "gameCount": 640,
+      "avgTime": 1019.1703125,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:43:51.175Z"
+    },
+    {
+      "gameCount": 650,
+      "avgTime": 1019.84,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:44:02.419Z"
+    },
+    {
+      "gameCount": 660,
+      "avgTime": 1019.8439393939394,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:44:13.241Z"
+    },
+    {
+      "gameCount": 670,
+      "avgTime": 1018.8641791044776,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:44:23.406Z"
+    },
+    {
+      "gameCount": 680,
+      "avgTime": 1018.1470588235294,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:44:33.730Z"
+    },
+    {
+      "gameCount": 690,
+      "avgTime": 1015.2985507246377,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:44:42.567Z"
+    },
+    {
+      "gameCount": 700,
+      "avgTime": 1016.8285714285714,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:44:54.411Z"
+    },
+    {
+      "gameCount": 710,
+      "avgTime": 1017.2718309859155,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:45:05.518Z"
+    },
+    {
+      "gameCount": 720,
+      "avgTime": 1017.2513888888889,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:45:16.297Z"
+    },
+    {
+      "gameCount": 730,
+      "avgTime": 1017.1890410958904,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:45:27.041Z"
+    },
+    {
+      "gameCount": 740,
+      "avgTime": 1015.1932432432433,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:45:36.357Z"
+    },
+    {
+      "gameCount": 750,
+      "avgTime": 1013.4853333333333,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:45:45.850Z"
+    },
+    {
+      "gameCount": 760,
+      "avgTime": 1014.4342105263158,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:45:57.324Z"
+    },
+    {
+      "gameCount": 770,
+      "avgTime": 1014.8857142857142,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:46:08.439Z"
+    },
+    {
+      "gameCount": 780,
+      "avgTime": 1014.0628205128205,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:46:18.566Z"
+    },
+    {
+      "gameCount": 790,
+      "avgTime": 1015.1227848101266,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:46:30.168Z"
+    },
+    {
+      "gameCount": 800,
+      "avgTime": 1017.95625,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:46:43.208Z"
+    },
+    {
+      "gameCount": 810,
+      "avgTime": 1016.9,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:46:53.156Z"
+    },
+    {
+      "gameCount": 820,
+      "avgTime": 1017.7353658536585,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:47:04.634Z"
+    },
+    {
+      "gameCount": 830,
+      "avgTime": 1017.3542168674699,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:47:15.113Z"
+    },
+    {
+      "gameCount": 840,
+      "avgTime": 1018.2261904761905,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:47:26.641Z"
+    },
+    {
+      "gameCount": 850,
+      "avgTime": 1017.6082352941177,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:47:36.925Z"
+    },
+    {
+      "gameCount": 860,
+      "avgTime": 1016.0709302325581,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:47:46.400Z"
+    },
+    {
+      "gameCount": 870,
+      "avgTime": 1014.5275862068966,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:47:55.841Z"
+    },
+    {
+      "gameCount": 880,
+      "avgTime": 1012.3715909090909,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:48:04.710Z"
+    },
+    {
+      "gameCount": 890,
+      "avgTime": 1012.8056179775281,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:48:15.846Z"
+    },
+    {
+      "gameCount": 900,
+      "avgTime": 1013.2422222222223,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:48:26.988Z"
+    },
+    {
+      "gameCount": 910,
+      "avgTime": 1012.5604395604396,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:48:37.127Z"
+    },
+    {
+      "gameCount": 920,
+      "avgTime": 1012.1239130434783,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:48:47.473Z"
+    },
+    {
+      "gameCount": 930,
+      "avgTime": 1011.9365591397849,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:48:58.042Z"
+    },
+    {
+      "gameCount": 940,
+      "avgTime": 1011.681914893617,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:49:08.543Z"
+    },
+    {
+      "gameCount": 950,
+      "avgTime": 1009.94,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:49:17.625Z"
+    },
+    {
+      "gameCount": 960,
+      "avgTime": 1008.971875,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:49:27.421Z"
+    },
+    {
+      "gameCount": 970,
+      "avgTime": 1007.1855670103092,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:49:36.398Z"
+    },
+    {
+      "gameCount": 980,
+      "avgTime": 1008.0622448979592,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:49:47.948Z"
+    },
+    {
+      "gameCount": 990,
+      "avgTime": 1008.790909090909,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:49:59.372Z"
+    },
+    {
+      "gameCount": 1000,
+      "avgTime": 1006.64,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:50:07.928Z"
+    },
+    {
+      "gameCount": 1010,
+      "avgTime": 1005.5287128712871,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:50:17.488Z"
+    },
+    {
+      "gameCount": 1020,
+      "avgTime": 1005.4892156862745,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:50:28.125Z"
+    },
+    {
+      "gameCount": 1030,
+      "avgTime": 1005.1456310679612,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:50:38.448Z"
+    },
+    {
+      "gameCount": 1040,
+      "avgTime": 1005.9221153846154,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:50:49.930Z"
+    },
+    {
+      "gameCount": 1050,
+      "avgTime": 1004.7238095238096,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:50:59.351Z"
+    },
+    {
+      "gameCount": 1060,
+      "avgTime": 1005.8650943396226,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:51:11.229Z"
+    },
+    {
+      "gameCount": 1070,
+      "avgTime": 1006.5158878504673,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:51:22.607Z"
+    },
+    {
+      "gameCount": 1080,
+      "avgTime": 1008.3361111111111,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:51:35.265Z"
+    },
+    {
+      "gameCount": 1090,
+      "avgTime": 1009.0155963302752,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:51:46.710Z"
+    },
+    {
+      "gameCount": 1100,
+      "avgTime": 1011.3918181818182,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:52:00.035Z"
+    },
+    {
+      "gameCount": 1110,
+      "avgTime": 1010.5486486486486,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:52:09.836Z"
+    },
+    {
+      "gameCount": 1120,
+      "avgTime": 1009.2714285714286,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:52:19.137Z"
+    },
+    {
+      "gameCount": 1130,
+      "avgTime": 1009.0690265486726,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:52:29.627Z"
+    },
+    {
+      "gameCount": 1140,
+      "avgTime": 1008.9070175438596,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:52:40.151Z"
+    },
+    {
+      "gameCount": 1150,
+      "avgTime": 1009.4747826086957,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:52:51.518Z"
+    },
+    {
+      "gameCount": 1160,
+      "avgTime": 1009.2008620689655,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:53:01.919Z"
+    },
+    {
+      "gameCount": 1170,
+      "avgTime": 1009.1905982905982,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:53:12.622Z"
+    },
+    {
+      "gameCount": 1180,
+      "avgTime": 1008.4957627118644,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:53:22.510Z"
+    },
+    {
+      "gameCount": 1190,
+      "avgTime": 1008.1193277310924,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:53:32.771Z"
+    },
+    {
+      "gameCount": 1200,
+      "avgTime": 1008.0175,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:53:43.351Z"
+    },
+    {
+      "gameCount": 1210,
+      "avgTime": 1008.4181818181818,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:53:54.538Z"
+    },
+    {
+      "gameCount": 1220,
+      "avgTime": 1008.3491803278689,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:54:05.156Z"
+    },
+    {
+      "gameCount": 1230,
+      "avgTime": 1008.660162601626,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:54:16.241Z"
+    },
+    {
+      "gameCount": 1240,
+      "avgTime": 1009.2217741935484,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:54:27.645Z"
+    },
+    {
+      "gameCount": 1250,
+      "avgTime": 1010.5704,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:54:40.046Z"
+    },
+    {
+      "gameCount": 1260,
+      "avgTime": 1010.0079365079365,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:54:50.066Z"
+    },
+    {
+      "gameCount": 1270,
+      "avgTime": 1011.4370078740158,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:55:02.601Z"
+    },
+    {
+      "gameCount": 1280,
+      "avgTime": 1011.7,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:55:13.674Z"
+    },
+    {
+      "gameCount": 1290,
+      "avgTime": 1011.7279069767442,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:55:24.446Z"
+    },
+    {
+      "gameCount": 1300,
+      "avgTime": 1011.2184615384615,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:55:34.518Z"
+    },
+    {
+      "gameCount": 1310,
+      "avgTime": 1010.8824427480916,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:55:44.810Z"
+    },
+    {
+      "gameCount": 1320,
+      "avgTime": 1010.4257575757575,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:55:54.936Z"
+    },
+    {
+      "gameCount": 1330,
+      "avgTime": 1011.2187969924812,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:56:06.722Z"
+    },
+    {
+      "gameCount": 1340,
+      "avgTime": 1009.605223880597,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:56:15.292Z"
+    },
+    {
+      "gameCount": 1350,
+      "avgTime": 1008.7303703703703,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:56:24.829Z"
+    },
+    {
+      "gameCount": 1360,
+      "avgTime": 1010.0595588235294,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:56:37.348Z"
+    },
+    {
+      "gameCount": 1370,
+      "avgTime": 1010.4197080291971,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:56:48.563Z"
+    },
+    {
+      "gameCount": 1380,
+      "avgTime": 1011.0239130434783,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:57:00.122Z"
+    },
+    {
+      "gameCount": 1390,
+      "avgTime": 1011.5107913669065,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:57:11.529Z"
+    },
+    {
+      "gameCount": 1400,
+      "avgTime": 1011.515,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:57:22.272Z"
+    },
+    {
+      "gameCount": 1410,
+      "avgTime": 1011.663829787234,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:57:33.218Z"
+    },
+    {
+      "gameCount": 1420,
+      "avgTime": 1011.5964788732394,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:57:43.865Z"
+    },
+    {
+      "gameCount": 1430,
+      "avgTime": 1011.7643356643357,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:57:54.842Z"
+    },
+    {
+      "gameCount": 1440,
+      "avgTime": 1011.4708333333333,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:58:05.158Z"
+    },
+    {
+      "gameCount": 1450,
+      "avgTime": 1011.8731034482759,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:58:16.481Z"
+    },
+    {
+      "gameCount": 1460,
+      "avgTime": 1011.3527397260274,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:58:26.461Z"
+    },
+    {
+      "gameCount": 1470,
+      "avgTime": 1010.3877551020408,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:58:35.782Z"
+    },
+    {
+      "gameCount": 1480,
+      "avgTime": 1011.1554054054054,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:58:47.647Z"
+    },
+    {
+      "gameCount": 1490,
+      "avgTime": 1010.7563758389261,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:58:57.785Z"
+    },
+    {
+      "gameCount": 1500,
+      "avgTime": 1009.6713333333333,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:59:06.882Z"
+    },
+    {
+      "gameCount": 1510,
+      "avgTime": 1009.5549668874172,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:59:17.422Z"
+    },
+    {
+      "gameCount": 1520,
+      "avgTime": 1009.8493421052632,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:59:28.588Z"
+    },
+    {
+      "gameCount": 1530,
+      "avgTime": 1010.3614379084968,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:59:40.092Z"
+    },
+    {
+      "gameCount": 1540,
+      "avgTime": 1010.6532467532468,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:59:51.268Z"
+    },
+    {
+      "gameCount": 1550,
+      "avgTime": 1012.0296774193548,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:00:04.136Z"
+    },
+    {
+      "gameCount": 1560,
+      "avgTime": 1013.0429487179487,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:00:16.457Z"
+    },
+    {
+      "gameCount": 1570,
+      "avgTime": 1012.5222929936306,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:00:26.389Z"
+    },
+    {
+      "gameCount": 1580,
+      "avgTime": 1012.5158227848101,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:00:37.127Z"
+    },
+    {
+      "gameCount": 1590,
+      "avgTime": 1013.9534591194969,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:00:50.160Z"
+    },
+    {
+      "gameCount": 1600,
+      "avgTime": 1012.8925,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:00:59.220Z"
+    },
+    {
+      "gameCount": 1610,
+      "avgTime": 1012.6863354037267,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:01:09.639Z"
+    },
+    {
+      "gameCount": 1620,
+      "avgTime": 1013.0283950617284,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:01:20.943Z"
+    },
+    {
+      "gameCount": 1630,
+      "avgTime": 1012.9018404907976,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:01:31.491Z"
+    },
+    {
+      "gameCount": 1640,
+      "avgTime": 1012.1201219512195,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:01:40.960Z"
+    },
+    {
+      "gameCount": 1650,
+      "avgTime": 1011.2490909090909,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:01:50.266Z"
+    },
+    {
+      "gameCount": 1660,
+      "avgTime": 1012.2777108433735,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:02:02.713Z"
+    },
+    {
+      "gameCount": 1670,
+      "avgTime": 1012.7413173652694,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:02:14.227Z"
+    },
+    {
+      "gameCount": 1680,
+      "avgTime": 1012.0708333333333,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:02:23.847Z"
+    },
+    {
+      "gameCount": 1690,
+      "avgTime": 1012.223076923077,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:02:34.848Z"
+    },
+    {
+      "gameCount": 1700,
+      "avgTime": 1012.354705882353,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:02:45.817Z"
+    },
+    {
+      "gameCount": 1710,
+      "avgTime": 1011.8947368421053,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:02:55.771Z"
+    },
+    {
+      "gameCount": 1720,
+      "avgTime": 1011.6127906976744,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:03:06.029Z"
+    },
+    {
+      "gameCount": 1730,
+      "avgTime": 1011.4485549132947,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:03:16.478Z"
+    },
+    {
+      "gameCount": 1740,
+      "avgTime": 1011.4902298850575,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:03:27.288Z"
+    },
+    {
+      "gameCount": 1750,
+      "avgTime": 1010.5668571428571,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:03:36.405Z"
+    },
+    {
+      "gameCount": 1760,
+      "avgTime": 1009.9619318181818,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:03:46.067Z"
+    },
+    {
+      "gameCount": 1770,
+      "avgTime": 1009.5,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:03:55.968Z"
+    },
+    {
+      "gameCount": 1780,
+      "avgTime": 1009.7426966292135,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:04:07.117Z"
+    },
+    {
+      "gameCount": 1790,
+      "avgTime": 1009.1871508379888,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:04:16.838Z"
+    },
+    {
+      "gameCount": 1800,
+      "avgTime": 1009.4027777777778,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:04:27.940Z"
+    },
+    {
+      "gameCount": 1810,
+      "avgTime": 1009.0745856353591,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:04:38.059Z"
+    },
+    {
+      "gameCount": 1820,
+      "avgTime": 1008.9626373626373,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:04:48.567Z"
+    },
+    {
+      "gameCount": 1830,
+      "avgTime": 1008.120218579235,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:04:57.736Z"
+    },
+    {
+      "gameCount": 1840,
+      "avgTime": 1007.5021739130435,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:05:07.303Z"
+    },
+    {
+      "gameCount": 1850,
+      "avgTime": 1008.5627027027027,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:05:19.960Z"
+    },
+    {
+      "gameCount": 1860,
+      "avgTime": 1007.8005376344086,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:05:29.253Z"
+    },
+    {
+      "gameCount": 1870,
+      "avgTime": 1007.1898395721926,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:05:38.813Z"
+    },
+    {
+      "gameCount": 1880,
+      "avgTime": 1008.5281914893617,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:05:52.020Z"
+    },
+    {
+      "gameCount": 1890,
+      "avgTime": 1008.0904761904762,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:06:01.902Z"
+    },
+    {
+      "gameCount": 1900,
+      "avgTime": 1008.4057894736842,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:06:13.204Z"
+    },
+    {
+      "gameCount": 1910,
+      "avgTime": 1008.7816753926702,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:06:24.629Z"
+    },
+    {
+      "gameCount": 1920,
+      "avgTime": 1008.440625,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:06:34.685Z"
+    },
+    {
+      "gameCount": 1930,
+      "avgTime": 1009.0098445595855,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:06:46.491Z"
+    },
+    {
+      "gameCount": 1940,
+      "avgTime": 1008.3,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:06:55.826Z"
+    },
+    {
+      "gameCount": 1950,
+      "avgTime": 1009.1461538461539,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:07:08.182Z"
+    },
+    {
+      "gameCount": 1960,
+      "avgTime": 1009.4561224489796,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:07:19.502Z"
+    },
+    {
+      "gameCount": 1970,
+      "avgTime": 1008.751269035533,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:07:28.830Z"
+    },
+    {
+      "gameCount": 1980,
+      "avgTime": 1008.1328282828283,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:07:38.314Z"
+    },
+    {
+      "gameCount": 1990,
+      "avgTime": 1007.8321608040201,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:07:48.416Z"
+    },
+    {
+      "gameCount": 2000,
+      "avgTime": 1007.9155,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:07:59.288Z"
+    },
+    {
+      "gameCount": 2010,
+      "avgTime": 1008.0721393034826,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:08:10.304Z"
+    },
+    {
+      "gameCount": 2020,
+      "avgTime": 1008.2608910891089,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:08:21.392Z"
+    },
+    {
+      "gameCount": 2030,
+      "avgTime": 1008.212315270936,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:08:31.997Z"
+    },
+    {
+      "gameCount": 2040,
+      "avgTime": 1008.6651960784313,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:08:43.618Z"
+    },
+    {
+      "gameCount": 2050,
+      "avgTime": 1008.5190243902439,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:08:54.026Z"
+    },
+    {
+      "gameCount": 2060,
+      "avgTime": 1008.2490291262136,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:09:04.173Z"
+    },
+    {
+      "gameCount": 2070,
+      "avgTime": 1007.908695652174,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:09:14.176Z"
+    },
+    {
+      "gameCount": 2080,
+      "avgTime": 1007.2682692307692,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:09:23.549Z"
+    },
+    {
+      "gameCount": 2090,
+      "avgTime": 1007.4933014354067,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:09:34.717Z"
+    },
+    {
+      "gameCount": 2100,
+      "avgTime": 1007.1509523809524,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:09:44.699Z"
+    },
+    {
+      "gameCount": 2110,
+      "avgTime": 1007.018009478673,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:09:55.107Z"
+    },
+    {
+      "gameCount": 2120,
+      "avgTime": 1007.1679245283019,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:10:06.115Z"
+    },
+    {
+      "gameCount": 2130,
+      "avgTime": 1006.7323943661971,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:10:15.877Z"
+    },
+    {
+      "gameCount": 2140,
+      "avgTime": 1007.1785046728972,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:10:27.519Z"
+    },
+    {
+      "gameCount": 2150,
+      "avgTime": 1007.6827906976744,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:10:39.299Z"
+    },
+    {
+      "gameCount": 2160,
+      "avgTime": 1007.312962962963,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:10:49.200Z"
+    },
+    {
+      "gameCount": 2170,
+      "avgTime": 1007.558064516129,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:11:00.427Z"
+    },
+    {
+      "gameCount": 2180,
+      "avgTime": 1007.701376146789,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:11:11.440Z"
+    },
+    {
+      "gameCount": 2190,
+      "avgTime": 1007.7264840182648,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:11:22.190Z"
+    },
+    {
+      "gameCount": 2200,
+      "avgTime": 1007.1618181818181,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:11:31.648Z"
+    },
+    {
+      "gameCount": 2210,
+      "avgTime": 1006.7506787330317,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:11:41.433Z"
+    },
+    {
+      "gameCount": 2220,
+      "avgTime": 1006.4234234234234,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:11:51.392Z"
+    },
+    {
+      "gameCount": 2230,
+      "avgTime": 1006.7224215246637,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:12:02.745Z"
+    },
+    {
+      "gameCount": 2240,
+      "avgTime": 1006.8383928571428,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:12:13.694Z"
+    },
+    {
+      "gameCount": 2250,
+      "avgTime": 1006.1946666666666,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:12:22.944Z"
+    },
+    {
+      "gameCount": 2260,
+      "avgTime": 1006.1530973451328,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:12:33.538Z"
+    },
+    {
+      "gameCount": 2270,
+      "avgTime": 1006.7409691629956,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:12:45.553Z"
+    },
+    {
+      "gameCount": 2280,
+      "avgTime": 1006.4118421052632,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:12:55.492Z"
+    },
+    {
+      "gameCount": 2290,
+      "avgTime": 1006.6327510917031,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:13:06.683Z"
+    },
+    {
+      "gameCount": 2300,
+      "avgTime": 1006.425652173913,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:13:16.896Z"
+    },
+    {
+      "gameCount": 2310,
+      "avgTime": 1007.0588744588745,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:13:29.048Z"
+    },
+    {
+      "gameCount": 2320,
+      "avgTime": 1007.5245689655172,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:13:40.821Z"
+    },
+    {
+      "gameCount": 2330,
+      "avgTime": 1007.7815450643777,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:13:52.115Z"
+    },
+    {
+      "gameCount": 2340,
+      "avgTime": 1008.3076923076923,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:14:04.047Z"
+    },
+    {
+      "gameCount": 2350,
+      "avgTime": 1008.464255319149,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:14:15.121Z"
+    },
+    {
+      "gameCount": 2360,
+      "avgTime": 1009.0822033898305,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:14:27.284Z"
+    },
+    {
+      "gameCount": 2370,
+      "avgTime": 1008.8949367088608,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:14:37.552Z"
+    },
+    {
+      "gameCount": 2380,
+      "avgTime": 1008.5794117647059,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:14:47.508Z"
+    },
+    {
+      "gameCount": 2390,
+      "avgTime": 1009.0602510460251,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:14:59.358Z"
+    },
+    {
+      "gameCount": 2400,
+      "avgTime": 1009.3379166666666,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:15:10.731Z"
+    },
+    {
+      "gameCount": 2410,
+      "avgTime": 1008.9203319502075,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:15:20.439Z"
+    },
+    {
+      "gameCount": 2420,
+      "avgTime": 1008.6987603305785,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:15:30.614Z"
+    },
+    {
+      "gameCount": 2430,
+      "avgTime": 1008.0917695473252,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:15:39.846Z"
+    },
+    {
+      "gameCount": 2440,
+      "avgTime": 1008.0979508196722,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:15:50.565Z"
+    },
+    {
+      "gameCount": 2450,
+      "avgTime": 1007.909387755102,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:16:00.803Z"
+    },
+    {
+      "gameCount": 2460,
+      "avgTime": 1007.9727642276423,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:16:11.662Z"
+    },
+    {
+      "gameCount": 2470,
+      "avgTime": 1007.5838056680162,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:16:21.401Z"
+    },
+    {
+      "gameCount": 2480,
+      "avgTime": 1008.3125,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:16:33.904Z"
+    },
+    {
+      "gameCount": 2490,
+      "avgTime": 1007.9867469879518,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:16:43.804Z"
+    },
+    {
+      "gameCount": 2500,
+      "avgTime": 1008.206,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:16:55.054Z"
+    },
+    {
+      "gameCount": 2510,
+      "avgTime": 1007.7274900398406,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:17:04.556Z"
+    },
+    {
+      "gameCount": 2520,
+      "avgTime": 1007.3079365079365,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:17:14.196Z"
+    },
+    {
+      "gameCount": 2530,
+      "avgTime": 1006.796837944664,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:17:23.601Z"
+    },
+    {
+      "gameCount": 2540,
+      "avgTime": 1007.1925196850393,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:17:35.300Z"
+    },
+    {
+      "gameCount": 2550,
+      "avgTime": 1007.38,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:17:46.473Z"
+    },
+    {
+      "gameCount": 2560,
+      "avgTime": 1007.414453125,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:17:57.254Z"
+    },
+    {
+      "gameCount": 2570,
+      "avgTime": 1007.5101167315175,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:18:08.193Z"
+    },
+    {
+      "gameCount": 2580,
+      "avgTime": 1007.1883720930233,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:18:18.060Z"
+    },
+    {
+      "gameCount": 2590,
+      "avgTime": 1006.965250965251,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:18:28.178Z"
+    },
+    {
+      "gameCount": 2600,
+      "avgTime": 1006.6176923076923,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:18:37.969Z"
+    },
+    {
+      "gameCount": 2610,
+      "avgTime": 1006.5689655172414,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:18:48.531Z"
+    },
+    {
+      "gameCount": 2620,
+      "avgTime": 1006.730534351145,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:18:59.642Z"
+    },
+    {
+      "gameCount": 2630,
+      "avgTime": 1006.945247148289,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:19:10.896Z"
+    },
+    {
+      "gameCount": 2640,
+      "avgTime": 1006.1852272727273,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:19:19.581Z"
+    },
+    {
+      "gameCount": 2650,
+      "avgTime": 1005.7954716981133,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:19:29.234Z"
+    },
+    {
+      "gameCount": 2660,
+      "avgTime": 1005.5977443609023,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:19:39.382Z"
+    },
+    {
+      "gameCount": 2670,
+      "avgTime": 1005.2423220973783,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:19:49.108Z"
+    },
+    {
+      "gameCount": 2680,
+      "avgTime": 1004.7235074626866,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:19:58.393Z"
+    },
+    {
+      "gameCount": 2690,
+      "avgTime": 1004.3342007434944,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:20:08.018Z"
+    },
+    {
+      "gameCount": 2700,
+      "avgTime": 1004.2537037037036,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:20:18.469Z"
+    },
+    {
+      "gameCount": 2710,
+      "avgTime": 1004.6007380073801,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:20:30.073Z"
+    },
+    {
+      "gameCount": 2720,
+      "avgTime": 1004.4661764705883,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:20:40.374Z"
+    },
+    {
+      "gameCount": 2730,
+      "avgTime": 1004.3106227106227,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:20:50.616Z"
+    },
+    {
+      "gameCount": 2740,
+      "avgTime": 1004.9445255474452,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:21:03.019Z"
+    },
+    {
+      "gameCount": 2750,
+      "avgTime": 1004.637090909091,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:21:12.846Z"
+    },
+    {
+      "gameCount": 2760,
+      "avgTime": 1004.4068840579711,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:21:22.882Z"
+    },
+    {
+      "gameCount": 2770,
+      "avgTime": 1004.8884476534296,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:21:34.887Z"
+    },
+    {
+      "gameCount": 2780,
+      "avgTime": 1004.5877697841727,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:21:44.719Z"
+    },
+    {
+      "gameCount": 2790,
+      "avgTime": 1004.8627240143369,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:21:56.153Z"
+    },
+    {
+      "gameCount": 2800,
+      "avgTime": 1004.5478571428572,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:22:05.940Z"
+    },
+    {
+      "gameCount": 2810,
+      "avgTime": 1003.9900355871886,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:22:15.039Z"
+    },
+    {
+      "gameCount": 2820,
+      "avgTime": 1004.0936170212766,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:22:25.997Z"
+    },
+    {
+      "gameCount": 2830,
+      "avgTime": 1004.2795053003533,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:22:37.185Z"
+    },
+    {
+      "gameCount": 2840,
+      "avgTime": 1003.6274647887324,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:22:46.001Z"
+    },
+    {
+      "gameCount": 2850,
+      "avgTime": 1003.2694736842105,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:22:55.641Z"
+    },
+    {
+      "gameCount": 2860,
+      "avgTime": 1003.4545454545455,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:23:06.822Z"
+    },
+    {
+      "gameCount": 2870,
+      "avgTime": 1003.383275261324,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:23:17.275Z"
+    },
+    {
+      "gameCount": 2880,
+      "avgTime": 1003.3666666666667,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:23:27.881Z"
+    },
+    {
+      "gameCount": 2890,
+      "avgTime": 1003.3159169550173,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:23:38.386Z"
+    },
+    {
+      "gameCount": 2900,
+      "avgTime": 1003.4331034482759,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:23:49.381Z"
+    },
+    {
+      "gameCount": 2910,
+      "avgTime": 1003.080412371134,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:23:59.012Z"
+    },
+    {
+      "gameCount": 2920,
+      "avgTime": 1002.832191780822,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:24:08.940Z"
+    },
+    {
+      "gameCount": 2930,
+      "avgTime": 1002.8235494880546,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:24:19.565Z"
+    },
+    {
+      "gameCount": 2940,
+      "avgTime": 1002.5166666666667,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:24:29.311Z"
+    },
+    {
+      "gameCount": 2950,
+      "avgTime": 1002.8125423728814,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:24:40.834Z"
+    },
+    {
+      "gameCount": 2960,
+      "avgTime": 1003.0945945945946,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:24:52.324Z"
+    },
+    {
+      "gameCount": 2970,
+      "avgTime": 1002.9329966329966,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:25:02.495Z"
+    },
+    {
+      "gameCount": 2980,
+      "avgTime": 1002.108389261745,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:25:10.690Z"
+    },
+    {
+      "gameCount": 2990,
+      "avgTime": 1001.8822742474916,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:25:20.654Z"
+    },
+    {
+      "gameCount": 3000,
+      "avgTime": 1002.485,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:25:33.102Z"
+    },
+    {
+      "gameCount": 3010,
+      "avgTime": 1002.6322259136213,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:25:44.192Z"
+    },
+    {
+      "gameCount": 3020,
+      "avgTime": 1002.1387417218543,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:25:53.351Z"
+    },
+    {
+      "gameCount": 3030,
+      "avgTime": 1001.7646864686469,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:26:02.865Z"
+    },
+    {
+      "gameCount": 3040,
+      "avgTime": 1001.7003289473685,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:26:13.315Z"
+    },
+    {
+      "gameCount": 3050,
+      "avgTime": 1001.3003278688525,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:26:22.735Z"
+    },
+    {
+      "gameCount": 3060,
+      "avgTime": 1001.4722222222222,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:26:33.896Z"
+    },
+    {
+      "gameCount": 3070,
+      "avgTime": 1001.4560260586319,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:26:44.484Z"
+    },
+    {
+      "gameCount": 3080,
+      "avgTime": 1001.8688311688312,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:26:56.394Z"
+    },
+    {
+      "gameCount": 3090,
+      "avgTime": 1002.095792880259,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:27:07.738Z"
+    },
+    {
+      "gameCount": 3100,
+      "avgTime": 1001.8432258064516,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:27:17.599Z"
+    },
+    {
+      "gameCount": 3110,
+      "avgTime": 1001.3903536977492,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:27:26.834Z"
+    },
+    {
+      "gameCount": 3120,
+      "avgTime": 1001.4820512820513,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:27:37.754Z"
+    },
+    {
+      "gameCount": 3130,
+      "avgTime": 1001.3629392971246,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:27:48.017Z"
+    },
+    {
+      "gameCount": 3140,
+      "avgTime": 1001.8117834394905,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:28:00.062Z"
+    },
+    {
+      "gameCount": 3150,
+      "avgTime": 1001.951746031746,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:28:11.139Z"
+    },
+    {
+      "gameCount": 3160,
+      "avgTime": 1002.2136075949367,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:28:22.610Z"
+    },
+    {
+      "gameCount": 3170,
+      "avgTime": 1002.4460567823344,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:28:33.992Z"
+    },
+    {
+      "gameCount": 3180,
+      "avgTime": 1002.5050314465409,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:28:44.825Z"
+    },
+    {
+      "gameCount": 3190,
+      "avgTime": 1002.3291536050157,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:28:54.914Z"
+    },
+    {
+      "gameCount": 3200,
+      "avgTime": 1002.4515625,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:29:05.955Z"
+    },
+    {
+      "gameCount": 3210,
+      "avgTime": 1003.0834890965732,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:29:18.629Z"
+    },
+    {
+      "gameCount": 3220,
+      "avgTime": 1003.3975155279503,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:29:30.294Z"
+    },
+    {
+      "gameCount": 3230,
+      "avgTime": 1002.877399380805,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:29:39.270Z"
+    },
+    {
+      "gameCount": 3240,
+      "avgTime": 1002.7364197530865,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:29:49.466Z"
+    },
+    {
+      "gameCount": 3250,
+      "avgTime": 1002.7273846153846,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:30:00.088Z"
+    },
+    {
+      "gameCount": 3260,
+      "avgTime": 1002.9610429447853,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:30:11.503Z"
+    },
+    {
+      "gameCount": 3270,
+      "avgTime": 1002.9021406727828,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:30:21.958Z"
+    },
+    {
+      "gameCount": 3280,
+      "avgTime": 1002.7009146341463,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:30:31.946Z"
+    },
+    {
+      "gameCount": 3290,
+      "avgTime": 1002.7209726443768,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:30:42.658Z"
+    },
+    {
+      "gameCount": 3300,
+      "avgTime": 1002.8372727272728,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:30:53.686Z"
+    },
+    {
+      "gameCount": 3310,
+      "avgTime": 1002.3981873111783,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:31:02.880Z"
+    },
+    {
+      "gameCount": 3320,
+      "avgTime": 1002.9259036144579,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:31:15.280Z"
+    },
+    {
+      "gameCount": 3330,
+      "avgTime": 1003.16006006006,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:31:26.709Z"
+    },
+    {
+      "gameCount": 3340,
+      "avgTime": 1002.8023952095808,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:31:36.167Z"
+    },
+    {
+      "gameCount": 3350,
+      "avgTime": 1003.0898507462687,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:31:47.782Z"
+    },
+    {
+      "gameCount": 3360,
+      "avgTime": 1003.4470238095238,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:31:59.630Z"
+    },
+    {
+      "gameCount": 3370,
+      "avgTime": 1003.3338278931751,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T10:32:09.906Z"
+    }
+  ],
+  "memorySnapshots": [
+    {
+      "time": "2025-09-13T09:32:29.224Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20829204480,
+      "freeMemory": 13132767232,
+      "gameCount": 10
+    },
+    {
+      "time": "2025-09-13T09:32:39.167Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20792418304,
+      "freeMemory": 13169553408,
+      "gameCount": 20
+    },
+    {
+      "time": "2025-09-13T09:32:49.843Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20734361600,
+      "freeMemory": 13227610112,
+      "gameCount": 30
+    },
+    {
+      "time": "2025-09-13T09:33:00.163Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20714684416,
+      "freeMemory": 13247287296,
+      "gameCount": 40
+    },
+    {
+      "time": "2025-09-13T09:33:11.607Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20752338944,
+      "freeMemory": 13209632768,
+      "gameCount": 50
+    },
+    {
+      "time": "2025-09-13T09:33:22.660Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20776800256,
+      "freeMemory": 13185171456,
+      "gameCount": 60
+    },
+    {
+      "time": "2025-09-13T09:33:33.588Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20769263616,
+      "freeMemory": 13192708096,
+      "gameCount": 70
+    },
+    {
+      "time": "2025-09-13T09:33:44.484Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20756312064,
+      "freeMemory": 13205659648,
+      "gameCount": 80
+    },
+    {
+      "time": "2025-09-13T09:33:55.159Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20760588288,
+      "freeMemory": 13201383424,
+      "gameCount": 90
+    },
+    {
+      "time": "2025-09-13T09:34:06.944Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20925923328,
+      "freeMemory": 13036048384,
+      "gameCount": 100
+    },
+    {
+      "time": "2025-09-13T09:34:16.306Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20735795200,
+      "freeMemory": 13226176512,
+      "gameCount": 110
+    },
+    {
+      "time": "2025-09-13T09:34:28.289Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20734267392,
+      "freeMemory": 13227704320,
+      "gameCount": 120
+    },
+    {
+      "time": "2025-09-13T09:34:37.856Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20726640640,
+      "freeMemory": 13235331072,
+      "gameCount": 130
+    },
+    {
+      "time": "2025-09-13T09:34:49.286Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20718936064,
+      "freeMemory": 13243035648,
+      "gameCount": 140
+    },
+    {
+      "time": "2025-09-13T09:35:00.209Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20747853824,
+      "freeMemory": 13214117888,
+      "gameCount": 150
+    },
+    {
+      "time": "2025-09-13T09:35:12.537Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20736000000,
+      "freeMemory": 13225971712,
+      "gameCount": 160
+    },
+    {
+      "time": "2025-09-13T09:35:23.182Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20786749440,
+      "freeMemory": 13175222272,
+      "gameCount": 170
+    },
+    {
+      "time": "2025-09-13T09:35:33.397Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20722192384,
+      "freeMemory": 13239779328,
+      "gameCount": 180
+    },
+    {
+      "time": "2025-09-13T09:35:44.768Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20746014720,
+      "freeMemory": 13215956992,
+      "gameCount": 190
+    },
+    {
+      "time": "2025-09-13T09:35:55.481Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20773027840,
+      "freeMemory": 13188943872,
+      "gameCount": 200
+    },
+    {
+      "time": "2025-09-13T09:36:08.277Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20720799744,
+      "freeMemory": 13241171968,
+      "gameCount": 210
+    },
+    {
+      "time": "2025-09-13T09:36:16.851Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20752605184,
+      "freeMemory": 13209366528,
+      "gameCount": 220
+    },
+    {
+      "time": "2025-09-13T09:36:26.010Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20842414080,
+      "freeMemory": 13119557632,
+      "gameCount": 230
+    },
+    {
+      "time": "2025-09-13T09:36:37.948Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20709285888,
+      "freeMemory": 13252685824,
+      "gameCount": 240
+    },
+    {
+      "time": "2025-09-13T09:36:49.485Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20552454144,
+      "freeMemory": 13409517568,
+      "gameCount": 250
+    },
+    {
+      "time": "2025-09-13T09:37:00.884Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20534046720,
+      "freeMemory": 13427924992,
+      "gameCount": 260
+    },
+    {
+      "time": "2025-09-13T09:37:13.826Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20536627200,
+      "freeMemory": 13425344512,
+      "gameCount": 270
+    },
+    {
+      "time": "2025-09-13T09:37:23.818Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20530950144,
+      "freeMemory": 13431021568,
+      "gameCount": 280
+    },
+    {
+      "time": "2025-09-13T09:37:35.519Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20701728768,
+      "freeMemory": 13260242944,
+      "gameCount": 290
+    },
+    {
+      "time": "2025-09-13T09:37:44.591Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19249524736,
+      "freeMemory": 14712446976,
+      "gameCount": 300
+    },
+    {
+      "time": "2025-09-13T09:37:54.672Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19208151040,
+      "freeMemory": 14753820672,
+      "gameCount": 310
+    },
+    {
+      "time": "2025-09-13T09:38:05.930Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19122946048,
+      "freeMemory": 14839025664,
+      "gameCount": 320
+    },
+    {
+      "time": "2025-09-13T09:38:14.887Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19163967488,
+      "freeMemory": 14798004224,
+      "gameCount": 330
+    },
+    {
+      "time": "2025-09-13T09:38:26.196Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19553456128,
+      "freeMemory": 14408515584,
+      "gameCount": 340
+    },
+    {
+      "time": "2025-09-13T09:38:37.608Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19534761984,
+      "freeMemory": 14427209728,
+      "gameCount": 350
+    },
+    {
+      "time": "2025-09-13T09:38:46.895Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19521204224,
+      "freeMemory": 14440767488,
+      "gameCount": 360
+    },
+    {
+      "time": "2025-09-13T09:38:57.992Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19435499520,
+      "freeMemory": 14526472192,
+      "gameCount": 370
+    },
+    {
+      "time": "2025-09-13T09:39:08.258Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19400654848,
+      "freeMemory": 14561316864,
+      "gameCount": 380
+    },
+    {
+      "time": "2025-09-13T09:39:18.564Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19394347008,
+      "freeMemory": 14567624704,
+      "gameCount": 390
+    },
+    {
+      "time": "2025-09-13T09:39:29.165Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19329753088,
+      "freeMemory": 14632218624,
+      "gameCount": 400
+    },
+    {
+      "time": "2025-09-13T09:39:38.672Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19377836032,
+      "freeMemory": 14584135680,
+      "gameCount": 410
+    },
+    {
+      "time": "2025-09-13T09:39:50.268Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19347251200,
+      "freeMemory": 14614720512,
+      "gameCount": 420
+    },
+    {
+      "time": "2025-09-13T09:40:00.778Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19357888512,
+      "freeMemory": 14604083200,
+      "gameCount": 430
+    },
+    {
+      "time": "2025-09-13T09:40:11.538Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19348140032,
+      "freeMemory": 14613831680,
+      "gameCount": 440
+    },
+    {
+      "time": "2025-09-13T09:40:23.170Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19359399936,
+      "freeMemory": 14602571776,
+      "gameCount": 450
+    },
+    {
+      "time": "2025-09-13T09:40:35.135Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19372683264,
+      "freeMemory": 14589288448,
+      "gameCount": 460
+    },
+    {
+      "time": "2025-09-13T09:40:46.021Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19276431360,
+      "freeMemory": 14685540352,
+      "gameCount": 470
+    },
+    {
+      "time": "2025-09-13T09:40:57.250Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19284406272,
+      "freeMemory": 14677565440,
+      "gameCount": 480
+    },
+    {
+      "time": "2025-09-13T09:41:08.360Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19222159360,
+      "freeMemory": 14739812352,
+      "gameCount": 490
+    },
+    {
+      "time": "2025-09-13T09:41:19.516Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19206479872,
+      "freeMemory": 14755491840,
+      "gameCount": 500
+    },
+    {
+      "time": "2025-09-13T09:41:29.910Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19196497920,
+      "freeMemory": 14765473792,
+      "gameCount": 510
+    },
+    {
+      "time": "2025-09-13T09:41:39.678Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19189686272,
+      "freeMemory": 14772285440,
+      "gameCount": 520
+    },
+    {
+      "time": "2025-09-13T09:41:51.127Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19238170624,
+      "freeMemory": 14723801088,
+      "gameCount": 530
+    },
+    {
+      "time": "2025-09-13T09:42:00.657Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19205328896,
+      "freeMemory": 14756642816,
+      "gameCount": 540
+    },
+    {
+      "time": "2025-09-13T09:42:11.259Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19194097664,
+      "freeMemory": 14767874048,
+      "gameCount": 550
+    },
+    {
+      "time": "2025-09-13T09:42:21.617Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19163226112,
+      "freeMemory": 14798745600,
+      "gameCount": 560
+    },
+    {
+      "time": "2025-09-13T09:42:33.275Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19175616512,
+      "freeMemory": 14786355200,
+      "gameCount": 570
+    },
+    {
+      "time": "2025-09-13T09:42:42.668Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19169619968,
+      "freeMemory": 14792351744,
+      "gameCount": 580
+    },
+    {
+      "time": "2025-09-13T09:42:53.352Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19226017792,
+      "freeMemory": 14735953920,
+      "gameCount": 590
+    },
+    {
+      "time": "2025-09-13T09:43:04.192Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19178938368,
+      "freeMemory": 14783033344,
+      "gameCount": 600
+    },
+    {
+      "time": "2025-09-13T09:43:16.216Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19161354240,
+      "freeMemory": 14800617472,
+      "gameCount": 610
+    },
+    {
+      "time": "2025-09-13T09:43:27.861Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19223580672,
+      "freeMemory": 14738391040,
+      "gameCount": 620
+    },
+    {
+      "time": "2025-09-13T09:43:38.477Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19231891456,
+      "freeMemory": 14730080256,
+      "gameCount": 630
+    },
+    {
+      "time": "2025-09-13T09:43:51.175Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19262402560,
+      "freeMemory": 14699569152,
+      "gameCount": 640
+    },
+    {
+      "time": "2025-09-13T09:44:02.419Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19240644608,
+      "freeMemory": 14721327104,
+      "gameCount": 650
+    },
+    {
+      "time": "2025-09-13T09:44:13.241Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19227222016,
+      "freeMemory": 14734749696,
+      "gameCount": 660
+    },
+    {
+      "time": "2025-09-13T09:44:23.406Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19212677120,
+      "freeMemory": 14749294592,
+      "gameCount": 670
+    },
+    {
+      "time": "2025-09-13T09:44:33.730Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19278639104,
+      "freeMemory": 14683332608,
+      "gameCount": 680
+    },
+    {
+      "time": "2025-09-13T09:44:42.567Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19259731968,
+      "freeMemory": 14702239744,
+      "gameCount": 690
+    },
+    {
+      "time": "2025-09-13T09:44:54.411Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19291500544,
+      "freeMemory": 14670471168,
+      "gameCount": 700
+    },
+    {
+      "time": "2025-09-13T09:45:05.518Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19225370624,
+      "freeMemory": 14736601088,
+      "gameCount": 710
+    },
+    {
+      "time": "2025-09-13T09:45:16.297Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19213537280,
+      "freeMemory": 14748434432,
+      "gameCount": 720
+    },
+    {
+      "time": "2025-09-13T09:45:27.041Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19207581696,
+      "freeMemory": 14754390016,
+      "gameCount": 730
+    },
+    {
+      "time": "2025-09-13T09:45:36.357Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19209854976,
+      "freeMemory": 14752116736,
+      "gameCount": 740
+    },
+    {
+      "time": "2025-09-13T09:45:45.850Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19173707776,
+      "freeMemory": 14788263936,
+      "gameCount": 750
+    },
+    {
+      "time": "2025-09-13T09:45:57.324Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19240042496,
+      "freeMemory": 14721929216,
+      "gameCount": 760
+    },
+    {
+      "time": "2025-09-13T09:46:08.439Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19173208064,
+      "freeMemory": 14788763648,
+      "gameCount": 770
+    },
+    {
+      "time": "2025-09-13T09:46:18.566Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19199127552,
+      "freeMemory": 14762844160,
+      "gameCount": 780
+    },
+    {
+      "time": "2025-09-13T09:46:30.168Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19193004032,
+      "freeMemory": 14768967680,
+      "gameCount": 790
+    },
+    {
+      "time": "2025-09-13T09:46:43.208Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19196637184,
+      "freeMemory": 14765334528,
+      "gameCount": 800
+    },
+    {
+      "time": "2025-09-13T09:46:53.156Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19150610432,
+      "freeMemory": 14811361280,
+      "gameCount": 810
+    },
+    {
+      "time": "2025-09-13T09:47:04.634Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19247448064,
+      "freeMemory": 14714523648,
+      "gameCount": 820
+    },
+    {
+      "time": "2025-09-13T09:47:15.113Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19238551552,
+      "freeMemory": 14723420160,
+      "gameCount": 830
+    },
+    {
+      "time": "2025-09-13T09:47:26.641Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19240628224,
+      "freeMemory": 14721343488,
+      "gameCount": 840
+    },
+    {
+      "time": "2025-09-13T09:47:36.925Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19218653184,
+      "freeMemory": 14743318528,
+      "gameCount": 850
+    },
+    {
+      "time": "2025-09-13T09:47:46.400Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19053158400,
+      "freeMemory": 14908813312,
+      "gameCount": 860
+    },
+    {
+      "time": "2025-09-13T09:47:55.841Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19063578624,
+      "freeMemory": 14898393088,
+      "gameCount": 870
+    },
+    {
+      "time": "2025-09-13T09:48:04.710Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19099226112,
+      "freeMemory": 14862745600,
+      "gameCount": 880
+    },
+    {
+      "time": "2025-09-13T09:48:15.846Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19008872448,
+      "freeMemory": 14953099264,
+      "gameCount": 890
+    },
+    {
+      "time": "2025-09-13T09:48:26.988Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19098779648,
+      "freeMemory": 14863192064,
+      "gameCount": 900
+    },
+    {
+      "time": "2025-09-13T09:48:37.127Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19052724224,
+      "freeMemory": 14909247488,
+      "gameCount": 910
+    },
+    {
+      "time": "2025-09-13T09:48:47.473Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19056443392,
+      "freeMemory": 14905528320,
+      "gameCount": 920
+    },
+    {
+      "time": "2025-09-13T09:48:58.042Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19061108736,
+      "freeMemory": 14900862976,
+      "gameCount": 930
+    },
+    {
+      "time": "2025-09-13T09:49:08.543Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19118600192,
+      "freeMemory": 14843371520,
+      "gameCount": 940
+    },
+    {
+      "time": "2025-09-13T09:49:17.625Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19066482688,
+      "freeMemory": 14895489024,
+      "gameCount": 950
+    },
+    {
+      "time": "2025-09-13T09:49:27.421Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19108769792,
+      "freeMemory": 14853201920,
+      "gameCount": 960
+    },
+    {
+      "time": "2025-09-13T09:49:36.398Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19051393024,
+      "freeMemory": 14910578688,
+      "gameCount": 970
+    },
+    {
+      "time": "2025-09-13T09:49:47.949Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18791997440,
+      "freeMemory": 15169974272,
+      "gameCount": 980
+    },
+    {
+      "time": "2025-09-13T09:49:59.372Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18821578752,
+      "freeMemory": 15140392960,
+      "gameCount": 990
+    },
+    {
+      "time": "2025-09-13T09:50:07.928Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18798465024,
+      "freeMemory": 15163506688,
+      "gameCount": 1000
+    },
+    {
+      "time": "2025-09-13T09:50:17.488Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18835419136,
+      "freeMemory": 15126552576,
+      "gameCount": 1010
+    },
+    {
+      "time": "2025-09-13T09:50:28.125Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18835333120,
+      "freeMemory": 15126638592,
+      "gameCount": 1020
+    },
+    {
+      "time": "2025-09-13T09:50:38.448Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18836770816,
+      "freeMemory": 15125200896,
+      "gameCount": 1030
+    },
+    {
+      "time": "2025-09-13T09:50:49.930Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18794364928,
+      "freeMemory": 15167606784,
+      "gameCount": 1040
+    },
+    {
+      "time": "2025-09-13T09:50:59.351Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18809405440,
+      "freeMemory": 15152566272,
+      "gameCount": 1050
+    },
+    {
+      "time": "2025-09-13T09:51:11.229Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18792755200,
+      "freeMemory": 15169216512,
+      "gameCount": 1060
+    },
+    {
+      "time": "2025-09-13T09:51:22.607Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18778746880,
+      "freeMemory": 15183224832,
+      "gameCount": 1070
+    },
+    {
+      "time": "2025-09-13T09:51:35.265Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18792386560,
+      "freeMemory": 15169585152,
+      "gameCount": 1080
+    },
+    {
+      "time": "2025-09-13T09:51:46.710Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18789019648,
+      "freeMemory": 15172952064,
+      "gameCount": 1090
+    },
+    {
+      "time": "2025-09-13T09:52:00.035Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18789359616,
+      "freeMemory": 15172612096,
+      "gameCount": 1100
+    },
+    {
+      "time": "2025-09-13T09:52:09.836Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18777939968,
+      "freeMemory": 15184031744,
+      "gameCount": 1110
+    },
+    {
+      "time": "2025-09-13T09:52:19.137Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18861428736,
+      "freeMemory": 15100542976,
+      "gameCount": 1120
+    },
+    {
+      "time": "2025-09-13T09:52:29.627Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18802462720,
+      "freeMemory": 15159508992,
+      "gameCount": 1130
+    },
+    {
+      "time": "2025-09-13T09:52:40.151Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18848681984,
+      "freeMemory": 15113289728,
+      "gameCount": 1140
+    },
+    {
+      "time": "2025-09-13T09:52:51.518Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18885726208,
+      "freeMemory": 15076245504,
+      "gameCount": 1150
+    },
+    {
+      "time": "2025-09-13T09:53:01.919Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18834333696,
+      "freeMemory": 15127638016,
+      "gameCount": 1160
+    },
+    {
+      "time": "2025-09-13T09:53:12.622Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18669568000,
+      "freeMemory": 15292403712,
+      "gameCount": 1170
+    },
+    {
+      "time": "2025-09-13T09:53:22.510Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18847703040,
+      "freeMemory": 15114268672,
+      "gameCount": 1180
+    },
+    {
+      "time": "2025-09-13T09:53:32.771Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18770862080,
+      "freeMemory": 15191109632,
+      "gameCount": 1190
+    },
+    {
+      "time": "2025-09-13T09:53:43.351Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18726862848,
+      "freeMemory": 15235108864,
+      "gameCount": 1200
+    },
+    {
+      "time": "2025-09-13T09:53:54.538Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18724970496,
+      "freeMemory": 15237001216,
+      "gameCount": 1210
+    },
+    {
+      "time": "2025-09-13T09:54:05.156Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 18890911744,
+      "freeMemory": 15071059968,
+      "gameCount": 1220
+    },
+    {
+      "time": "2025-09-13T09:54:16.241Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20427206656,
+      "freeMemory": 13534765056,
+      "gameCount": 1230
+    },
+    {
+      "time": "2025-09-13T09:54:27.645Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20803579904,
+      "freeMemory": 13158391808,
+      "gameCount": 1240
+    },
+    {
+      "time": "2025-09-13T09:54:40.046Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20660445184,
+      "freeMemory": 13301526528,
+      "gameCount": 1250
+    },
+    {
+      "time": "2025-09-13T09:54:50.066Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20527939584,
+      "freeMemory": 13434032128,
+      "gameCount": 1260
+    },
+    {
+      "time": "2025-09-13T09:55:02.601Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20574916608,
+      "freeMemory": 13387055104,
+      "gameCount": 1270
+    },
+    {
+      "time": "2025-09-13T09:55:13.674Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20742651904,
+      "freeMemory": 13219319808,
+      "gameCount": 1280
+    },
+    {
+      "time": "2025-09-13T09:55:24.446Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20685365248,
+      "freeMemory": 13276606464,
+      "gameCount": 1290
+    },
+    {
+      "time": "2025-09-13T09:55:34.518Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20723228672,
+      "freeMemory": 13238743040,
+      "gameCount": 1300
+    },
+    {
+      "time": "2025-09-13T09:55:44.810Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20734296064,
+      "freeMemory": 13227675648,
+      "gameCount": 1310
+    },
+    {
+      "time": "2025-09-13T09:55:54.936Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20710625280,
+      "freeMemory": 13251346432,
+      "gameCount": 1320
+    },
+    {
+      "time": "2025-09-13T09:56:06.722Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20696666112,
+      "freeMemory": 13265305600,
+      "gameCount": 1330
+    },
+    {
+      "time": "2025-09-13T09:56:15.292Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20581224448,
+      "freeMemory": 13380747264,
+      "gameCount": 1340
+    },
+    {
+      "time": "2025-09-13T09:56:24.829Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20573814784,
+      "freeMemory": 13388156928,
+      "gameCount": 1350
+    },
+    {
+      "time": "2025-09-13T09:56:37.348Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20552990720,
+      "freeMemory": 13408980992,
+      "gameCount": 1360
+    },
+    {
+      "time": "2025-09-13T09:56:48.563Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20483235840,
+      "freeMemory": 13478735872,
+      "gameCount": 1370
+    },
+    {
+      "time": "2025-09-13T09:57:00.122Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20452646912,
+      "freeMemory": 13509324800,
+      "gameCount": 1380
+    },
+    {
+      "time": "2025-09-13T09:57:11.529Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20887359488,
+      "freeMemory": 13074612224,
+      "gameCount": 1390
+    },
+    {
+      "time": "2025-09-13T09:57:22.272Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20888137728,
+      "freeMemory": 13073833984,
+      "gameCount": 1400
+    },
+    {
+      "time": "2025-09-13T09:57:33.218Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20864634880,
+      "freeMemory": 13097336832,
+      "gameCount": 1410
+    },
+    {
+      "time": "2025-09-13T09:57:43.865Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20721328128,
+      "freeMemory": 13240643584,
+      "gameCount": 1420
+    },
+    {
+      "time": "2025-09-13T09:57:54.842Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20743827456,
+      "freeMemory": 13218144256,
+      "gameCount": 1430
+    },
+    {
+      "time": "2025-09-13T09:58:05.158Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20721762304,
+      "freeMemory": 13240209408,
+      "gameCount": 1440
+    },
+    {
+      "time": "2025-09-13T09:58:16.481Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20698656768,
+      "freeMemory": 13263314944,
+      "gameCount": 1450
+    },
+    {
+      "time": "2025-09-13T09:58:26.461Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20754575360,
+      "freeMemory": 13207396352,
+      "gameCount": 1460
+    },
+    {
+      "time": "2025-09-13T09:58:35.782Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20806991872,
+      "freeMemory": 13154979840,
+      "gameCount": 1470
+    },
+    {
+      "time": "2025-09-13T09:58:47.647Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20715687936,
+      "freeMemory": 13246283776,
+      "gameCount": 1480
+    },
+    {
+      "time": "2025-09-13T09:58:57.785Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20670976000,
+      "freeMemory": 13290995712,
+      "gameCount": 1490
+    },
+    {
+      "time": "2025-09-13T09:59:06.882Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20628213760,
+      "freeMemory": 13333757952,
+      "gameCount": 1500
+    },
+    {
+      "time": "2025-09-13T09:59:17.422Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20636061696,
+      "freeMemory": 13325910016,
+      "gameCount": 1510
+    },
+    {
+      "time": "2025-09-13T09:59:28.588Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20631416832,
+      "freeMemory": 13330554880,
+      "gameCount": 1520
+    },
+    {
+      "time": "2025-09-13T09:59:40.092Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20699406336,
+      "freeMemory": 13262565376,
+      "gameCount": 1530
+    },
+    {
+      "time": "2025-09-13T09:59:51.268Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20646047744,
+      "freeMemory": 13315923968,
+      "gameCount": 1540
+    },
+    {
+      "time": "2025-09-13T10:00:04.136Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20856606720,
+      "freeMemory": 13105364992,
+      "gameCount": 1550
+    },
+    {
+      "time": "2025-09-13T10:00:16.457Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20753408000,
+      "freeMemory": 13208563712,
+      "gameCount": 1560
+    },
+    {
+      "time": "2025-09-13T10:00:26.389Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20720447488,
+      "freeMemory": 13241524224,
+      "gameCount": 1570
+    },
+    {
+      "time": "2025-09-13T10:00:37.128Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20704571392,
+      "freeMemory": 13257400320,
+      "gameCount": 1580
+    },
+    {
+      "time": "2025-09-13T10:00:50.160Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20479229952,
+      "freeMemory": 13482741760,
+      "gameCount": 1590
+    },
+    {
+      "time": "2025-09-13T10:00:59.220Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20474437632,
+      "freeMemory": 13487534080,
+      "gameCount": 1600
+    },
+    {
+      "time": "2025-09-13T10:01:09.639Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20469329920,
+      "freeMemory": 13492641792,
+      "gameCount": 1610
+    },
+    {
+      "time": "2025-09-13T10:01:20.943Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20487999488,
+      "freeMemory": 13473972224,
+      "gameCount": 1620
+    },
+    {
+      "time": "2025-09-13T10:01:31.491Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20482613248,
+      "freeMemory": 13479358464,
+      "gameCount": 1630
+    },
+    {
+      "time": "2025-09-13T10:01:40.960Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20477083648,
+      "freeMemory": 13484888064,
+      "gameCount": 1640
+    },
+    {
+      "time": "2025-09-13T10:01:50.266Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20093231104,
+      "freeMemory": 13868740608,
+      "gameCount": 1650
+    },
+    {
+      "time": "2025-09-13T10:02:02.713Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19970338816,
+      "freeMemory": 13991632896,
+      "gameCount": 1660
+    },
+    {
+      "time": "2025-09-13T10:02:14.227Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19967246336,
+      "freeMemory": 13994725376,
+      "gameCount": 1670
+    },
+    {
+      "time": "2025-09-13T10:02:23.847Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19974246400,
+      "freeMemory": 13987725312,
+      "gameCount": 1680
+    },
+    {
+      "time": "2025-09-13T10:02:34.848Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20162613248,
+      "freeMemory": 13799358464,
+      "gameCount": 1690
+    },
+    {
+      "time": "2025-09-13T10:02:45.817Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20102905856,
+      "freeMemory": 13859065856,
+      "gameCount": 1700
+    },
+    {
+      "time": "2025-09-13T10:02:55.771Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20089257984,
+      "freeMemory": 13872713728,
+      "gameCount": 1710
+    },
+    {
+      "time": "2025-09-13T10:03:06.029Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20094943232,
+      "freeMemory": 13867028480,
+      "gameCount": 1720
+    },
+    {
+      "time": "2025-09-13T10:03:16.478Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20104843264,
+      "freeMemory": 13857128448,
+      "gameCount": 1730
+    },
+    {
+      "time": "2025-09-13T10:03:27.288Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20131840000,
+      "freeMemory": 13830131712,
+      "gameCount": 1740
+    },
+    {
+      "time": "2025-09-13T10:03:36.405Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20137943040,
+      "freeMemory": 13824028672,
+      "gameCount": 1750
+    },
+    {
+      "time": "2025-09-13T10:03:46.067Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20108029952,
+      "freeMemory": 13853941760,
+      "gameCount": 1760
+    },
+    {
+      "time": "2025-09-13T10:03:55.968Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20188758016,
+      "freeMemory": 13773213696,
+      "gameCount": 1770
+    },
+    {
+      "time": "2025-09-13T10:04:07.117Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20131880960,
+      "freeMemory": 13830090752,
+      "gameCount": 1780
+    },
+    {
+      "time": "2025-09-13T10:04:16.838Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20137078784,
+      "freeMemory": 13824892928,
+      "gameCount": 1790
+    },
+    {
+      "time": "2025-09-13T10:04:27.940Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20131561472,
+      "freeMemory": 13830410240,
+      "gameCount": 1800
+    },
+    {
+      "time": "2025-09-13T10:04:38.059Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20143898624,
+      "freeMemory": 13818073088,
+      "gameCount": 1810
+    },
+    {
+      "time": "2025-09-13T10:04:48.567Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20204826624,
+      "freeMemory": 13757145088,
+      "gameCount": 1820
+    },
+    {
+      "time": "2025-09-13T10:04:57.737Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20229996544,
+      "freeMemory": 13731975168,
+      "gameCount": 1830
+    },
+    {
+      "time": "2025-09-13T10:05:07.303Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20280193024,
+      "freeMemory": 13681778688,
+      "gameCount": 1840
+    },
+    {
+      "time": "2025-09-13T10:05:19.960Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20160176128,
+      "freeMemory": 13801795584,
+      "gameCount": 1850
+    },
+    {
+      "time": "2025-09-13T10:05:29.253Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20151496704,
+      "freeMemory": 13810475008,
+      "gameCount": 1860
+    },
+    {
+      "time": "2025-09-13T10:05:38.813Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20159320064,
+      "freeMemory": 13802651648,
+      "gameCount": 1870
+    },
+    {
+      "time": "2025-09-13T10:05:52.020Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20182958080,
+      "freeMemory": 13779013632,
+      "gameCount": 1880
+    },
+    {
+      "time": "2025-09-13T10:06:01.902Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20232781824,
+      "freeMemory": 13729189888,
+      "gameCount": 1890
+    },
+    {
+      "time": "2025-09-13T10:06:13.204Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20229902336,
+      "freeMemory": 13732069376,
+      "gameCount": 1900
+    },
+    {
+      "time": "2025-09-13T10:06:24.630Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20183035904,
+      "freeMemory": 13778935808,
+      "gameCount": 1910
+    },
+    {
+      "time": "2025-09-13T10:06:34.685Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20182831104,
+      "freeMemory": 13779140608,
+      "gameCount": 1920
+    },
+    {
+      "time": "2025-09-13T10:06:46.491Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20130304000,
+      "freeMemory": 13831667712,
+      "gameCount": 1930
+    },
+    {
+      "time": "2025-09-13T10:06:55.826Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19818799104,
+      "freeMemory": 14143172608,
+      "gameCount": 1940
+    },
+    {
+      "time": "2025-09-13T10:07:08.182Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20236840960,
+      "freeMemory": 13725130752,
+      "gameCount": 1950
+    },
+    {
+      "time": "2025-09-13T10:07:19.502Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20083113984,
+      "freeMemory": 13878857728,
+      "gameCount": 1960
+    },
+    {
+      "time": "2025-09-13T10:07:28.830Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20167917568,
+      "freeMemory": 13794054144,
+      "gameCount": 1970
+    },
+    {
+      "time": "2025-09-13T10:07:38.314Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20199100416,
+      "freeMemory": 13762871296,
+      "gameCount": 1980
+    },
+    {
+      "time": "2025-09-13T10:07:48.416Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20185432064,
+      "freeMemory": 13776539648,
+      "gameCount": 1990
+    },
+    {
+      "time": "2025-09-13T10:07:59.288Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20175953920,
+      "freeMemory": 13786017792,
+      "gameCount": 2000
+    },
+    {
+      "time": "2025-09-13T10:08:10.304Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20250443776,
+      "freeMemory": 13711527936,
+      "gameCount": 2010
+    },
+    {
+      "time": "2025-09-13T10:08:21.392Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20210917376,
+      "freeMemory": 13751054336,
+      "gameCount": 2020
+    },
+    {
+      "time": "2025-09-13T10:08:31.997Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20250931200,
+      "freeMemory": 13711040512,
+      "gameCount": 2030
+    },
+    {
+      "time": "2025-09-13T10:08:43.618Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20223242240,
+      "freeMemory": 13738729472,
+      "gameCount": 2040
+    },
+    {
+      "time": "2025-09-13T10:08:54.026Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20209823744,
+      "freeMemory": 13752147968,
+      "gameCount": 2050
+    },
+    {
+      "time": "2025-09-13T10:09:04.173Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20182331392,
+      "freeMemory": 13779640320,
+      "gameCount": 2060
+    },
+    {
+      "time": "2025-09-13T10:09:14.177Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20238450688,
+      "freeMemory": 13723521024,
+      "gameCount": 2070
+    },
+    {
+      "time": "2025-09-13T10:09:23.549Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20225318912,
+      "freeMemory": 13736652800,
+      "gameCount": 2080
+    },
+    {
+      "time": "2025-09-13T10:09:34.717Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20188782592,
+      "freeMemory": 13773189120,
+      "gameCount": 2090
+    },
+    {
+      "time": "2025-09-13T10:09:44.699Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20216336384,
+      "freeMemory": 13745635328,
+      "gameCount": 2100
+    },
+    {
+      "time": "2025-09-13T10:09:55.107Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20205240320,
+      "freeMemory": 13756731392,
+      "gameCount": 2110
+    },
+    {
+      "time": "2025-09-13T10:10:06.115Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20312322048,
+      "freeMemory": 13649649664,
+      "gameCount": 2120
+    },
+    {
+      "time": "2025-09-13T10:10:15.877Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20288688128,
+      "freeMemory": 13673283584,
+      "gameCount": 2130
+    },
+    {
+      "time": "2025-09-13T10:10:27.519Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20204093440,
+      "freeMemory": 13757878272,
+      "gameCount": 2140
+    },
+    {
+      "time": "2025-09-13T10:10:39.299Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20214292480,
+      "freeMemory": 13747679232,
+      "gameCount": 2150
+    },
+    {
+      "time": "2025-09-13T10:10:49.200Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20188995584,
+      "freeMemory": 13772976128,
+      "gameCount": 2160
+    },
+    {
+      "time": "2025-09-13T10:11:00.427Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20196048896,
+      "freeMemory": 13765922816,
+      "gameCount": 2170
+    },
+    {
+      "time": "2025-09-13T10:11:11.440Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20210323456,
+      "freeMemory": 13751648256,
+      "gameCount": 2180
+    },
+    {
+      "time": "2025-09-13T10:11:22.190Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20176949248,
+      "freeMemory": 13785022464,
+      "gameCount": 2190
+    },
+    {
+      "time": "2025-09-13T10:11:31.648Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20210425856,
+      "freeMemory": 13751545856,
+      "gameCount": 2200
+    },
+    {
+      "time": "2025-09-13T10:11:41.434Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20204761088,
+      "freeMemory": 13757210624,
+      "gameCount": 2210
+    },
+    {
+      "time": "2025-09-13T10:11:51.392Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20196012032,
+      "freeMemory": 13765959680,
+      "gameCount": 2220
+    },
+    {
+      "time": "2025-09-13T10:12:02.745Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19966959616,
+      "freeMemory": 13995012096,
+      "gameCount": 2230
+    },
+    {
+      "time": "2025-09-13T10:12:13.694Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19941269504,
+      "freeMemory": 14020702208,
+      "gameCount": 2240
+    },
+    {
+      "time": "2025-09-13T10:12:22.944Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20009279488,
+      "freeMemory": 13952692224,
+      "gameCount": 2250
+    },
+    {
+      "time": "2025-09-13T10:12:33.538Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19945508864,
+      "freeMemory": 14016462848,
+      "gameCount": 2260
+    },
+    {
+      "time": "2025-09-13T10:12:45.553Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19947290624,
+      "freeMemory": 14014681088,
+      "gameCount": 2270
+    },
+    {
+      "time": "2025-09-13T10:12:55.492Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19963441152,
+      "freeMemory": 13998530560,
+      "gameCount": 2280
+    },
+    {
+      "time": "2025-09-13T10:13:06.683Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19973283840,
+      "freeMemory": 13988687872,
+      "gameCount": 2290
+    },
+    {
+      "time": "2025-09-13T10:13:16.896Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19954712576,
+      "freeMemory": 14007259136,
+      "gameCount": 2300
+    },
+    {
+      "time": "2025-09-13T10:13:29.048Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19989086208,
+      "freeMemory": 13972885504,
+      "gameCount": 2310
+    },
+    {
+      "time": "2025-09-13T10:13:40.821Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19971379200,
+      "freeMemory": 13990592512,
+      "gameCount": 2320
+    },
+    {
+      "time": "2025-09-13T10:13:52.115Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19982925824,
+      "freeMemory": 13979045888,
+      "gameCount": 2330
+    },
+    {
+      "time": "2025-09-13T10:14:04.047Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19986026496,
+      "freeMemory": 13975945216,
+      "gameCount": 2340
+    },
+    {
+      "time": "2025-09-13T10:14:15.121Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20040724480,
+      "freeMemory": 13921247232,
+      "gameCount": 2350
+    },
+    {
+      "time": "2025-09-13T10:14:27.284Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20089020416,
+      "freeMemory": 13872951296,
+      "gameCount": 2360
+    },
+    {
+      "time": "2025-09-13T10:14:37.552Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20035010560,
+      "freeMemory": 13926961152,
+      "gameCount": 2370
+    },
+    {
+      "time": "2025-09-13T10:14:47.508Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20034846720,
+      "freeMemory": 13927124992,
+      "gameCount": 2380
+    },
+    {
+      "time": "2025-09-13T10:14:59.358Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20014166016,
+      "freeMemory": 13947805696,
+      "gameCount": 2390
+    },
+    {
+      "time": "2025-09-13T10:15:10.731Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20002750464,
+      "freeMemory": 13959221248,
+      "gameCount": 2400
+    },
+    {
+      "time": "2025-09-13T10:15:20.439Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20003536896,
+      "freeMemory": 13958434816,
+      "gameCount": 2410
+    },
+    {
+      "time": "2025-09-13T10:15:30.614Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20045438976,
+      "freeMemory": 13916532736,
+      "gameCount": 2420
+    },
+    {
+      "time": "2025-09-13T10:15:39.846Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19999719424,
+      "freeMemory": 13962252288,
+      "gameCount": 2430
+    },
+    {
+      "time": "2025-09-13T10:15:50.565Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19989180416,
+      "freeMemory": 13972791296,
+      "gameCount": 2440
+    },
+    {
+      "time": "2025-09-13T10:16:00.803Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19992657920,
+      "freeMemory": 13969313792,
+      "gameCount": 2450
+    },
+    {
+      "time": "2025-09-13T10:16:11.662Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20000907264,
+      "freeMemory": 13961064448,
+      "gameCount": 2460
+    },
+    {
+      "time": "2025-09-13T10:16:21.401Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20013146112,
+      "freeMemory": 13948825600,
+      "gameCount": 2470
+    },
+    {
+      "time": "2025-09-13T10:16:33.904Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20060790784,
+      "freeMemory": 13901180928,
+      "gameCount": 2480
+    },
+    {
+      "time": "2025-09-13T10:16:43.804Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20007202816,
+      "freeMemory": 13954768896,
+      "gameCount": 2490
+    },
+    {
+      "time": "2025-09-13T10:16:55.054Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19949830144,
+      "freeMemory": 14012141568,
+      "gameCount": 2500
+    },
+    {
+      "time": "2025-09-13T10:17:04.556Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19993882624,
+      "freeMemory": 13968089088,
+      "gameCount": 2510
+    },
+    {
+      "time": "2025-09-13T10:17:14.196Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19972526080,
+      "freeMemory": 13989445632,
+      "gameCount": 2520
+    },
+    {
+      "time": "2025-09-13T10:17:23.601Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19994099712,
+      "freeMemory": 13967872000,
+      "gameCount": 2530
+    },
+    {
+      "time": "2025-09-13T10:17:35.300Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20003409920,
+      "freeMemory": 13958561792,
+      "gameCount": 2540
+    },
+    {
+      "time": "2025-09-13T10:17:46.473Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20001193984,
+      "freeMemory": 13960777728,
+      "gameCount": 2550
+    },
+    {
+      "time": "2025-09-13T10:17:57.254Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19973275648,
+      "freeMemory": 13988696064,
+      "gameCount": 2560
+    },
+    {
+      "time": "2025-09-13T10:18:08.193Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19985793024,
+      "freeMemory": 13976178688,
+      "gameCount": 2570
+    },
+    {
+      "time": "2025-09-13T10:18:18.060Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20039405568,
+      "freeMemory": 13922566144,
+      "gameCount": 2580
+    },
+    {
+      "time": "2025-09-13T10:18:28.178Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19898392576,
+      "freeMemory": 14063579136,
+      "gameCount": 2590
+    },
+    {
+      "time": "2025-09-13T10:18:37.969Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19891515392,
+      "freeMemory": 14070456320,
+      "gameCount": 2600
+    },
+    {
+      "time": "2025-09-13T10:18:48.531Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19930308608,
+      "freeMemory": 14031663104,
+      "gameCount": 2610
+    },
+    {
+      "time": "2025-09-13T10:18:59.642Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19893809152,
+      "freeMemory": 14068162560,
+      "gameCount": 2620
+    },
+    {
+      "time": "2025-09-13T10:19:10.896Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19902251008,
+      "freeMemory": 14059720704,
+      "gameCount": 2630
+    },
+    {
+      "time": "2025-09-13T10:19:19.581Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19920941056,
+      "freeMemory": 14041030656,
+      "gameCount": 2640
+    },
+    {
+      "time": "2025-09-13T10:19:29.234Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19892228096,
+      "freeMemory": 14069743616,
+      "gameCount": 2650
+    },
+    {
+      "time": "2025-09-13T10:19:39.382Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19906535424,
+      "freeMemory": 14055436288,
+      "gameCount": 2660
+    },
+    {
+      "time": "2025-09-13T10:19:49.108Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19970748416,
+      "freeMemory": 13991223296,
+      "gameCount": 2670
+    },
+    {
+      "time": "2025-09-13T10:19:58.393Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19925106688,
+      "freeMemory": 14036865024,
+      "gameCount": 2680
+    },
+    {
+      "time": "2025-09-13T10:20:08.018Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19921461248,
+      "freeMemory": 14040510464,
+      "gameCount": 2690
+    },
+    {
+      "time": "2025-09-13T10:20:18.469Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19920932864,
+      "freeMemory": 14041038848,
+      "gameCount": 2700
+    },
+    {
+      "time": "2025-09-13T10:20:30.073Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19953553408,
+      "freeMemory": 14008418304,
+      "gameCount": 2710
+    },
+    {
+      "time": "2025-09-13T10:20:40.374Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19917115392,
+      "freeMemory": 14044856320,
+      "gameCount": 2720
+    },
+    {
+      "time": "2025-09-13T10:20:50.616Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20005556224,
+      "freeMemory": 13956415488,
+      "gameCount": 2730
+    },
+    {
+      "time": "2025-09-13T10:21:03.019Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19974189056,
+      "freeMemory": 13987782656,
+      "gameCount": 2740
+    },
+    {
+      "time": "2025-09-13T10:21:12.846Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19963404288,
+      "freeMemory": 13998567424,
+      "gameCount": 2750
+    },
+    {
+      "time": "2025-09-13T10:21:22.882Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19981029376,
+      "freeMemory": 13980942336,
+      "gameCount": 2760
+    },
+    {
+      "time": "2025-09-13T10:21:34.887Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19978924032,
+      "freeMemory": 13983047680,
+      "gameCount": 2770
+    },
+    {
+      "time": "2025-09-13T10:21:44.719Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20004016128,
+      "freeMemory": 13957955584,
+      "gameCount": 2780
+    },
+    {
+      "time": "2025-09-13T10:21:56.153Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20057432064,
+      "freeMemory": 13904539648,
+      "gameCount": 2790
+    },
+    {
+      "time": "2025-09-13T10:22:05.940Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19986759680,
+      "freeMemory": 13975212032,
+      "gameCount": 2800
+    },
+    {
+      "time": "2025-09-13T10:22:15.039Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20011708416,
+      "freeMemory": 13950263296,
+      "gameCount": 2810
+    },
+    {
+      "time": "2025-09-13T10:22:25.997Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19973148672,
+      "freeMemory": 13988823040,
+      "gameCount": 2820
+    },
+    {
+      "time": "2025-09-13T10:22:37.185Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19959414784,
+      "freeMemory": 14002556928,
+      "gameCount": 2830
+    },
+    {
+      "time": "2025-09-13T10:22:46.002Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19953602560,
+      "freeMemory": 14008369152,
+      "gameCount": 2840
+    },
+    {
+      "time": "2025-09-13T10:22:55.641Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20019834880,
+      "freeMemory": 13942136832,
+      "gameCount": 2850
+    },
+    {
+      "time": "2025-09-13T10:23:06.822Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20040110080,
+      "freeMemory": 13921861632,
+      "gameCount": 2860
+    },
+    {
+      "time": "2025-09-13T10:23:17.275Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20083548160,
+      "freeMemory": 13878423552,
+      "gameCount": 2870
+    },
+    {
+      "time": "2025-09-13T10:23:27.881Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20089921536,
+      "freeMemory": 13872050176,
+      "gameCount": 2880
+    },
+    {
+      "time": "2025-09-13T10:23:38.386Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20102578176,
+      "freeMemory": 13859393536,
+      "gameCount": 2890
+    },
+    {
+      "time": "2025-09-13T10:23:49.381Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20068818944,
+      "freeMemory": 13893152768,
+      "gameCount": 2900
+    },
+    {
+      "time": "2025-09-13T10:23:59.012Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20032847872,
+      "freeMemory": 13929123840,
+      "gameCount": 2910
+    },
+    {
+      "time": "2025-09-13T10:24:08.940Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20148523008,
+      "freeMemory": 13813448704,
+      "gameCount": 2920
+    },
+    {
+      "time": "2025-09-13T10:24:19.565Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20138414080,
+      "freeMemory": 13823557632,
+      "gameCount": 2930
+    },
+    {
+      "time": "2025-09-13T10:24:29.311Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20156932096,
+      "freeMemory": 13805039616,
+      "gameCount": 2940
+    },
+    {
+      "time": "2025-09-13T10:24:40.834Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20204478464,
+      "freeMemory": 13757493248,
+      "gameCount": 2950
+    },
+    {
+      "time": "2025-09-13T10:24:52.324Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20202729472,
+      "freeMemory": 13759242240,
+      "gameCount": 2960
+    },
+    {
+      "time": "2025-09-13T10:25:02.495Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20218310656,
+      "freeMemory": 13743661056,
+      "gameCount": 2970
+    },
+    {
+      "time": "2025-09-13T10:25:10.690Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20186808320,
+      "freeMemory": 13775163392,
+      "gameCount": 2980
+    },
+    {
+      "time": "2025-09-13T10:25:20.654Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20185645056,
+      "freeMemory": 13776326656,
+      "gameCount": 2990
+    },
+    {
+      "time": "2025-09-13T10:25:33.102Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20165353472,
+      "freeMemory": 13796618240,
+      "gameCount": 3000
+    },
+    {
+      "time": "2025-09-13T10:25:44.192Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20156932096,
+      "freeMemory": 13805039616,
+      "gameCount": 3010
+    },
+    {
+      "time": "2025-09-13T10:25:53.351Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20179558400,
+      "freeMemory": 13782413312,
+      "gameCount": 3020
+    },
+    {
+      "time": "2025-09-13T10:26:02.865Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20192956416,
+      "freeMemory": 13769015296,
+      "gameCount": 3030
+    },
+    {
+      "time": "2025-09-13T10:26:13.315Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20182941696,
+      "freeMemory": 13779030016,
+      "gameCount": 3040
+    },
+    {
+      "time": "2025-09-13T10:26:22.735Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20204134400,
+      "freeMemory": 13757837312,
+      "gameCount": 3050
+    },
+    {
+      "time": "2025-09-13T10:26:33.896Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20205834240,
+      "freeMemory": 13756137472,
+      "gameCount": 3060
+    },
+    {
+      "time": "2025-09-13T10:26:44.484Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20229722112,
+      "freeMemory": 13732249600,
+      "gameCount": 3070
+    },
+    {
+      "time": "2025-09-13T10:26:56.394Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 21393498112,
+      "freeMemory": 12568473600,
+      "gameCount": 3080
+    },
+    {
+      "time": "2025-09-13T10:27:07.738Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20230520832,
+      "freeMemory": 13731450880,
+      "gameCount": 3090
+    },
+    {
+      "time": "2025-09-13T10:27:17.599Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20294094848,
+      "freeMemory": 13667876864,
+      "gameCount": 3100
+    },
+    {
+      "time": "2025-09-13T10:27:26.834Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20250570752,
+      "freeMemory": 13711400960,
+      "gameCount": 3110
+    },
+    {
+      "time": "2025-09-13T10:27:37.754Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20253790208,
+      "freeMemory": 13708181504,
+      "gameCount": 3120
+    },
+    {
+      "time": "2025-09-13T10:27:48.017Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20244414464,
+      "freeMemory": 13717557248,
+      "gameCount": 3130
+    },
+    {
+      "time": "2025-09-13T10:28:00.062Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20245962752,
+      "freeMemory": 13716008960,
+      "gameCount": 3140
+    },
+    {
+      "time": "2025-09-13T10:28:11.139Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20259549184,
+      "freeMemory": 13702422528,
+      "gameCount": 3150
+    },
+    {
+      "time": "2025-09-13T10:28:22.610Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20293578752,
+      "freeMemory": 13668392960,
+      "gameCount": 3160
+    },
+    {
+      "time": "2025-09-13T10:28:33.992Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20073721856,
+      "freeMemory": 13888249856,
+      "gameCount": 3170
+    },
+    {
+      "time": "2025-09-13T10:28:44.825Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20028514304,
+      "freeMemory": 13933457408,
+      "gameCount": 3180
+    },
+    {
+      "time": "2025-09-13T10:28:54.914Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20024373248,
+      "freeMemory": 13937598464,
+      "gameCount": 3190
+    },
+    {
+      "time": "2025-09-13T10:29:05.955Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20010692608,
+      "freeMemory": 13951279104,
+      "gameCount": 3200
+    },
+    {
+      "time": "2025-09-13T10:29:18.629Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20017029120,
+      "freeMemory": 13944942592,
+      "gameCount": 3210
+    },
+    {
+      "time": "2025-09-13T10:29:30.294Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20028596224,
+      "freeMemory": 13933375488,
+      "gameCount": 3220
+    },
+    {
+      "time": "2025-09-13T10:29:39.270Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20027744256,
+      "freeMemory": 13934227456,
+      "gameCount": 3230
+    },
+    {
+      "time": "2025-09-13T10:29:49.466Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20029743104,
+      "freeMemory": 13932228608,
+      "gameCount": 3240
+    },
+    {
+      "time": "2025-09-13T10:30:00.088Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20035502080,
+      "freeMemory": 13926469632,
+      "gameCount": 3250
+    },
+    {
+      "time": "2025-09-13T10:30:11.503Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20044263424,
+      "freeMemory": 13917708288,
+      "gameCount": 3260
+    },
+    {
+      "time": "2025-09-13T10:30:21.958Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20057247744,
+      "freeMemory": 13904723968,
+      "gameCount": 3270
+    },
+    {
+      "time": "2025-09-13T10:30:31.946Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20044795904,
+      "freeMemory": 13917175808,
+      "gameCount": 3280
+    },
+    {
+      "time": "2025-09-13T10:30:42.658Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20022669312,
+      "freeMemory": 13939302400,
+      "gameCount": 3290
+    },
+    {
+      "time": "2025-09-13T10:30:53.686Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20022030336,
+      "freeMemory": 13939941376,
+      "gameCount": 3300
+    },
+    {
+      "time": "2025-09-13T10:31:02.880Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20016812032,
+      "freeMemory": 13945159680,
+      "gameCount": 3310
+    },
+    {
+      "time": "2025-09-13T10:31:15.280Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20076924928,
+      "freeMemory": 13885046784,
+      "gameCount": 3320
+    },
+    {
+      "time": "2025-09-13T10:31:26.709Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20195840000,
+      "freeMemory": 13766131712,
+      "gameCount": 3330
+    },
+    {
+      "time": "2025-09-13T10:31:36.167Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20123471872,
+      "freeMemory": 13838499840,
+      "gameCount": 3340
+    },
+    {
+      "time": "2025-09-13T10:31:47.782Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 20114223104,
+      "freeMemory": 13847748608,
+      "gameCount": 3350
+    },
+    {
+      "time": "2025-09-13T10:31:59.630Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19884437504,
+      "freeMemory": 14077534208,
+      "gameCount": 3360
+    },
+    {
+      "time": "2025-09-13T10:32:09.906Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 19874803712,
+      "freeMemory": 14087168000,
+      "gameCount": 3370
+    }
+  ],
+  "startTime": "2025-09-13T09:32:19.158Z",
+  "endTime": "2025-09-13T10:32:20.175Z"
+}

@@ -15,6 +15,7 @@ interface DifficultySettingsProps {
   onRecrop?: () => void; // 新增：重新剪裁回调
   hasUploadedImage?: boolean; // 新增：是否有已上传图片
   onCustomGridChange?: (rows: number, cols: number) => void; // 新增：自定义网格更新回调
+  aspectRatio?: '1:1' | '16:9'; // 新增：画幅比例信息
 }
 
 export const DifficultySettings: React.FC<DifficultySettingsProps> = ({
@@ -28,16 +29,29 @@ export const DifficultySettings: React.FC<DifficultySettingsProps> = ({
   onShapeChange,
   onRecrop,
   hasUploadedImage,
-  onCustomGridChange
+  onCustomGridChange,
+  aspectRatio = '1:1' // 默认1:1
 }) => {
   const [customRows, setCustomRows] = useState('3');
   const [customCols, setCustomCols] = useState('3');
   const [showCustomInputs, setShowCustomInputs] = useState(false);
 
+  // 检查是否为16:9比例且选择了非方形拼块
+  const is16x9WithNonSquareShape = aspectRatio === '16:9' && selectedShape !== 'square';
+
   // 当选择自定义难度时显示输入框
   useEffect(() => {
     setShowCustomInputs(selectedDifficulty === 'custom');
   }, [selectedDifficulty]);
+
+  // 处理形状选择，如果是16:9比例且选择非方形，则提示并阻止选择
+  const handleShapeChange = (shape: PieceShape) => {
+    if (aspectRatio === '16:9' && shape !== 'square') {
+      alert('功能尚不完善，暂时封锁：16:9画幅比例目前仅支持方形拼块');
+      return;
+    }
+    onShapeChange(shape);
+  };
 
   // 基础难度选项
   const baseDifficultyOptions = [
@@ -107,7 +121,8 @@ export const DifficultySettings: React.FC<DifficultySettingsProps> = ({
       icon: '🔺',
       description: '三角形状，增加趣味性',
       preview: '/images/shapes/triangle-preview.svg',
-      difficulty: '中等'
+      difficulty: '中等',
+      disabled: aspectRatio === '16:9' // 16:9时禁用
     },
     {
       value: 'irregular' as PieceShape,
@@ -116,7 +131,8 @@ export const DifficultySettings: React.FC<DifficultySettingsProps> = ({
       description: '传统拼图形状，更有挑战',
       preview: '/images/shapes/irregular-preview.svg',
       difficulty: '困难',
-      comingSoon: true
+      comingSoon: true,
+      disabled: aspectRatio === '16:9' // 16:9时禁用
     },
     {
       value: 'tetris' as PieceShape,
@@ -124,11 +140,17 @@ export const DifficultySettings: React.FC<DifficultySettingsProps> = ({
       icon: '🟦🟦🟦',
       description: '经典俄罗斯方块拼图，挑战空间感',
       preview: '/images/shapes/tetris-preview.svg',
-      difficulty: '专家'
+      difficulty: '专家',
+      disabled: aspectRatio === '16:9' // 16:9时禁用
     }
   ];
 
   const handleComplete = () => {
+    if (is16x9WithNonSquareShape) {
+      alert('功能尚不完善，暂时封锁：16:9画幅比例目前仅支持方形拼块');
+      return;
+    }
+    
     if (selectedDifficulty === 'custom') {
       const rows = parseInt(customRows);
       const cols = parseInt(customCols);
@@ -399,8 +421,9 @@ export const DifficultySettings: React.FC<DifficultySettingsProps> = ({
           {shapeOptions.map((option) => (
             <button
               key={option.value}
-              className={`shape-card ${selectedShape === option.value ? 'selected' : ''}`}
-              onClick={() => onShapeChange(option.value)}
+              className={`shape-card ${selectedShape === option.value ? 'selected' : ''} ${option.disabled ? 'disabled' : ''}`}
+              onClick={() => handleShapeChange(option.value)}
+              disabled={option.disabled}
             >
               <div className="shape-header">
                 <span className="shape-icon">{option.icon}</span>
@@ -413,10 +436,15 @@ export const DifficultySettings: React.FC<DifficultySettingsProps> = ({
                   <span className="difficulty-badge" data-difficulty={option.difficulty.toLowerCase()}>
                     难度: {option.difficulty}
                   </span>
+                  {option.disabled && (
+                    <span className="disabled-badge" style={{color: '#ef4444', fontSize: '12px', marginLeft: '8px'}}>
+                      ⚠️ 16:9时不可用
+                    </span>
+                  )}
                 </div>
               </div>
               <div className={`selection-indicator ${selectedShape === option.value ? 'active' : ''}`}>
-                {selectedShape === option.value ? '✓ 已选择' : '点击选择'}
+                {selectedShape === option.value ? '✓ 已选择' : option.disabled ? '不可选择' : '点击选择'}
               </div>
             </button>
           ))}

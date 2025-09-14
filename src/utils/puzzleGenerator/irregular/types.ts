@@ -54,6 +54,13 @@ export interface IrregularPuzzlePiece extends Omit<PuzzlePiece, 'shape' | 'curre
   right: number;
   down: number;
   left: number;
+
+  // 操作历史状态：用于限制旋转和翻转操作
+  lastOperation?: 'rotate' | 'flip' | null;
+  
+  // 操作计数：用于实现旋转360度后可翻转，翻转两次后可旋转
+  rotateCount?: number; // 旋转次数
+  flipCount?: number;    // 翻转次数
 }
 
 // 尺寸接口

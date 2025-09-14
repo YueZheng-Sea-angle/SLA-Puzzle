@@ -1,0 +1,26 @@
+{
+  "totalGames": 10,
+  "totalDuration": 11.676,
+  "avgTime": 1105.6,
+  "errorCount": 0,
+  "crashDetected": false,
+  "performanceMetrics": [
+    {
+      "gameCount": 10,
+      "avgTime": 1105.6,
+      "errorCount": 0,
+      "timestamp": "2025-09-13T09:29:55.737Z"
+    }
+  ],
+  "memorySnapshots": [
+    {
+      "time": "2025-09-13T09:29:55.739Z",
+      "totalMemory": 33961971712,
+      "usedMemory": 21064773632,
+      "freeMemory": 12897198080,
+      "gameCount": 10
+    }
+  ],
+  "startTime": "2025-09-13T09:29:44.124Z",
+  "endTime": "2025-09-13T09:29:55.800Z"
+}

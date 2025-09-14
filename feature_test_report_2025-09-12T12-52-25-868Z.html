@@ -1,0 +1,834 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SLA-Puzzle 功能测试报告</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+    .container { max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    h1 { color: #333; text-align: center; }
+    h2 { color: #555; margin-top: 30px; }
+    h3 { color: #666; }
+    .summary { display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0; }
+    .summary-card { flex: 1; min-width: 180px; background: #f8f9fa; padding: 15px; border-radius: 6px; text-align: center; }
+    .summary-card h3 { margin: 0 0 10px 0; color: #555; font-size: 16px; }
+    .summary-card .value { font-size: 24px; font-weight: bold; }
+    .value.success { color: #28a745; }
+    .value.error { color: #dc3545; }
+    .value.info { color: #007bff; }
+    .chart-container { margin: 30px 0; height: 400px; }
+    .test-details { margin-top: 30px; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+    th { background-color: #f2f2f2; font-weight: bold; }
+    tr.success { background-color: #d4edda; }
+    tr.error { background-color: #f8d7da; }
+    .module-section { margin-bottom: 40px; border: 1px solid #e9ecef; border-radius: 6px; padding: 15px; }
+    .tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
+    .tab { cursor: pointer; padding: 8px 16px; border-radius: 4px 4px 0 0; }
+    .tab.active { background-color: #007bff; color: white; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>SLA-Puzzle 功能测试报告</h1>
+    
+    <div class="summary">
+      <div class="summary-card">
+        <h3>总测试用例数</h3>
+        <div class="value info">32</div>
+      </div>
+      <div class="summary-card">
+        <h3>通过测试</h3>
+        <div class="value success">32</div>
+      </div>
+      <div class="summary-card">
+        <h3>失败测试</h3>
+        <div class="value error">0</div>
+      </div>
+      <div class="summary-card">
+        <h3>通过率</h3>
+        <div class="value info">100.00%</div>
+      </div>
+      <div class="summary-card">
+        <h3>测试时长</h3>
+        <div class="value info">9.45秒</div>
+      </div>
+      <div class="summary-card">
+        <h3>开始时间</h3>
+        <div class="value info">2025/9/12 20:52:16</div>
+      </div>
+    </div>
+    
+    <div class="chart-container">
+      <canvas id="moduleChart"></canvas>
+    </div>
+    
+    <div class="tabs">
+      <div class="tab active" onclick="showTab('all-tests')">所有测试</div>
+      <div class="tab" onclick="showTab('grouped-tests')">按模块查看</div>
+    </div>
+    
+    <div class="tab-content active" id="all-tests">
+      <h2>所有测试用例详情</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>模块</th>
+            <th>测试用例</th>
+            <th>状态</th>
+            <th>耗时</th>
+            <th>错误信息</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+      <tr class="success">
+        <td>1</td>
+        <td>拼图生成模块</td>
+        <td>生成简单难度拼图</td>
+        <td>通过</td>
+        <td>379ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>2</td>
+        <td>拼图生成模块</td>
+        <td>生成中等难度拼图</td>
+        <td>通过</td>
+        <td>201ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>3</td>
+        <td>拼图生成模块</td>
+        <td>生成困难难度拼图</td>
+        <td>通过</td>
+        <td>203ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>4</td>
+        <td>拼图生成模块</td>
+        <td>生成专家难度拼图</td>
+        <td>通过</td>
+        <td>359ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>5</td>
+        <td>拼图生成模块</td>
+        <td>自定义网格大小拼图</td>
+        <td>通过</td>
+        <td>171ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>6</td>
+        <td>拼图生成模块</td>
+        <td>拼图生成失败 - 无参数</td>
+        <td>通过</td>
+        <td>265ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>7</td>
+        <td>游戏逻辑模块</td>
+        <td>初始化游戏状态</td>
+        <td>通过</td>
+        <td>406ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>8</td>
+        <td>游戏逻辑模块</td>
+        <td>保存游戏状态</td>
+        <td>通过</td>
+        <td>218ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>9</td>
+        <td>游戏逻辑模块</td>
+        <td>保存游戏失败 - 缺少用户ID</td>
+        <td>通过</td>
+        <td>216ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>10</td>
+        <td>游戏逻辑模块</td>
+        <td>保存游戏失败 - 缺少游戏状态</td>
+        <td>通过</td>
+        <td>216ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>11</td>
+        <td>用户认证模块</td>
+        <td>普通用户登录认证</td>
+        <td>通过</td>
+        <td>310ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>12</td>
+        <td>用户认证模块</td>
+        <td>管理员用户登录认证</td>
+        <td>通过</td>
+        <td>314ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>13</td>
+        <td>用户认证模块</td>
+        <td>认证失败 - 用户名或密码错误</td>
+        <td>通过</td>
+        <td>309ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>14</td>
+        <td>用户认证模块</td>
+        <td>认证失败 - 缺少用户名</td>
+        <td>通过</td>
+        <td>309ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>15</td>
+        <td>用户认证模块</td>
+        <td>认证失败 - 缺少密码</td>
+        <td>通过</td>
+        <td>310ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>16</td>
+        <td>成就系统模块</td>
+        <td>获取用户成就列表</td>
+        <td>通过</td>
+        <td>184ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>17</td>
+        <td>成就系统模块</td>
+        <td>验证成就数据结构</td>
+        <td>通过</td>
+        <td>192ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>18</td>
+        <td>排行榜模块</td>
+        <td>获取排行榜数据</td>
+        <td>通过</td>
+        <td>156ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>19</td>
+        <td>排行榜模块</td>
+        <td>验证排行榜数据结构</td>
+        <td>通过</td>
+        <td>155ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>20</td>
+        <td>排行榜模块</td>
+        <td>排行榜应按分数降序排列</td>
+        <td>通过</td>
+        <td>154ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>21</td>
+        <td>拼图形状模块</td>
+        <td>生成方形拼图</td>
+        <td>通过</td>
+        <td>293ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>22</td>
+        <td>拼图形状模块</td>
+        <td>生成三角形拼图</td>
+        <td>通过</td>
+        <td>280ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>23</td>
+        <td>拼图形状模块</td>
+        <td>生成异形拼图</td>
+        <td>通过</td>
+        <td>342ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>24</td>
+        <td>拼图形状模块</td>
+        <td>生成简单难度俄罗斯方块拼图</td>
+        <td>通过</td>
+        <td>292ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>25</td>
+        <td>拼图形状模块</td>
+        <td>生成专家难度俄罗斯方块拼图</td>
+        <td>通过</td>
+        <td>296ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>26</td>
+        <td>拼图形状模块</td>
+        <td>不同难度下的方形拼图比较</td>
+        <td>通过</td>
+        <td>558ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>27</td>
+        <td>多人对战模块</td>
+        <td>创建1v1对战游戏</td>
+        <td>通过</td>
+        <td>201ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>28</td>
+        <td>多人对战模块</td>
+        <td>开始多人对战游戏</td>
+        <td>通过</td>
+        <td>312ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>29</td>
+        <td>多人对战模块</td>
+        <td>提交游戏动作</td>
+        <td>通过</td>
+        <td>466ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>30</td>
+        <td>多人对战模块</td>
+        <td>结束多人对战游戏并指定获胜者</td>
+        <td>通过</td>
+        <td>429ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>31</td>
+        <td>多人对战模块</td>
+        <td>创建多人对战游戏失败 - 缺少玩家ID</td>
+        <td>通过</td>
+        <td>204ms</td>
+        <td>-</td>
+      </tr>
+    
+      <tr class="success">
+        <td>32</td>
+        <td>多人对战模块</td>
+        <td>使用不同拼图形状进行多人对战</td>
+        <td>通过</td>
+        <td>201ms</td>
+        <td>-</td>
+      </tr>
+    
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="tab-content" id="grouped-tests">
+      <h2>测试用例详情（按模块分组）</h2>
+      
+      <div class="module-section">
+        <h3>拼图生成模块</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>测试用例</th>
+              <th>状态</th>
+              <th>耗时</th>
+              <th>错误信息</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+        <tr class="success">
+          <td>1</td>
+          <td>生成简单难度拼图</td>
+          <td>通过</td>
+          <td>379ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>2</td>
+          <td>生成中等难度拼图</td>
+          <td>通过</td>
+          <td>201ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>3</td>
+          <td>生成困难难度拼图</td>
+          <td>通过</td>
+          <td>203ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>4</td>
+          <td>生成专家难度拼图</td>
+          <td>通过</td>
+          <td>359ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>5</td>
+          <td>自定义网格大小拼图</td>
+          <td>通过</td>
+          <td>171ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>6</td>
+          <td>拼图生成失败 - 无参数</td>
+          <td>通过</td>
+          <td>265ms</td>
+          <td>-</td>
+        </tr>
+      
+          </tbody>
+        </table>
+      </div>
+    
+      <div class="module-section">
+        <h3>游戏逻辑模块</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>测试用例</th>
+              <th>状态</th>
+              <th>耗时</th>
+              <th>错误信息</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+        <tr class="success">
+          <td>1</td>
+          <td>初始化游戏状态</td>
+          <td>通过</td>
+          <td>406ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>2</td>
+          <td>保存游戏状态</td>
+          <td>通过</td>
+          <td>218ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>3</td>
+          <td>保存游戏失败 - 缺少用户ID</td>
+          <td>通过</td>
+          <td>216ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>4</td>
+          <td>保存游戏失败 - 缺少游戏状态</td>
+          <td>通过</td>
+          <td>216ms</td>
+          <td>-</td>
+        </tr>
+      
+          </tbody>
+        </table>
+      </div>
+    
+      <div class="module-section">
+        <h3>用户认证模块</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>测试用例</th>
+              <th>状态</th>
+              <th>耗时</th>
+              <th>错误信息</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+        <tr class="success">
+          <td>1</td>
+          <td>普通用户登录认证</td>
+          <td>通过</td>
+          <td>310ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>2</td>
+          <td>管理员用户登录认证</td>
+          <td>通过</td>
+          <td>314ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>3</td>
+          <td>认证失败 - 用户名或密码错误</td>
+          <td>通过</td>
+          <td>309ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>4</td>
+          <td>认证失败 - 缺少用户名</td>
+          <td>通过</td>
+          <td>309ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>5</td>
+          <td>认证失败 - 缺少密码</td>
+          <td>通过</td>
+          <td>310ms</td>
+          <td>-</td>
+        </tr>
+      
+          </tbody>
+        </table>
+      </div>
+    
+      <div class="module-section">
+        <h3>成就系统模块</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>测试用例</th>
+              <th>状态</th>
+              <th>耗时</th>
+              <th>错误信息</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+        <tr class="success">
+          <td>1</td>
+          <td>获取用户成就列表</td>
+          <td>通过</td>
+          <td>184ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>2</td>
+          <td>验证成就数据结构</td>
+          <td>通过</td>
+          <td>192ms</td>
+          <td>-</td>
+        </tr>
+      
+          </tbody>
+        </table>
+      </div>
+    
+      <div class="module-section">
+        <h3>排行榜模块</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>测试用例</th>
+              <th>状态</th>
+              <th>耗时</th>
+              <th>错误信息</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+        <tr class="success">
+          <td>1</td>
+          <td>获取排行榜数据</td>
+          <td>通过</td>
+          <td>156ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>2</td>
+          <td>验证排行榜数据结构</td>
+          <td>通过</td>
+          <td>155ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>3</td>
+          <td>排行榜应按分数降序排列</td>
+          <td>通过</td>
+          <td>154ms</td>
+          <td>-</td>
+        </tr>
+      
+          </tbody>
+        </table>
+      </div>
+    
+      <div class="module-section">
+        <h3>拼图形状模块</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>测试用例</th>
+              <th>状态</th>
+              <th>耗时</th>
+              <th>错误信息</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+        <tr class="success">
+          <td>1</td>
+          <td>生成方形拼图</td>
+          <td>通过</td>
+          <td>293ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>2</td>
+          <td>生成三角形拼图</td>
+          <td>通过</td>
+          <td>280ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>3</td>
+          <td>生成异形拼图</td>
+          <td>通过</td>
+          <td>342ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>4</td>
+          <td>生成简单难度俄罗斯方块拼图</td>
+          <td>通过</td>
+          <td>292ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>5</td>
+          <td>生成专家难度俄罗斯方块拼图</td>
+          <td>通过</td>
+          <td>296ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>6</td>
+          <td>不同难度下的方形拼图比较</td>
+          <td>通过</td>
+          <td>558ms</td>
+          <td>-</td>
+        </tr>
+      
+          </tbody>
+        </table>
+      </div>
+    
+      <div class="module-section">
+        <h3>多人对战模块</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>测试用例</th>
+              <th>状态</th>
+              <th>耗时</th>
+              <th>错误信息</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+        <tr class="success">
+          <td>1</td>
+          <td>创建1v1对战游戏</td>
+          <td>通过</td>
+          <td>201ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>2</td>
+          <td>开始多人对战游戏</td>
+          <td>通过</td>
+          <td>312ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>3</td>
+          <td>提交游戏动作</td>
+          <td>通过</td>
+          <td>466ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>4</td>
+          <td>结束多人对战游戏并指定获胜者</td>
+          <td>通过</td>
+          <td>429ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>5</td>
+          <td>创建多人对战游戏失败 - 缺少玩家ID</td>
+          <td>通过</td>
+          <td>204ms</td>
+          <td>-</td>
+        </tr>
+      
+        <tr class="success">
+          <td>6</td>
+          <td>使用不同拼图形状进行多人对战</td>
+          <td>通过</td>
+          <td>201ms</td>
+          <td>-</td>
+        </tr>
+      
+          </tbody>
+        </table>
+      </div>
+    
+    </div>
+  </div>
+  
+  <script>
+    // 切换标签页
+    function showTab(tabId) {
+      // 隐藏所有内容
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(content => content.classList.remove('active'));
+      
+      // 重置所有标签
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      
+      // 显示选中的内容和标签
+      document.getElementById(tabId).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+    
+    // 模块测试结果图表
+    const ctx = document.getElementById('moduleChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ["拼图生成模块","游戏逻辑模块","用户认证模块","成就系统模块","排行榜模块","拼图形状模块","多人对战模块"],
+        datasets: [
+          {
+            label: '通过',
+            data: [6,4,5,2,3,6,6],
+            backgroundColor: 'rgba(75, 192, 192, 0.8)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+          },
+          {
+            label: '失败',
+            data: [0,0,0,0,0,0,0],
+            backgroundColor: 'rgba(255, 99, 132, 0.8)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: '测试用例数量'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: '模块'
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+  

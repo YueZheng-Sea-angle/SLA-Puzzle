@@ -608,6 +608,8 @@ export const PuzzleEditor: React.FC<PuzzleEditorProps> = ({ onBackToMenu, onBack
           // 新增：重新剪裁功能
           onRecrop={() => setCurrentStep('crop')}
           hasUploadedImage={!!uploadedImage}
+          // 新增：传递画幅比例信息
+          aspectRatio={customPuzzleConfig.aspectRatio}
         />
       </div>
     </div>

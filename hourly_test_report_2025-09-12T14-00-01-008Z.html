@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SLA-Puzzle 一小时性能测试报告</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+    .container { max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    h1 { color: #333; text-align: center; }
+    .summary { display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0; }
+    .summary-card { flex: 1; min-width: 200px; background: #f8f9fa; padding: 15px; border-radius: 6px; text-align: center; }
+    .summary-card h3 { margin: 0 0 10px 0; color: #555; }
+    .summary-card .value { font-size: 24px; font-weight: bold; color: #007bff; }
+    .chart-container { margin: 30px 0; height: 400px; }
+    .error-section { margin-top: 30px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+    th { background-color: #f2f2f2; }
+    .success { color: #28a745; }
+    .error { color: #dc3545; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>SLA-Puzzle 一小时性能测试报告</h1>
+    
+    <div class="summary">
+      <div class="summary-card">
+        <h3>总游戏局数</h3>
+        <div class="value">5332</div>
+      </div>
+      <div class="summary-card">
+        <h3>成功完成</h3>
+        <div class="value success">5332</div>
+      </div>
+      <div class="summary-card">
+        <h3>失败次数</h3>
+        <div class="value error">0</div>
+      </div>
+      <div class="summary-card">
+        <h3>错误率</h3>
+        <div class="value">0.00%</div>
+      </div>
+      <div class="summary-card">
+        <h3>测试时长</h3>
+        <div class="value">01:00:00</div>
+      </div>
+      <div class="summary-card">
+        <h3>平均每局耗时</h3>
+        <div class="value">00:03:27</div>
+      </div>
+    </div>
+    
+    <div class="chart-container">
+      <canvas id="performanceChart"></canvas>
+    </div>
+    
+    <div class="difficulty-section">
+      <h2>难度分布</h2>
+      <div class="chart-container">
+        <canvas id="difficultyChart"></canvas>
+      </div>
+    </div>
+    
+    
+  </div>
+  
+  <script>
+    // 性能趋势图
+    const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+    new Chart(performanceCtx, {
+      type: 'line',
+      data: {
+        labels: ["21:00:34","21:01:08","21:01:41","21:02:16","21:02:48","21:03:21","21:03:54","21:04:27","21:05:01","21:05:34","21:06:07","21:06:42","21:07:16","21:07:49","21:08:22","21:08:57","21:09:30","21:10:04","21:10:37","21:11:12","21:11:46","21:12:19","21:12:52","21:13:27","21:14:00","21:14:33","21:15:07","21:15:40","21:16:14","21:16:48","21:17:21","21:17:53","21:18:27","21:18:59","21:19:33","21:20:07","21:20:42","21:21:17","21:21:51","21:22:25","21:22:58","21:23:33","21:24:07","21:24:41","21:25:16","21:25:50","21:26:22","21:26:56","21:27:29","21:28:03","21:28:36","21:29:11","21:29:46","21:30:19","21:30:52","21:31:25","21:32:00","21:32:34","21:33:09","21:33:43","21:34:17","21:34:52","21:35:26","21:35:59","21:36:34","21:37:08","21:37:41","21:38:13","21:38:47","21:39:21","21:39:54","21:40:28","21:41:02","21:41:34","21:42:09","21:42:42","21:43:15","21:43:50","21:44:24","21:44:58","21:45:32","21:46:07","21:46:41","21:47:15","21:47:49","21:48:23","21:48:57","21:49:32","21:50:07","21:50:40","21:51:13","21:51:46","21:52:20","21:52:53","21:53:28","21:54:02","21:54:36","21:55:09","21:55:42","21:56:17","21:56:50","21:57:24","21:57:59","21:58:32","21:59:05","21:59:38","22:00:01"],
+        datasets: [
+          {
+            label: '完成游戏数',
+            data: [50,100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900,950,1000,1050,1100,1150,1200,1250,1300,1350,1400,1450,1500,1550,1600,1650,1700,1750,1800,1850,1900,1950,2000,2050,2100,2150,2200,2250,2300,2350,2400,2450,2500,2550,2600,2650,2700,2750,2800,2850,2900,2950,3000,3050,3100,3150,3200,3250,3300,3350,3400,3450,3500,3550,3600,3650,3700,3750,3800,3850,3900,3950,4000,4050,4100,4150,4200,4250,4300,4350,4400,4450,4500,4550,4600,4650,4700,4750,4800,4850,4900,4950,5000,5050,5100,5150,5200,5250,5300,5332],
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            yAxisID: 'y'
+          },
+          {
+            label: '错误率(%)',
+            data: ["0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00","0.00"],
+            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            yAxisID: 'y1'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: '完成游戏数'
+            }
+          },
+          y1: {
+            beginAtZero: true,
+            position: 'right',
+            title: {
+              display: true,
+              text: '错误率(%)'
+            },
+            grid: {
+              drawOnChartArea: false
+            }
+          }
+        }
+      }
+    });
+    
+    // 难度分布图
+    const difficultyCtx = document.getElementById('difficultyChart').getContext('2d');
+    new Chart(difficultyCtx, {
+      type: 'bar',
+      data: {
+        labels: ['简单', '中等', '困难', '专家'],
+        datasets: [{
+          label: '游戏数量',
+          data: [2093,1674,1061,504],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.5)',
+            'rgba(54, 162, 235, 0.5)',
+            'rgba(255, 206, 86, 0.5)',
+            'rgba(75, 192, 192, 0.5)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: '游戏数量'
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+  

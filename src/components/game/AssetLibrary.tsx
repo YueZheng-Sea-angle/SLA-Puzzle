@@ -220,6 +220,31 @@ const builtinAssets: Asset[] = [
     fileSize: 6000,
     createdAt: new Date('2024-01-01'),
   },
+  // 新增的自然风光PNG图片
+  {
+    id: 'aurora',
+    name: '极光景象',
+    category: '自然风光',
+    tags: ['极光', '自然', '夜景', '冰雪'],
+    filePath: '/images/nature/aurora.png',
+    thumbnail: '/images/nature/aurora.png',
+    width: 400,
+    height: 400,
+    fileSize: 114000,
+    createdAt: new Date('2024-01-01'),
+  },
+  {
+    id: 'scene1',
+    name: '自然景观',
+    category: '自然风光',
+    tags: ['自然', '风景', '山水', '户外'],
+    filePath: '/images/nature/scene1.png',
+    thumbnail: '/images/nature/scene1.png',
+    width: 400,
+    height: 400,
+    fileSize: 138000,
+    createdAt: new Date('2024-01-01'),
+  },
 
   // 动物类
   {
@@ -232,6 +257,31 @@ const builtinAssets: Asset[] = [
     width: 400,
     height: 400,
     fileSize: 5500,
+    createdAt: new Date('2024-01-01'),
+  },
+  // 新增的动物PNG图片
+  {
+    id: 'fox',
+    name: '机敏狐狸',
+    category: '动物',
+    tags: ['狐狸', '野生动物', '红色', '动物'],
+    filePath: '/images/animals/fox.png',
+    thumbnail: '/images/animals/fox.png',
+    width: 400,
+    height: 400,
+    fileSize: 143000,
+    createdAt: new Date('2024-01-01'),
+  },
+  {
+    id: 'rabbit',
+    name: '可爱兔子',
+    category: '动物',
+    tags: ['兔子', '宠物', '可爱', '动物'],
+    filePath: '/images/animals/rabbit.png',
+    thumbnail: '/images/animals/rabbit.png',
+    width: 400,
+    height: 400,
+    fileSize: 593600,
     createdAt: new Date('2024-01-01'),
   },
 
@@ -248,6 +298,31 @@ const builtinAssets: Asset[] = [
     fileSize: 6500,
     createdAt: new Date('2024-01-01'),
   },
+  // 新增的建筑PNG图片
+  {
+    id: 'eiffel_tower',
+    name: '埃菲尔铁塔',
+    category: '建筑',
+    tags: ['埃菲尔铁塔', '巴黎', '法国', '地标'],
+    filePath: '/images/buildings/Eiffel tower.png',
+    thumbnail: '/images/buildings/Eiffel tower.png',
+    width: 400,
+    height: 400,
+    fileSize: 79600,
+    createdAt: new Date('2024-01-01'),
+  },
+  {
+    id: 'building1',
+    name: '万神殿',
+    category: '建筑',
+    tags: ['建筑', '罗马', '古典', '历史'],
+    filePath: '/images/buildings/build1.png',
+    thumbnail: '/images/buildings/build1.png',
+    width: 400,
+    height: 400,
+    fileSize: 214000,
+    createdAt: new Date('2024-01-01'),
+  },
 
   // 动漫类
   {
@@ -260,6 +335,43 @@ const builtinAssets: Asset[] = [
     width: 400,
     height: 400,
     fileSize: 7000,
+    createdAt: new Date('2024-01-01'),
+  },
+  // 新增的动漫PNG图片
+  {
+    id: 'blue_eyes',
+    name: '青眼白龙',
+    category: '动漫',
+    tags: ['动漫', '角色', '青眼', '二次元'],
+    filePath: '/images/anime/blueeyes.png',
+    thumbnail: '/images/anime/blueeyes.png',
+    width: 400,
+    height: 400,
+    fileSize: 2448000,
+    createdAt: new Date('2024-01-01'),
+  },
+  {
+    id: 'dimension',
+    name: '次元吸引者',
+    category: '动漫',
+    tags: ['动漫', '角色', '次元', '二次元'],
+    filePath: '/images/anime/dimension.png',
+    thumbnail: '/images/anime/dimension.png',
+    width: 400,
+    height: 400,
+    fileSize: 2143600,
+    createdAt: new Date('2024-01-01'),
+  },
+  {
+    id: 'yugioh',
+    name: '闪刀启动 - 交闪',
+    category: '动漫',
+    tags: ['动漫', '闪刀姬', '卡牌', '二次元'],
+    filePath: '/images/anime/yugioh.png',
+    thumbnail: '/images/anime/yugioh.png',
+    width: 400,
+    height: 400,
+    fileSize: 636500,
     createdAt: new Date('2024-01-01'),
   },
 ];
@@ -433,40 +545,45 @@ export const AssetLibrary: React.FC<AssetLibraryProps> = ({
       <div className="library-header">
         <h3 className="m-0 text-gray-800 text-xl font-bold">素材库</h3>
         
-        {showUpload && onAssetUpload && (
-          <div className="upload-section">
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleFileUpload}
-              style={{ display: 'none' }}
-              id="asset-upload"
-              disabled={isUploading}
-            />
-            <Button
-              onClick={() => document.getElementById('asset-upload')?.click()}
-              variant="primary"
-              size="small"
-              disabled={isUploading}
-            >
-              {isUploading ? '上传中...' : '上传素材'}
-            </Button>
+        <div className="header-controls">
+          <div className="search-container">
+            <div className="search-box">
+              <input
+                type="text"
+                placeholder="搜索素材..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="search-input"
+              />
+              <span className="search-icon">🔍</span>
+            </div>
           </div>
-        )}
+          
+          {showUpload && onAssetUpload && (
+            <div className="upload-section">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileUpload}
+                style={{ display: 'none' }}
+                id="asset-upload"
+                disabled={isUploading}
+              />
+              <Button
+                onClick={() => document.getElementById('asset-upload')?.click()}
+                variant="primary"
+                size="small"
+                disabled={isUploading}
+              >
+                {isUploading ? '上传中...' : '上传素材'}
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* 搜索和筛选 */}
-      <div className="library-filters">
-        <div className="search-box">
-          <input
-            type="text"
-            placeholder="搜索素材..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="search-input"
-          />
-        </div>
-        
+      {/* 分类标签 */}
+      <div className="category-tabs-container">
         <div className="category-tabs">
           {categories.map(category => (
             <button

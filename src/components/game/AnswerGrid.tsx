@@ -72,24 +72,29 @@ export const AnswerGrid: React.FC<AnswerGridProps> = ({
     const maxCellWidth = Math.floor(availableWidth / gridSize.cols);
     const maxCellHeight = Math.floor(availableHeight / gridSize.rows);
 
-    // 根据宽高比计算合适的单元格大小
-    let newSize;
-    if (aspectRatio === '16:9') {
+    // 对于俄罗斯方块拼图，强制使用1:1比例
+    if (pieceShape === 'tetris') {
+      // 俄罗斯方块使用1:1比例，增大方格大小
+      const newSize = Math.min(maxCellWidth, maxCellHeight, 120); // 增大到最大120px
+      const minSize = (gridSize.rows <= 3 && gridSize.cols <= 3) ? 80 : 90; // 增大最小尺寸
+      const finalSize = Math.max(minSize, newSize);
+      setCellSize(finalSize);
+    } else if (aspectRatio === '16:9') {
       // 对于16:9比例，优先保证宽度，然后根据比例计算高度
       const targetWidth = Math.min(maxCellWidth, 160); // 限制最大宽度
       const targetHeight = Math.floor(targetWidth * 9 / 16);
-      newSize = Math.min(targetWidth, targetHeight, maxCellHeight);
+      const newSize = Math.min(targetWidth, targetHeight, maxCellHeight);
+      const minSize = (gridSize.rows <= 3 && gridSize.cols <= 3) ? 80 : 100;
+      const finalSize = Math.max(minSize, newSize);
+      setCellSize(finalSize);
     } else {
       // 对于1:1比例，取较小值确保所有单元格都能显示
-      newSize = Math.min(maxCellWidth, maxCellHeight, 140); // 最大140px (降低以避免溢出)
+      const newSize = Math.min(maxCellWidth, maxCellHeight, 140); // 最大140px (降低以避免溢出)
+      const minSize = (gridSize.rows <= 3 && gridSize.cols <= 3) ? 80 : 100;
+      const finalSize = Math.max(minSize, newSize);
+      setCellSize(finalSize);
     }
-
-    // 确保单元格大小合理，但对于小网格(如3x3)允许更小的尺寸
-    const minSize = (gridSize.rows <= 3 && gridSize.cols <= 3) ? 80 : 100;
-    const finalSize = Math.max(minSize, newSize);
-
-    setCellSize(finalSize);
-  }, [gridSize.cols, gridSize.rows, aspectRatio]);
+  }, [gridSize.cols, gridSize.rows, aspectRatio, pieceShape]);
 
   // 处理槽位点击
   const handleSlotClick = (slotIndex: number) => {
@@ -190,7 +195,7 @@ export const AnswerGrid: React.FC<AnswerGridProps> = ({
   // 创建网格样式对象
   const gridStyle: React.CSSProperties = {
     gridTemplateColumns: `repeat(${gridSize.cols}, ${cellSize}px)`,
-    gridTemplateRows: `repeat(${gridSize.rows}, ${aspectRatio === '16:9' ? Math.floor(cellSize * 9 / 16) : cellSize}px)`,
+    gridTemplateRows: `repeat(${gridSize.rows}, ${pieceShape === 'tetris' ? cellSize : (aspectRatio === '16:9' ? Math.floor(cellSize * 9 / 16) : cellSize)}px)`,
   };
 
   // 根据网格尺寸动态计算16:9裁剪的缩放因子
@@ -224,21 +229,12 @@ export const AnswerGrid: React.FC<AnswerGridProps> = ({
   const scaleFactors = aspectRatio === '16:9' ? get16by9ScaleFactors() : null;
 
   return (
-    <div 
-      className="answer-grid-container" 
-      ref={containerRef}
-      data-aspect-ratio={aspectRatio}
-      style={{
-        '--grid-scale-factor': scaleFactors?.gridScale,
-        '--image-scale-factor': scaleFactors?.imageScale
-      } as React.CSSProperties}
-    >
-      {/* 网格槽位 */}
-      <div
-        ref={gridRef}
+    <div className="answer-grid-container" ref={containerRef}>
+      <div 
         className={`answer-grid ${pieceShape === 'triangle' ? 'triangle-grid' : ''
           } ${pieceShape === 'tetris' ? 'tetris-grid' : ''
           }`}
+        ref={gridRef} 
         style={gridStyle}
       >
         {pieceShape === 'triangle' ? (
@@ -367,7 +363,7 @@ export const AnswerGrid: React.FC<AnswerGridProps> = ({
             );
           })
         ) : pieceShape === 'tetris' ? (
-          // 俄罗斯方块拼图：每个槽位显示对应的图像片段
+          // 俄罗斯方块拼图：特殊渲染逻辑
           answerGrid.map((piece, index) => {
             const row = Math.floor(index / gridSize.cols);
             const col = index % gridSize.cols;
@@ -420,7 +416,7 @@ export const AnswerGrid: React.FC<AnswerGridProps> = ({
                 onDrop={(e) => handleSlotDrop(e, index)}
                 style={{
                   width: `${cellSize}px`,
-                  height: `${aspectRatio === '16:9' ? Math.floor(cellSize * 9 / 16) : cellSize}px`,
+                  height: `${pieceShape === 'tetris' ? cellSize : (aspectRatio === '16:9' ? Math.floor(cellSize * 9 / 16) : cellSize)}px`,
                 }}
               >
                 {/* 槽位编号 */}
@@ -557,8 +553,8 @@ export const AnswerGrid: React.FC<AnswerGridProps> = ({
         )}
       </div>
 
-      {/* 网格信息 */}
-      <div className="grid-info">
+      {/* 网格信息 - 固定在答题卡内部下方 */}
+      <div className="grid-info fixed-bottom">
         <div className="completion-status">
           已完成: {completedCount} / {answerGrid.length}
         </div>

@@ -130,10 +130,10 @@ export const PuzzlePieceArea: React.FC<PuzzlePieceAreaProps> = ({
                       : undefined,
                   height: piece.tetrisShape
                     ? piece.tetrisShape === 'I'
-                      ? '320px'
+                      ? '100px' // 俄罗斯方块使用1:1比例
                       : piece.tetrisShape === 'I3'
-                        ? '160px'
-                        : `${Math.min(Math.max(piece.height * 1.2, 120), 180)}px`
+                        ? '80px' // I3型调整为1:1比例
+                        : `${Math.min(Math.max(piece.height * 1.2, 120), 200)}px` // 其他俄罗斯方块保持原有逻辑
                     : piece.shape === 'square' && piece.width && piece.height
                       ? aspectRatio === '16:9' && pieceShape === 'square'
                         ? `${Math.min(Math.max(piece.height * 1.3, 160), 220)}px` // 16:9方形拼图块稍大

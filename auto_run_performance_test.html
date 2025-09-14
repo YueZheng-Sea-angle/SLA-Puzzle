@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLA-Puzzle 性能测试 - 自动运行</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        #test-output {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+            font-family: 'Courier New', Courier, monospace;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+        }
+        .status {
+            padding: 10px;
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>SLA-Puzzle 性能测试 - 自动运行</h1>
+    <div class="status">
+        <p><strong>测试状态：</strong>正在自动运行性能测试...</p>
+        <p>测试完成后，HTML报告将自动下载到您的计算机。</p>
+    </div>
+    <div id="test-output">性能测试输出日志将显示在这里...</div>
+
+    <script>
+        // 重写console.log以在页面上显示输出
+        const originalConsoleLog = console.log;
+        const testOutput = document.getElementById('test-output');
+        
+        console.log = function() {
+            const args = Array.from(arguments);
+            const logString = args.map(arg => {
+                if (typeof arg === 'object') {
+                    try {
+                        return JSON.stringify(arg, null, 2);
+                    } catch (e) {
+                        return String(arg);
+                    }
+                }
+                return String(arg);
+            }).join(' ');
+            
+            testOutput.textContent += logString + '\n';
+            testOutput.scrollTop = testOutput.scrollHeight;
+            originalConsoleLog.apply(console, arguments);
+        };
+        
+        // 重写console.error
+        const originalConsoleError = console.error;
+        console.error = function() {
+            const args = Array.from(arguments);
+            const logString = '❌ ' + args.map(arg => {
+                if (typeof arg === 'object') {
+                    try {
+                        return JSON.stringify(arg, null, 2);
+                    } catch (e) {
+                        return String(arg);
+                    }
+                }
+                return String(arg);
+            }).join(' ');
+            
+            testOutput.textContent += logString + '\n';
+            testOutput.scrollTop = testOutput.scrollHeight;
+            originalConsoleError.apply(console, arguments);
+        };
+        
+        // 加载并运行性能测试
+        window.addEventListener('load', function() {
+            testOutput.textContent = '正在加载性能测试脚本...\n';
+            
+            const script = document.createElement('script');
+            script.src = 'performance_test.js';
+            script.onload = function() {
+                testOutput.textContent += '性能测试脚本已加载，测试正在进行中...\n';
+            };
+            script.onerror = function() {
+                testOutput.textContent += '❌ 加载性能测试脚本失败！\n';
+            };
+            document.body.appendChild(script);
+        });
+    </script>
+</body>
+</html>
