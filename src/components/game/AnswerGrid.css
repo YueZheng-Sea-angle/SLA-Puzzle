@@ -273,9 +273,20 @@
   background: #f8fafc;
   padding: 12px 16px;
   border-radius: 8px;
-  border: 1px solid #e2e8f0;
+  border: none; /* 移除边框 */
   flex-shrink: 0;
   /* 防止被压缩 */
+}
+
+/* 固定在答题卡底部的统计信息 */
+.grid-info.fixed-bottom {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  margin: 0;
+  z-index: 10;
+  box-shadow: none; /* 移除阴影 */
 }
 
 .completion-status,

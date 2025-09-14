@@ -42,6 +42,7 @@ export interface PuzzleConfig {
   pieces: PuzzlePiece[];
   createdAt: Date;
   updatedAt: Date;
+  aspectRatio?: '1:1' | '16:9'; // 裁剪比例，可以是1:1或16:9
 }
 
 // 难度等级

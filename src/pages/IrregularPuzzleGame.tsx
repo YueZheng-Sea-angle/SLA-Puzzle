@@ -36,6 +36,18 @@ interface IrregularPuzzleGameProps {
   gridSize?: { rows: number; cols: number } | '3x3' | '4x4' | '5x5' | '6x6';
 }
 
+// 定义操作记录类型
+interface GameMove {
+  id: string;
+  pieceId: string;
+  action: 'place' | 'remove' | 'rotate' | 'flip' | 'replace';
+  fromSlot: number | null;
+  toSlot: number | null;
+  replacedPieceId?: string;
+  rotationDelta?: number;
+  timestamp: Date;
+}
+
 export const IrregularPuzzleGame: React.FC<IrregularPuzzleGameProps> = ({
   onBackToMenu,
   imageData,
@@ -55,10 +67,19 @@ export const IrregularPuzzleGame: React.FC<IrregularPuzzleGameProps> = ({
   const [draggedPiece, setDraggedPiece] = useState<string | null>(null);
   const [dragOverSlot, setDragOverSlot] = useState<number | null>(null);
   const [answerGrid, setAnswerGrid] = useState<(IrregularPuzzlePiece | null)[]>([]);
+  const [history, setHistory] = useState<GameMove[]>([]);
+  const [redoHistory, setRedoHistory] = useState<GameMove[]>([]);
 
   // 旋转/翻转直接同步到puzzleConfig.pieces属性
   const handleRotatePiece = useCallback((pieceId: string, direction: 1 | -1 = 1) => {
     if (!puzzleConfig) return;
+    
+    // 检查操作限制：如果上次操作是翻转且翻转次数小于2，则不允许旋转
+    const targetPiece = puzzleConfig.pieces.find(p => p.id === pieceId);
+    if (targetPiece?.lastOperation === 'flip' && (targetPiece?.flipCount ?? 0) < 2) {
+      return; // 翻转后且翻转次数小于2时不可旋转
+    }
+    
     setPuzzleConfig(cfg => {
       if (!cfg) return cfg;
       const newPieces = cfg.pieces.map(piece => {
@@ -78,18 +99,40 @@ export const IrregularPuzzleGame: React.FC<IrregularPuzzleGameProps> = ({
         }
         // 修正：翻转后旋转角度也要反向
         const realDirection = flipX ? -direction : direction;
+        const newRotation = rotation + 90 * realDirection;
+        const rotateCount = (piece.rotateCount ?? 0) + 1;
+        
         return {
           ...piece,
           up: dirs[0],
           right: dirs[1],
           down: dirs[2],
           left: dirs[3],
-          rotation: rotation + 90 * realDirection, // 不取模，累加
+          rotation: newRotation, // 不取模，累加
           flipX,
+          lastOperation: 'rotate', // 记录最后一次操作为旋转
+          rotateCount: rotateCount, // 更新旋转次数
+          flipCount: 0, // 重置翻转次数
         };
       });
       return { ...cfg, pieces: newPieces };
     });
+
+    // 记录旋转操作历史（执行新操作时清空重做历史）
+    const move: GameMove = {
+      id: Date.now().toString(),
+      pieceId,
+      action: 'rotate',
+      fromSlot: null,
+      toSlot: null,
+      rotationDelta: 90 * direction,
+      timestamp: new Date(),
+    };
+    setHistory(prev => [...prev, move]);
+    setRedoHistory([]);
+    
+    // 旋转操作算一步（根据普通方形拼图规则）
+    setMoves(prev => prev + 1);
   }, [puzzleConfig]);
 
   const handleRotatePieceLeft = useCallback((pieceId: string) => {
@@ -98,22 +141,353 @@ export const IrregularPuzzleGame: React.FC<IrregularPuzzleGameProps> = ({
 
   const handleFlipX = useCallback((pieceId: string) => {
     if (!puzzleConfig) return;
+    
+    // 检查操作限制：如果上次操作是旋转且旋转角度不是360度的倍数，则不允许翻转
+    const targetPiece = puzzleConfig.pieces.find(p => p.id === pieceId);
+    if (targetPiece?.lastOperation === 'rotate' && (targetPiece?.rotation ?? 0) % 360 !== 0) {
+      return; // 旋转后且旋转角度不是360度的倍数时不可翻转
+    }
+    
     setPuzzleConfig(cfg => {
       if (!cfg) return cfg;
       const newPieces = cfg.pieces.map(piece => {
         if (piece.id !== pieceId) return piece;
         // 左右对称翻转：只交换 left/right
+        const flipCount = (piece.flipCount ?? 0) + 1;
+        
         return {
           ...piece,
           left: piece.right,
           right: piece.left,
           flipX: !(piece.flipX ?? false),
+          lastOperation: 'flip', // 记录最后一次操作为翻转
+          flipCount: flipCount, // 更新翻转次数
+          rotateCount: 0, // 重置旋转次数
         };
       });
       return { ...cfg, pieces: newPieces };
     });
+
+    // 记录翻转操作历史（执行新操作时清空重做历史）
+    const move: GameMove = {
+      id: Date.now().toString(),
+      pieceId,
+      action: 'flip',
+      fromSlot: null,
+      toSlot: null,
+      timestamp: new Date(),
+    };
+    setHistory(prev => [...prev, move]);
+    setRedoHistory([]);
+    
+    // 翻转操作算一步（根据普通方形拼图规则）
+    setMoves(prev => prev + 1);
   }, [puzzleConfig]);
 
+  // 撤销操作
+  const handleUndo = useCallback(() => {
+    if (history.length === 0) return;
+
+    const lastMove = history[history.length - 1];
+    const newHistory = history.slice(0, -1);
+    setRedoHistory(prev => [...prev, lastMove]);
+
+    switch (lastMove.action) {
+      case 'place':
+        // 撤销放置：将拼图块从槽位移回原位置
+        if (lastMove.toSlot !== null && lastMove.toSlot !== undefined) {
+          setAnswerGrid(prev => {
+            const newGrid = [...prev];
+            // 移除当前槽位的拼图块
+            newGrid[lastMove.toSlot!] = null;
+            // 如果从其他槽位移动，需要恢复原槽位
+            if (lastMove.fromSlot !== null && lastMove.fromSlot !== undefined) {
+              const piece = puzzleConfig?.pieces.find(p => p.id === lastMove.pieceId);
+              if (piece) {
+                newGrid[lastMove.fromSlot!] = { ...piece, currentSlot: lastMove.fromSlot };
+              }
+            }
+            return newGrid;
+          });
+          // 更新拼图块状态
+          setPuzzleConfig(cfg => {
+            if (!cfg) return cfg;
+            const newPieces = cfg.pieces.map(piece => {
+              if (piece.id === lastMove.pieceId) {
+                return { 
+                  ...piece, 
+                  isCorrect: lastMove.fromSlot !== null, // 如果原来在槽位，则标记为正确放置
+                  currentSlot: lastMove.fromSlot
+                };
+              }
+              return piece;
+            });
+            return { ...cfg, pieces: newPieces };
+          });
+        }
+        break;
+      case 'remove':
+        // 撤销移除：将拼图块放回槽位
+        if (lastMove.fromSlot !== null && lastMove.fromSlot !== undefined) {
+          setAnswerGrid(prev => {
+            const newGrid = [...prev];
+            const piece = puzzleConfig?.pieces.find(p => p.id === lastMove.pieceId);
+            if (piece) {
+              newGrid[lastMove.fromSlot!] = { ...piece, currentSlot: lastMove.fromSlot };
+            }
+            return newGrid;
+          });
+        }
+        break;
+      case 'rotate':
+        // 撤销旋转：应用相反的delta值并更新方向属性
+        if (lastMove.rotationDelta !== undefined) {
+          setPuzzleConfig(cfg => {
+            if (!cfg) return cfg;
+            const newPieces = cfg.pieces.map(piece => {
+              if (piece.id !== lastMove.pieceId) return piece;
+              
+              // 计算撤销后的旋转角度
+              const newRotation = piece.rotation - lastMove.rotationDelta!;
+              
+              // 更新方向属性：根据新的旋转角度重新计算方向
+              let { up, right, down, left } = piece;
+              let dirs = [up, right, down, left];
+              
+              // 计算需要旋转的次数（每次90度）
+              const rotationSteps = -Math.sign(lastMove.rotationDelta!);
+              let times = rotationSteps;
+              if (piece.flipX) times = -times;
+              times = (times + 4) % 4;
+              
+              for (let i = 0; i < times; i++) {
+                dirs = [dirs[3], dirs[0], dirs[1], dirs[2]];
+              }
+              
+              return {
+                ...piece,
+                up: dirs[0],
+                right: dirs[1],
+                down: dirs[2],
+                left: dirs[3],
+                rotation: newRotation,
+                lastOperation: null, // 撤销操作后重置操作状态
+                rotateCount: Math.max(0, (piece.rotateCount ?? 1) - 1), // 减少旋转次数
+              };
+            });
+            return { ...cfg, pieces: newPieces };
+          });
+        }
+        break;
+      case 'flip':
+        // 撤销翻转：再次翻转并更新方向属性
+        setPuzzleConfig(cfg => {
+          if (!cfg) return cfg;
+          const newPieces = cfg.pieces.map(piece => {
+            if (piece.id !== lastMove.pieceId) return piece;
+            
+            // 撤销翻转：交换左右方向
+            return {
+              ...piece,
+              left: piece.right,
+              right: piece.left,
+              flipX: !piece.flipX,
+              lastOperation: null, // 撤销操作后重置操作状态
+              flipCount: Math.max(0, (piece.flipCount ?? 1) - 1), // 减少翻转次数
+            };
+          });
+          return { ...cfg, pieces: newPieces };
+        });
+        break;
+      case 'replace':
+        // 撤销替换：恢复被替换的拼图块
+        if (lastMove.toSlot !== null && lastMove.toSlot !== undefined && lastMove.replacedPieceId) {
+          setAnswerGrid(prev => {
+            const newGrid = [...prev];
+            const replacedPiece = puzzleConfig?.pieces.find(p => p.id === lastMove.replacedPieceId);
+            if (replacedPiece) {
+              newGrid[lastMove.toSlot!] = { ...replacedPiece, currentSlot: lastMove.toSlot };
+            }
+            return newGrid;
+          });
+        }
+        break;
+    }
+
+    setHistory(newHistory);
+    setMoves(prev => Math.max(0, prev - 1));
+  }, [history, puzzleConfig]);
+
+  // 重做操作
+  const handleRedo = useCallback(() => {
+    if (redoHistory.length === 0) return;
+
+    const nextMove = redoHistory[redoHistory.length - 1];
+    const newRedoHistory = redoHistory.slice(0, -1);
+
+    // 执行重做操作
+    switch (nextMove.action) {
+      case 'place':
+        // 重做放置：将拼图块放到槽位
+        if (nextMove.toSlot !== null && nextMove.toSlot !== undefined) {
+          const piece = puzzleConfig?.pieces.find(p => p.id === nextMove.pieceId);
+          if (piece) {
+            setAnswerGrid(prev => {
+              const newGrid = [...prev];
+              // 如果从其他槽位移动，需要清空原槽位
+              if (nextMove.fromSlot !== null && nextMove.fromSlot !== undefined) {
+                newGrid[nextMove.fromSlot!] = null;
+              }
+              // 放置到目标槽位
+              newGrid[nextMove.toSlot!] = { ...piece, currentSlot: nextMove.toSlot };
+              return newGrid;
+            });
+            // 更新拼图块状态
+            setPuzzleConfig(cfg => {
+              if (!cfg) return cfg;
+              const newPieces = cfg.pieces.map(p => {
+                if (p.id === nextMove.pieceId) {
+                  return { 
+                    ...p, 
+                    isCorrect: true,
+                    currentSlot: nextMove.toSlot
+                  };
+                }
+                return p;
+              });
+              return { ...cfg, pieces: newPieces };
+            });
+          }
+        }
+        break;
+      case 'remove':
+        // 重做移除：将拼图块从槽位移除
+        if (nextMove.fromSlot !== null && nextMove.fromSlot !== undefined) {
+          setAnswerGrid(prev => {
+            const newGrid = [...prev];
+            newGrid[nextMove.fromSlot!] = null;
+            return newGrid;
+          });
+          // 更新拼图块状态
+          setPuzzleConfig(cfg => {
+            if (!cfg) return cfg;
+            const newPieces = cfg.pieces.map(p => {
+              if (p.id === nextMove.pieceId) {
+                return { 
+                  ...p, 
+                  isCorrect: false,
+                  currentSlot: null
+                };
+              }
+              return p;
+            });
+            return { ...cfg, pieces: newPieces };
+          });
+        }
+        break;
+      case 'rotate':
+        // 重做旋转：应用相同的delta值并更新方向属性
+        if (nextMove.rotationDelta !== undefined) {
+          setPuzzleConfig(cfg => {
+            if (!cfg) return cfg;
+            const newPieces = cfg.pieces.map(p => {
+              if (p.id !== nextMove.pieceId) return p;
+              
+              // 计算重做后的旋转角度
+              const newRotation = p.rotation + nextMove.rotationDelta!;
+              
+              // 更新方向属性：根据新的旋转角度重新计算方向
+              let { up, right, down, left } = p;
+              let dirs = [up, right, down, left];
+              
+              // 计算需要旋转的次数（每次90度）
+              const rotationSteps = Math.sign(nextMove.rotationDelta!);
+              let times = rotationSteps;
+              if (p.flipX) times = -times;
+              times = (times + 4) % 4;
+              
+              for (let i = 0; i < times; i++) {
+                dirs = [dirs[3], dirs[0], dirs[1], dirs[2]];
+              }
+              
+              return {
+                ...p,
+                up: dirs[0],
+                right: dirs[1],
+                down: dirs[2],
+                left: dirs[3],
+                rotation: newRotation,
+                lastOperation: 'rotate', // 重做操作后记录操作状态
+                rotateCount: (p.rotateCount ?? 0) + 1, // 增加旋转次数
+                flipCount: 0, // 重置翻转次数
+              };
+            });
+            return { ...cfg, pieces: newPieces };
+          });
+        }
+        break;
+      case 'flip':
+        // 重做翻转：再次翻转并更新方向属性
+        setPuzzleConfig(cfg => {
+          if (!cfg) return cfg;
+          const newPieces = cfg.pieces.map(p => {
+            if (p.id !== nextMove.pieceId) return p;
+            
+            // 重做翻转：交换左右方向
+            return {
+              ...p,
+              left: p.right,
+              right: p.left,
+              flipX: !p.flipX,
+              lastOperation: 'flip', // 重做操作后记录操作状态
+              flipCount: (p.flipCount ?? 0) + 1, // 增加翻转次数
+              rotateCount: 0, // 重置旋转次数
+            };
+          });
+          return { ...cfg, pieces: newPieces };
+        });
+        break;
+      case 'replace':
+        // 重做替换：替换槽位中的拼图块
+        if (nextMove.toSlot !== null && nextMove.toSlot !== undefined && nextMove.replacedPieceId) {
+          const piece = puzzleConfig?.pieces.find(p => p.id === nextMove.pieceId);
+          if (piece) {
+            setAnswerGrid(prev => {
+              const newGrid = [...prev];
+              // 放置新拼图块
+              newGrid[nextMove.toSlot!] = { ...piece, currentSlot: nextMove.toSlot };
+              return newGrid;
+            });
+            // 更新拼图块状态
+            setPuzzleConfig(cfg => {
+              if (!cfg) return cfg;
+              const newPieces = cfg.pieces.map(p => {
+                if (p.id === nextMove.pieceId) {
+                  return { 
+                    ...p, 
+                    isCorrect: true,
+                    currentSlot: nextMove.toSlot
+                  };
+                } else if (p.id === nextMove.replacedPieceId) {
+                  return { 
+                    ...p, 
+                    isCorrect: false,
+                    currentSlot: null
+                  };
+                }
+                return p;
+              });
+              return { ...cfg, pieces: newPieces };
+            });
+          }
+        }
+        break;
+    }
+
+    setRedoHistory(newRedoHistory);
+    setHistory(prev => [...prev, nextMove]);
+    setMoves(prev => prev + 1);
+  }, [redoHistory, puzzleConfig]);
 
 
   // 生成拼图配置
@@ -146,13 +520,16 @@ export const IrregularPuzzleGame: React.FC<IrregularPuzzleGameProps> = ({
         name: '异形拼图',
         expansionRatio: 0.4
       });
-      // 初始化时为每个piece补充flipX/rotation属性
+      // 初始化时为每个piece补充flipX/rotation/lastOperation属性
       const patchedConfig = {
         ...config,
         pieces: config.pieces.map(p => ({
           ...p,
           flipX: false,
           rotation: 0,
+          lastOperation: null, // 初始化操作状态
+          rotateCount: 0, // 初始化旋转次数
+          flipCount: 0, // 初始化翻转次数
         })),
       };
       setPuzzleConfig(patchedConfig);
@@ -209,11 +586,23 @@ export const IrregularPuzzleGame: React.FC<IrregularPuzzleGameProps> = ({
     console.log('异形拼图完成！');
   }, []);
 
-  // 处理键盘快捷键（ESC取消选择，R右旋，L左旋，F水平翻转）
+  // 处理键盘快捷键（ESC取消选择，R右旋，L左旋，F水平翻转，Ctrl+Z撤销，Ctrl+Y重做）
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setSelectedPiece(null);
+      }
+      // Ctrl+Z 撤销操作
+      if (e.ctrlKey && e.key === 'z') {
+        e.preventDefault();
+        handleUndo();
+        return;
+      }
+      // Ctrl+Y 重做操作
+      if (e.ctrlKey && e.key === 'y') {
+        e.preventDefault();
+        handleRedo();
+        return;
       }
       if (!selectedPiece) return;
       if (e.key === 'r' || e.key === 'R') {
@@ -228,7 +617,7 @@ export const IrregularPuzzleGame: React.FC<IrregularPuzzleGameProps> = ({
     };
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [selectedPiece, handleRotatePiece, handleRotatePieceLeft, handleFlipX]);
+  }, [selectedPiece, handleRotatePiece, handleRotatePieceLeft, handleFlipX, handleUndo, handleRedo]);
 
   // 重新开始游戏
   const handleRestart = useCallback(() => {
@@ -248,7 +637,7 @@ export const IrregularPuzzleGame: React.FC<IrregularPuzzleGameProps> = ({
   // 处理拼图块选择
   const handlePieceSelect = useCallback((pieceId: string | null) => {
     setSelectedPiece(pieceId);
-    setMoves(prev => prev + 1);
+    // 选择操作不算步数（根据普通方形拼图规则）
   }, []);
 
   // 处理拼图块放置
@@ -356,6 +745,19 @@ export const IrregularPuzzleGame: React.FC<IrregularPuzzleGameProps> = ({
       handlePuzzleComplete();
     }
 
+    // 记录操作历史（执行新操作时清空重做历史）
+    const move: GameMove = {
+      id: Date.now().toString(),
+      pieceId,
+      action: existingPieceId ? 'replace' : 'place',
+      fromSlot: currentSlotIndex !== -1 ? currentSlotIndex : null,
+      toSlot: slotIndex,
+      replacedPieceId: existingPieceId || undefined,
+      timestamp: new Date(),
+    };
+    setHistory(prev => [...prev, move]);
+    setRedoHistory([]);
+
     setSelectedPiece(null);
     setMoves(prev => prev + 1);
   }, [puzzleConfig, answerGrid, handlePuzzleComplete]);
@@ -390,6 +792,18 @@ export const IrregularPuzzleGame: React.FC<IrregularPuzzleGameProps> = ({
       total: totalCount,
       percentage
     });
+
+    // 记录操作历史（执行新操作时清空重做历史）
+    const move: GameMove = {
+      id: Date.now().toString(),
+      pieceId,
+      action: 'remove',
+      fromSlot: slotIndex,
+      toSlot: null,
+      timestamp: new Date(),
+    };
+    setHistory(prev => [...prev, move]);
+    setRedoHistory([]);
 
     setMoves(prev => prev + 1);
   }, [puzzleConfig, answerGrid]);
@@ -561,6 +975,24 @@ export const IrregularPuzzleGame: React.FC<IrregularPuzzleGameProps> = ({
         <div className="game-controls">
           <GameHelpButton />
           <Button
+            onClick={handleUndo}
+            variant="secondary"
+            size="small"
+            className="undo-button"
+            disabled={history.length === 0}
+          >
+            ↩️ 撤销
+          </Button>
+          <Button
+            onClick={handleRedo}
+            variant="secondary"
+            size="small"
+            className="redo-button"
+            disabled={redoHistory.length === 0}
+          >
+            ↪️ 重做
+          </Button>
+          <Button
             onClick={getHint}
             variant="secondary"
             size="small"
@@ -664,6 +1096,8 @@ export const IrregularPuzzleGame: React.FC<IrregularPuzzleGameProps> = ({
                 <p>2. 点击右侧答题卡放置拼图块</p>
                 <p>3. 拖拽拼图块到右侧答题卡</p>
                 <p>4. 按 ESC 键取消选择</p>
+                <p>5. 鼠标右键取回答题卡上方块</p>
+                <p>6. 异形拼图块不可同时旋转+翻转</p>
               </div>
             </div>
           </div>

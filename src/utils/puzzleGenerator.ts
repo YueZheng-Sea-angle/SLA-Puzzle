@@ -379,7 +379,7 @@ export class PuzzleGenerator {
 
   // 生成俄罗斯方块拼图
   private static async generateTetrisPuzzle(params: GeneratePuzzleParams): Promise<PuzzleConfig> {
-    const { imageData, gridSize, name } = params;
+    const { imageData, gridSize, name, aspectRatio = '1:1' } = params;
     const targetSize = params.targetSize || 400;
 
     const pieces: PuzzlePiece[] = [];
@@ -428,6 +428,7 @@ export class PuzzleGenerator {
       gridSize,
       pieceShape: 'tetris',
       difficulty: this.calculateDifficulty(gridSize, 'tetris' as PieceShape),
+      aspectRatio, // 添加裁剪比例
       createdAt: new Date(),
       updatedAt: new Date()
     };

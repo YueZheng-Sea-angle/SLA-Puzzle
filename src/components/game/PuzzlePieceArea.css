@@ -157,9 +157,9 @@
 /* I型俄罗斯方块特殊样式 - 垂直长条 */
 .tetris-i {
   min-width: 100px;
-  min-height: 280px;
+  min-height: 100px;
   max-width: 120px;
-  max-height: 320px;
+  max-height: 120px;
 }
 
 /* I3型俄罗斯方块特殊样式 - 3格长条 */
