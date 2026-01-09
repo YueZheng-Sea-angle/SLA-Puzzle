@@ -95,15 +95,18 @@ export const DailyChallenge: React.FC<DailyChallengeProps> = ({ onBackToMenu }) 
     return effects;
   };
 
-  // 拼图图片库
+  // 拼图图片库 - 夏日旋律系列
   const puzzleImageLibrary = [
-    { path: '/images/nature/landscape1.svg', title: '梦幻城堡', description: '一座隐藏在云端的神秘城堡，等待着勇敢的冒险者来探索' },
-    { path: '/images/nature/landscape2.svg', title: '樱花飞舞', description: '春日樱花盛开的美景' },
-    { path: '/images/nature/landscape3.svg', title: '星空之夜', description: '浩瀚星空下的宁静夜晚' },
-    { path: '/images/animals/cat.svg', title: '草原之王', description: '非洲草原上的雄狮，展现王者风范' },
-    { path: '/images/nature/landscape1.svg', title: '高山流水', description: '壮丽的山脉与清澈的溪流' },
-    { path: '/images/anime/character.svg', title: '动漫角色', description: '来自异世界的神秘角色' },
-    { path: '/images/buildings/castle.svg', title: '城市之巅', description: '现代化都市的摩天大楼' }
+    { path: '/images/SolongAdele/MistyMemory_Day.png', title: '朦胧记忆·白昼', description: '阳光下的温柔回忆，如梦似幻的美好时光' },
+    { path: '/images/SolongAdele/MistyMemory_Night.png', title: '朦胧记忆·夜晚', description: '月色下的宁静时刻，星光点点的夜空' },
+    { path: '/images/SolongAdele/I\'llMissYou.png', title: '我会想你', description: '深情告别的温暖瞬间，珍藏心底的思念' },
+    { path: '/images/SolongAdele/InTheNight.png', title: '夜色中', description: '夜幕降临时的神秘与浪漫' },
+    { path: '/images/SolongAdele/SingWithMe.png', title: '与我同歌', description: '音乐中相伴的欢乐时光' },
+    { path: '/images/SolongAdele/RainRainGoAway.png', title: '雨啊快停', description: '雨中的期盼，等待阳光的心情' },
+    { path: '/images/SolongAdele/EnjoySummer.png', title: '享受夏日', description: '夏日的美好时光，阳光与欢笑' },
+    { path: '/images/SolongAdele/LastNotLast.png', title: '最后不是最后', description: '告别不是终结，而是新的开始' },
+    { path: '/images/SolongAdele/SoLongAdele.png', title: '再见阿黛尔', description: '一段旅程的终点，另一段冒险的起点' },
+    { path: '/images/SolongAdele/DancingInTheLava.png', title: '岩浆中起舞', description: '在烈焰中绽放的热情与活力' }
   ];
 
   // 难度配置
